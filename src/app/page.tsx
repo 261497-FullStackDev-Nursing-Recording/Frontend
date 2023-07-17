@@ -3,17 +3,22 @@ import { useState } from 'react'
 import Head from 'next/head'
 import "./LoginPage.css"
 
-const handleLogin =(e:any)=> {
-  e.preventDefault()
-  console.log("logging in...")
-}
 
-// const LoginPage: React.FC = () => {
+
+// const LoginPage  = () => {
 //   const [username, Setusername] =useState('');
 //   const [password, Setpassword] =useState('');
 // }
 
 export default function Home() {
+  const [username, Setusername] =useState('');
+  const [password, Setpassword] =useState('');
+
+  const handleLogin =(e:any)=> {
+    e.preventDefault()
+    console.log("logging in..." + username + "..." + password)
+  }
+
   return (
     <div>
       <Head>
@@ -29,19 +34,19 @@ export default function Home() {
                 className='Username'
                     type="text"
                     id="username"
-                    // value={username}
-                    // onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                    onChange={(e) => Setusername(e.target.value)}
                     placeholder='Username'
                     />
                 <input
                     className='Password'
                     type="password"
                     id="password"
-                    // value={password}
-                    // onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onChange={(e) => Setpassword(e.target.value)}
                     placeholder='Password'
                 />
-                <button type="submit" className='LoginButton'>Login</button>
+                <button type="submit" className='LoginButton' onClick={handleLogin}>Login</button>
               </div>
             </div>
     </div>
