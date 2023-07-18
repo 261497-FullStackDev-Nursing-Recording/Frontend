@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap');
 *{
   font-family: 'Kanit', sans-serif;
-/* font-family: 'Overpass', sans-serif; */
 }
 
-.Chart{
-  width: 300px;
+.chart-container {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    font-family: 'Kanit', sans-serif;
+  flex-direction: column;
+  align-items: center; /* Center vertically */
+  margin-top: 20px;
+}
+
+.chart-wrapper {
+  width: 300px; 
 }

@@ -15,10 +15,14 @@ export default function Chart(){
         datasets:[{label:'status',
         data:[5,4,1,1],
         backgroundColor:[
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
+        // 'rgba(255, 99, 132, 0.2)',
+        // 'rgba(255, 206, 86, 0.2)',
+        // 'rgba(75, 192, 192, 0.2)',
+        // 'rgba(54, 162, 235, 0.2)',
+        '#949DEB',
+        '#65EB89',
+        '#EBD071',
+        '#EB6569',
     ],
         bordercolor :[
         'rgba(255, 99, 132, 1)',
@@ -31,9 +35,8 @@ export default function Chart(){
     const options={
     }
     return(
-        <div>
-            {/* <h1>Chart</h1> */}
-            <div className='Chart'>
+        <div className="chart-container">
+            <div className='chart-wrapper'>
                 <Doughnut data={data} options={options} ></Doughnut>
             </div>
         </div>
