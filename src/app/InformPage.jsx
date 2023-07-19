@@ -1,6 +1,7 @@
 
 import Navbar from "../Component/Navbarbottom";
 import "./InformPage.css";
+// import "../Component/textarea.js" ;
 
 export default function Inform(){
     return(
@@ -9,9 +10,10 @@ export default function Inform(){
 
             <form>
             <h3>Name</h3>
-            <input type="text" id="name" placeholder="name"></input>
-            <input type="text" id="lastname" placeholder="lastname"></input>
-            
+            <div className="name">
+            <input type="text" id="name" placeholder="name" size="14" tabindex="2"></input>
+            <input type="text" id="lastname" placeholder="lastname"  size="14" tabindex="2"></input>
+            </div>
             
           
             <h3>Identification ID</h3>
@@ -19,20 +21,26 @@ export default function Inform(){
             
             
             <h3>ปัญหาและความต้องการ</h3>
-            <input type="text" id="a" placeholder="A" color="gray"></input>
-            <input type="text" id="o" placeholder="O"></input>
-            <input type="text" id="s" placeholder="S"></input>
+            <textarea type="text" id="my-text" placeholder="A" ></textarea>
+            <textarea type="text" id="my-text" placeholder="O" ></textarea>
+            <textarea type="text" id="my-text" placeholder="S"></textarea>
+            
             
 
             <h3>กิจกรรมพยาบาล/การประเมิน</h3>
-            <input type="text" id="i" placeholder="I"></input>
-            <input type="text" id="e" placeholder="E"></input>
+            <textarea type="text" id="my-text" placeholder="I"></textarea>
+            <textarea type="text" id="my-text" placeholder="E"></textarea>
 
+            
             </form>
             
             
+           
             <Navbar />
+            
         </div>
         
+        
+       
     )
 }
