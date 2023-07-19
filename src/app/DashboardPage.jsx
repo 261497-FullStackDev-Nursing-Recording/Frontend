@@ -7,10 +7,13 @@ export default function Dashboard(){
     return(
         <div className="dashboard-container">
             <div className="centered-content">
-            <AiOutlineHome className="HomeLogo"/>
-            <div className="chart-wrapper">
-            <Chart />
-            </div>
+                <AiOutlineHome className="HomeLogo"/>
+                    <div className="chart-wrapper">
+                        <Chart />
+                    </div>
+                    <div>
+                        
+                    </div>
             </div>
             <Navbar />
         </div>
