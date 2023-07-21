@@ -9,8 +9,8 @@ export default function Home(){
     <div>
       {/* < Login /> */}
       {/* <Chart/> */}
-      {/* <Dashboard /> */}
-     <Inform/>
+      <Dashboard />
+     {/* <Inform/> */}
     </div>
   )
 }

@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap');
 *{
-  font-family: 'Overpass', sans-serif;
+  font-family: 'Kanit', sans-serif;
 }
 
 .HomeLogo{
@@ -16,3 +16,57 @@
     margin-top: 50px; /* Add some spacing between the components */
   }
   
+.NperPtext{
+/* margin-top: 30px; */
+padding-inline: 40px;
+/* background-color: aqua; */
+}
+.NperP{
+margin-top: 20px;
+padding-inline: 40px;
+/* background-color: aqua; */
+font-size: 40px;
+font-weight: bold;
+}
+.countbox{
+  margin-top: 40px;
+  padding-inline: 40px;
+  display: flex;
+  flex-direction: row;
+  /* background-color: rgb(235, 235, 235); */
+  background-color:  #a4f1b5;;
+  border-radius: 20px;
+  margin-bottom: 130px;
+}
+
+.nursecount{
+  margin: 10px 20px;
+  font-family: 'Kanit', sans-serif;
+  /* background-color: blue; */
+  /* padding-bottom: 80px; */
+}
+
+.pateintcount{
+  margin: 10px 20px;
+  font-family: 'Kanit', sans-serif;
+  /* background-color: rgb(34, 150, 82); */
+  /* padding-bottom: 80px; */
+  
+}
+
+.nursetext{
+    margin-top: 20px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+  }
+  .patienttext{
+    margin-top: 20px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+  }
