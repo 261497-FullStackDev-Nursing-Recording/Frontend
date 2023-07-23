@@ -1,10 +1,12 @@
-import Chart from "../Component/DonughnutChart";
+import Chart from "../../Component/DonughnutChart";
 import "./DashboardPage.css";
-import Navbar from "../Component/Navbarbottom";
+import Navbar from "../../Component/Navbarbottom";
+import NurseCount from "./DataNurse";
+import PatientCount from "./DataPatient";
+
 
 export default function Dashboard(){
-
-
+    
     return(
         <div className="dashboard-container">
             <div className="centered-content">
@@ -15,7 +17,7 @@ export default function Dashboard(){
                         <Chart />
                     </div>
                     <div className="NperP">
-                            1 : 21
+                            1 : 
                     </div>
                     <div className="NperPtext">
                         จำนวนพยาบาลต่อผู้ป่วย
@@ -24,13 +26,13 @@ export default function Dashboard(){
                         <div className="nursecount">
                         จำนวนพยาบาล
                             <div className="nursetext">
-                            20
+                            <NurseCount/>
                             </div>
                         </div>
                         <div className="pateintcount">
                         จำนวนผู้ป่วย
                             <div className="patienttext">
-                            420
+                            <PatientCount/>
                             </div>
                         </div>
                     </div>

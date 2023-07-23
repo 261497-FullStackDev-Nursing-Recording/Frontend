@@ -16,7 +16,7 @@ export default function Login() {
     console.log("logging in..." + username + "..." + password);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/login', {username: username, password: password});
+      const response = await axios.post('http://localhost:5001/auth/signin', {username: username, password: password});
       setData(response.data);
       console.log("Login successful!");
       console.log(response.data);
