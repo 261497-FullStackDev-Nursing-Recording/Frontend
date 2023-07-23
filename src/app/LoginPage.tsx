@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import "./LoginPage.css"
+import { PasswordInput,TextInput } from '@mantine/core';
+import { IconLock } from '@tabler/icons-react';
 
 export default function Login() {
   const [username, Setusername] =useState('');
@@ -11,6 +13,8 @@ export default function Login() {
     e.preventDefault()
     console.log("logging in..." + username + "..." + password)
   }
+
+  
 
   return (
     <div>
@@ -23,22 +27,21 @@ export default function Login() {
         </div>
             <div onSubmit={handleLogin}>
               <div className='Container'>
-                <input
-                className='Username'
-                    type="text"
-                    id="username"
-                    value={username}
-                    onChange={(e) => Setusername(e.target.value)}
-                    placeholder='Username'
+                    <TextInput
+                    className='Username'
+                      placeholder="Username"
+                      withAsterisk
+                      value={username}
+                      onChange={(event) => Setusername(event.currentTarget.value)}
                     />
-                <input
-                    className='Password'
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => Setpassword(e.target.value)}
-                    placeholder='Password'
-                />
+                    <PasswordInput
+                      className='Password'
+                      placeholder="Password"
+                      withAsterisk
+                      value={password}
+                      onChange={(event) => Setpassword(event.currentTarget.value)}
+                      icon={<IconLock size="1rem" />}
+                    />
                 <button type="submit" className='LoginButton' onClick={handleLogin}>Login</button>
               </div>
             </div>
