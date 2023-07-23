@@ -1,14 +1,10 @@
 import Chart from "../Component/DonughnutChart";
-import { AiOutlineHome } from "react-icons/Ai";
 import "./DashboardPage.css";
 import Navbar from "../Component/Navbarbottom";
-import Navbar2 from "../Component/Navbarbottom2";
 
 export default function Dashboard(){
 
-    // const nurseperpatient = patient/nurse;
-    // let patient;
-    // let nurse;
+
     return(
         <div className="dashboard-container">
             <div className="centered-content">
@@ -39,7 +35,6 @@ export default function Dashboard(){
                         </div>
                     </div>
             </div>
-            {/* <Navbar2 /> */}
             <Navbar />
         </div>
         
