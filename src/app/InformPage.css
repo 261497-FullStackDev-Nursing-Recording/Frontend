@@ -2,14 +2,19 @@
 *{
   font-family: 'Kanit', sans-serif;
 }
+.svgcontainer{
+  width: 60px;
+  height: 60px;
+  
+}
 
 .inform-container {
+  margin-top: 50px; 
     width: 100%;
-  
     background-color:white ;
     display: flex;   
+    flex-direction: column ;
     align-items: center;
-    justify-content: center;
 
   }
   

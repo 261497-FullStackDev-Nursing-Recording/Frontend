@@ -3,9 +3,9 @@
   font-family: 'Kanit', sans-serif;
 }
 
-.HomeLogo{
-    width: 60px;
-    height: 60px;
+.svgcontainer{
+  width: 60px;
+  height: 60px;
 }
 
 .centered-content {
