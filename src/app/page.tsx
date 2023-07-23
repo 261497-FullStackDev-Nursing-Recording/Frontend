@@ -7,9 +7,8 @@ import Inform from "./InformPage"
 export default function Home(){
   return(
     <div>
-      {/* < Login /> */}
-      {/* <Chart/> */}
-      <Dashboard />
+      < Login />
+      {/* <Dashboard /> */}
      {/* <Inform/> */}
     </div>
   )

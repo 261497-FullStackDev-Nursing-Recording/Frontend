@@ -37,8 +37,8 @@ export default function Dashboard(){
                         </div>
                     </div>
             </div>
-            <Navbar2 />
-            {/* <Navbar /> */}
+            {/* <Navbar2 /> */}
+            <Navbar />
         </div>
         
     )
