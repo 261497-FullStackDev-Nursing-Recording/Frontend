@@ -4,17 +4,27 @@ import Head from 'next/head'
 import "./LoginPage.css"
 import { PasswordInput,TextInput } from '@mantine/core';
 import { IconLock } from '@tabler/icons-react';
+import axios from 'axios';
 
 export default function Login() {
   const [username, Setusername] =useState('');
   const [password, Setpassword] =useState('');
+  const [data, setData] = useState(null);
 
-  const handleLogin =(e:any)=> {
-    e.preventDefault()
-    console.log("logging in..." + username + "..." + password)
+  const handleLogin = async (e:any)=> {
+    e.preventDefault();
+    console.log("logging in..." + username + "..." + password);
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/login', {username: username, password: password});
+      setData(response.data);
+      console.log("Login successful!");
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+    
   }
-
-  
 
   return (
     <div>
