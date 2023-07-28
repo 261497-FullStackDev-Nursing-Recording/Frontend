@@ -7,17 +7,17 @@ import Add from "./AddPage";
 import UserList from "./Dashboard/DataNurse";
 
 export default function Home() {
-  return (
-    <div>
-      {/* < Login /> */}
-      {/* <Dashboard /> */}
-     {/* <Inform/> */}
-      {/* < Login /> */}
-      {/* <Chart/> */}
-      <Dashboard />
-      {/* <Inform /> */}
-      {/* <Add /> */}
-      {/* <UserList/> */}
-    </div>
-  );
+	return (
+		<div>
+			{/* < Login /> */}
+			{/* <Dashboard /> */}
+			{/* <Inform/> */}
+			<Login />
+			{/* <Chart /> */}
+			{/* <Dashboard /> */}
+			{/* <Inform /> */}
+			{/* <Add /> */}
+			{/* <UserList/> */}
+		</div>
+	);
 }
