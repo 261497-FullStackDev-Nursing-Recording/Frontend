@@ -40,33 +40,39 @@
 
 // export default UserList;
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { axiosCustom } from "../../services/axiosCustom";
+import { safelyParseJSON } from "../../services/axiosCustom";
 const PatientCount: React.FC = () => {
-  const [patientCount, setPatientCount] = useState<number>(0);
+	const [patientCount, setPatientCount] = useState<number>(0);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+	useEffect(() => {
+		fetchData();
+	}, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://localhost:5001/patient/get_all');
-      const data = response.data;
-      setPatientCount(data.length);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+	const fetchData = async () => {
+		try {
+			const accessToken = safelyParseJSON(localStorage.getItem("access_token"));
+			const header = {
+				Authorization: "Bearer " + accessToken,
+			};
+			console.log(header);
 
-  return (
-    <div>
-      {patientCount}
-    </div>
-  );
+			const response = await axiosCustom.post("api/patient/search", {
+				headers: header,
+				body: {},
+			});
+			const data = response.data;
+			console.log(data);
+
+			setPatientCount(data.length);
+		} catch (error) {
+			console.error("Error fetching data:", error);
+		}
+	};
+
+	return <div>{patientCount}</div>;
 };
 
 export default PatientCount;
-
-
