@@ -5,6 +5,8 @@ import Dashboard from "./Dashboard/DashboardPage";
 import Inform from "./Inform/InformPage";
 import Add from "./Addpt/AddPage";
 import UserList from "./Dashboard/DataNurse";
+// import spinner from "../Component/spinner";
+import { Loader } from "@mantine/core";
 
 export default function Home() {
 	return (
@@ -18,6 +20,7 @@ export default function Home() {
 			{/* <Inform /> */}
 			{/* <Add /> */}
 			{/* <UserList/> */}
+			<Loader color="green"/>
 		</div>
 	);
 }
