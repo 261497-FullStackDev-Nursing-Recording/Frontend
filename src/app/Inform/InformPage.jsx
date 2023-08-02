@@ -1,4 +1,4 @@
-import Navbar from "../Component/Navbarbottom";
+import Navbar from "../../Component/Navbarbottom";
 import "./InformPage.css";
 // import "../Component/textarea.js" ;
 

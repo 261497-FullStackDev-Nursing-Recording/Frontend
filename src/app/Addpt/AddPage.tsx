@@ -1,9 +1,9 @@
-import Navbar from "../Component/Navbarbottom";
+import Navbar from "../../Component/Navbarbottom";
 import "./AddPage.css";
 import React, { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 
-export default function Home() {
+export default function Addpt() {
   const DuplicateBoxes = (count: number) => {
     const boxes = [];
     for (let i: number = 0; i < count; i++) {
