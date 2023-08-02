@@ -45,6 +45,8 @@ export default function Login() {
 			<div className="LoginText">
 				<span>NURSING</span>
 				<span> RECORD</span>
+				<span className="LoginTextTH">ระบบจัดการการบันทึกทางพยาบาล</span>
+				
 			</div>
 			<div onSubmit={handleLogin}>
 				<div className="Container">
