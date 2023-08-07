@@ -1,7 +1,7 @@
 import Navbar from "../../Component/Navbarbottom";
 import "./AddPage.css";
 import React, { useState } from "react";
-import CheckIcon from "@mui/icons-material/Check";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function Addpt() {
   const DuplicateBoxes = (count: number) => {
@@ -97,12 +97,13 @@ export default function Addpt() {
   const [showModal, setShowModal] = useState(false);
 
   return (
+    // <div className="container">
     <div>
-      <div className="Icon">
+      <div className="flex justify-center my-10">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="80"
-          height="80"
+          width="60"
+          height="60"
           viewBox="0 0 158 158"
           fill="none"
         >
@@ -120,10 +121,24 @@ export default function Addpt() {
           />
         </svg>
       </div>
-      <div className="ID_Text">Identification ID</div>
-      <input className="ID_SearchBox" type="search" />
-      <div className="NameText">Name</div>
-      <input className="NameSearchBox" type="search" />
+
+      <div className="mb-10">
+        <div className="Text">Identification ID</div>
+        <div className="searchBar">
+          <input className="input" id="identificationid"></input>
+          <button className="button">
+            <SearchIcon />
+          </button>
+        </div>
+        <div className="Text">Name</div>
+        <div className="searchBar">
+          <input className="input" id="name"></input>
+          <button className="button">
+            <SearchIcon />
+          </button>
+        </div>
+      </div>
+
       {/* <div className="Box">
         <div>
           <div className="PName">
@@ -154,7 +169,7 @@ export default function Addpt() {
           </svg>
         </button>
       </div> */}
-      {DuplicateBoxes(5)}
+      {DuplicateBoxes(1)}
     </div>
   );
 }

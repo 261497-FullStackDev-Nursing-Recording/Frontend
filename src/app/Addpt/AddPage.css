@@ -6,27 +6,13 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.Icon {
+.container {
+  margin-top: 50px;
   display: flex;
-  justify-content: center;
-  padding-top: 60px;
-}
-.Container {
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
 }
-.ID_Text {
-  padding-top: 40px;
-  padding-bottom: 5px;
-  margin-left: 50px;
-  color: #000;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
+
 .ID_SearchBox {
   margin: auto;
   display: flex;
@@ -39,30 +25,9 @@
   font-family: "Kanit", sans-serif;
   font-size: 15px;
 }
-.NameText {
-  padding-top: 20px;
-  padding-bottom: 5px;
-  margin-left: 50px;
-  color: #000;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-.NameSearchBox {
-  margin: auto;
-  display: flex;
-  padding: 15px 15px;
-  width: 300px;
-  height: 25px;
-  border: none;
-  border-radius: 10px;
-  background: #eee;
-  font-size: 15px;
-  margin-bottom: 40px;
-}
+
 .Box {
-  margin-inline: 15px;
+  width: 80%;
   padding-left: 30px;
   display: flex;
   flex-direction: row;
@@ -70,6 +35,8 @@
   background-color: #aae1f0fa;
   border-radius: 10px;
   margin-bottom: 5px;
+  margin-inline: auto;
+  font-weight: 600;
 }
 .AddButton {
   display: flex;
@@ -87,4 +54,48 @@
 .PID {
   margin-top: 1px;
   margin-bottom: 10px;
+}
+
+.Text {
+  color: #000000;
+  font-weight: 800;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  font-size: 20px;
+  display: flex;
+  padding-left: 10%;
+  /* padding-right: 2vw;*/
+}
+
+.input {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  margin-inline: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #f5f5f5;
+  font-size: 15px;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.button {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  background: #00da12;
+  color: #ffffff;
+  align-items: center;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  margin-inline: auto;
+  width: 80%;
 }
