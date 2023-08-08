@@ -1,16 +1,31 @@
-.Home{
-    
+/* .Home{  
     background-color: pink;
     color: #B83280;
 }
 
 .Record{
-    background-color: #BFDBFE; /* bg-blue-200 -> #BFDBFE */
-  color: #2563EB; /* text-blue-600 -> #2563EB */
-  border-color: #2563EB; /* border-blue-600 -> #2563EB */
+    background-color: #BFDBFE; 
+  color: #2563EB; 
 }
 
 .Patient{
+    background-color: #B2F5EA;
+    color: #319795;
+} */
+
+
+
+/* .Patient,.Home,.Record{ 
+    background-color: pink;
+    color: #B83280;
+} */
+
+/* .Patient,.Home,.Record{
+    background-color: #BFDBFE; 
+  color: #2563EB; 
+} */
+
+.Patient,.Home,.Record{
     background-color: #B2F5EA;
     color: #319795;
 }
