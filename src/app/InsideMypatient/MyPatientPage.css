@@ -24,7 +24,8 @@
     padding: 10px;
     border-radius: 6px;
     font-weight: bold;
-    width: 400px;
+    max-width: 400px;
+    width: 80%;
   }
 
   /* .seperate{
