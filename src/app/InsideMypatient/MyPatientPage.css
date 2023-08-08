@@ -3,46 +3,58 @@
   font-family: 'Kanit', sans-serif;
 }
 
-.patientheaddata{
+
+.Container{
   display: flex;
   justify-content: center;
-  padding-top: 100px;
+  align-items: center;
   flex-direction: column;
-
-  
+  margin-top: 80px ;
+  margin-bottom: 30px ;
+  width: 500;
 }
 
-.Name{
-  color: rgb(0, 0, 0);
-  background-color: blanchedalmond;
-    justify-content: center;
-    display: flex;
-    margin: 20px;
-    padding: 10px;
-    border-radius: 6px;
-    font-weight: bold;
 
-  }
-  
-  .ID{
+.Name,.ID{
     color: rgb(0, 0, 0);
-    background-color: blanchedalmond;
+    background-color: rgb(157, 255, 186);
     justify-content: center;
     display: flex;
-    margin: 20px;
+    margin: 5px;
     padding: 10px;
     border-radius: 6px;
     font-weight: bold;
+    width: 400px;
+  }
+
+  /* .seperate{
+    padding: 10px;
+  } */
+
+  .buttoncontainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+.containercard{
+  /* margin-bottom: 50px; */
 }
 
-.containercard{
-  margin-bottom: 20px;
+.addButton {
+  background-color: #198754;
+  margin-right: 10px; /* Adjust the margin as needed */
 }
-.line{
-  margin-top: 20px;
+
+.deleteButton {
+  background-color: #ff6464;
 }
+
+
 .card{
-  background-color: rgb(153, 49, 49);
+  background-color: rgb(208, 235, 253);
   margin: 20px 20px;
 
 }
+
