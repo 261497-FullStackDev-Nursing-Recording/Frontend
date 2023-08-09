@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@800&display=swap");
+* {
+  font-family: "Kanit", sans-serif;
+}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
