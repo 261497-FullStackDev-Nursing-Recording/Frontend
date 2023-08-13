@@ -1,108 +1,18 @@
-import Navbar from "../../Component/Navbarbottom";
+import Navbar from "@/Component/Navbarbottom";
 import "./AddPage.css";
-import React, { useState } from "react";
-import CheckIcon from "@mui/icons-material/Check";
+import React from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import P_Card from "./P_Card";
+import Button from "@mui/material/Button";
 
 export default function Addpt() {
-  const DuplicateBoxes = (count: number) => {
-    const boxes = [];
-    for (let i: number = 0; i < count; i++) {
-      boxes.push(
-        <div className="Box">
-          <div className="PText">
-            <div className="PName">
-              <span className="NameTitle">นาย </span>
-              <span className="PNameText">ณัฐพล สายทอง</span>
-            </div>
-            <div className="PID">
-              <span className="IDText">ID </span>
-              <span className="IDNo">XXXXXXXXXX</span>
-            </div>
-          </div>
-          <button
-            className="AddButton"
-            type="button"
-            onClick={() => setShowModal(true)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              viewBox="0 0 46 46"
-              fill="none"
-            >
-              <path
-                d="M43.4444 25.5556H2.55556C1.15852 25.5556 0 24.397 0 23C0 21.603 1.15852 20.4444 2.55556 20.4444H43.4444C44.8415 20.4444 46 21.603 46 23C46 24.397 44.8415 25.5556 43.4444 25.5556Z"
-                fill="#292D32"
-              />
-              <path
-                d="M23 46C21.603 46 20.4445 44.8415 20.4445 43.4444V2.55554C20.4445 1.1585 21.603 -1.52588e-05 23 -1.52588e-05C24.3971 -1.52588e-05 25.5556 1.1585 25.5556 2.55554V43.4444C25.5556 44.8415 24.3971 46 23 46Z"
-                fill="#292D32"
-              />
-            </svg>
-          </button>
-          {showModal ? (
-            <>
-              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-1 z-50 outline-none focus:outline-none">
-                <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                  {/*content*/}
-                  <div className="border-0 rounded-xl shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                    {/*header*/}
-                    {/* <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                      <h3 className="text-3xl font-semibold">Modal Title</h3>
-                      <button
-                        className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                        onClick={() => setShowModal(false)}
-                      >
-                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                          ×
-                        </span>
-                      </button>
-                    </div> */}
-                    {/*body*/}
-                    <div className="relative p-8 flex-auto">
-                      <p className="my- text-slate-500 text-lg text-center leading-relaxed">
-                        ต้องการเพิ่มคนไข้?
-                      </p>
-                    </div>
-                    {/*footer*/}
-                    <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                      <button
-                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button"
-                        onClick={() => setShowModal(false)}
-                      >
-                        ยกเลิก
-                      </button>
-                      <button
-                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button"
-                        onClick={() => setShowModal(false)}
-                      >
-                        ตกลง
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-            </>
-          ) : null}
-        </div>
-      );
-    }
-    return boxes;
-  };
-
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <div>
-      <div className="Icon">
+      <div className="flex justify-center my-[40px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="80"
-          height="80"
+          width="60"
+          height="60"
           viewBox="0 0 158 158"
           fill="none"
         >
@@ -120,41 +30,43 @@ export default function Addpt() {
           />
         </svg>
       </div>
-      <div className="ID_Text">Identification ID</div>
-      <input className="ID_SearchBox" type="search" />
-      <div className="NameText">Name</div>
-      <input className="NameSearchBox" type="search" />
-      {/* <div className="Box">
-        <div>
-          <div className="PName">
-            <span className="NameTitle">นาย </span>
-            <span className="PNameText">ณัฐพล สายทอง</span>
-          </div>
-          <div className="PID">
-            <span className="IDText">ID </span>
-            <span className="IDNo">XXXXXXXXXX</span>
-          </div>
+
+      <div className="mb-[40px]">
+        <div className="text-black font-extrabold text-[20px] flex mt-[20px] mb-[5px] pl-[10%]">
+          Identification ID
         </div>
-        <button className="AddButton">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 46 46"
-            fill="none"
+        <div className="flex flex-row mx-[10%]">
+          <input
+            className="flex w-full h-[40px] px-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center"
+            id="identificationid"
+          ></input>
+          <Button
+            className="flex h-[40px] text-white items-center ml-[10px] px-[10px] rounded-[5px] bg-[#08a638]"
+            variant="contained"
+            color="success"
           >
-            <path
-              d="M43.4444 25.5556H2.55556C1.15852 25.5556 0 24.397 0 23C0 21.603 1.15852 20.4444 2.55556 20.4444H43.4444C44.8415 20.4444 46 21.603 46 23C46 24.397 44.8415 25.5556 43.4444 25.5556Z"
-              fill="#292D32"
-            />
-            <path
-              d="M23 46C21.603 46 20.4445 44.8415 20.4445 43.4444V2.55554C20.4445 1.1585 21.603 -1.52588e-05 23 -1.52588e-05C24.3971 -1.52588e-05 25.5556 1.1585 25.5556 2.55554V43.4444C25.5556 44.8415 24.3971 46 23 46Z"
-              fill="#292D32"
-            />
-          </svg>
-        </button>
-      </div> */}
-      {DuplicateBoxes(5)}
+            <SearchIcon />
+          </Button>
+        </div>
+        <div className="text-black font-extrabold text-xl flex mt-5 mb-[5px] pl-[10%]">
+          Name
+        </div>
+        <div className="flex flex-row mx-[10%]">
+          <input
+            className="flex w-full h-[40px] px-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center"
+            id="name"
+          ></input>
+          <Button
+            className="flex h-[40px] text-white items-center ml-[10px] px-[10px] rounded-[5px] bg-[#08a638]"
+            variant="contained"
+            color="success"
+          >
+            <SearchIcon />
+          </Button>
+        </div>
+      </div>
+      <P_Card />
+      <Navbar />
     </div>
   );
 }

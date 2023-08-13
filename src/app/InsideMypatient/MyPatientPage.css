@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap');
+*{
+  font-family: 'Kanit', sans-serif;
+}
+
+
+.Container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 80px ;
+  margin-bottom: 30px ;
+  width: 500;
+}
+
+
+.Name,.ID{
+    color: rgb(0, 0, 0);
+    background-color: rgb(157, 255, 186);
+    justify-content: center;
+    display: flex;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    max-width: 400px;
+    width: 80%;
+  }
+
+  .spinner-container {
+    justify-content: center;
+    display: flex;
+    align-items: center; /* Center vertically */
+    position: fixed; /* Fix the position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Add a semi-transparent background */
+    z-index: 9999; /* Make sure it's on top of everything */
+  }
+  
+
+  .buttoncontainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+/* .containercard{
+} */
+
+.addButton {
+  background-color: #198754;
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+
+.deleteButton {
+  background-color: #ff6464;
+}
+
+
+.card{
+  background-color: rgb(208, 235, 253);
+  margin: 20px 20px;
+
+}
+

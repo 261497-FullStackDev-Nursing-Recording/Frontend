@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import Addpt from "./AddPage";
+
+import Inform from "./InformPage";
 type Props = {};
 
 export default function page({}: Props) {
-  return <Addpt />;
+	return <Inform />;
 }
