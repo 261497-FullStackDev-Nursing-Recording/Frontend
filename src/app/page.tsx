@@ -12,11 +12,11 @@ export default function Home() {
 	const queryclient = new QueryClient();
 	return (
 		<div>
-			{/* < Login /> */}
+			<Login />
 			{/* <Dashboard /> */}
 			{/* <Inform/> */}
 			{/* <Chart /> */}
-			<Dashboard />
+			{/* <Dashboard /> */}
 			{/* <Inform /> */}
 			{/* <Add /> */}
 			{/* <UserList/> */}

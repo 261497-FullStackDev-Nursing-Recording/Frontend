@@ -42,14 +42,14 @@ export default function Inform() {
 						id="name"
 						placeholder="name"
 						size="14"
-						tabindex="2"
+						tabIndex="2"
 					></input>
 					<input
 						type="text"
 						id="lastname"
 						placeholder="lastname"
 						size="14"
-						tabindex="2"
+						tabIndex="2"
 					></input>
 				</div>
 
