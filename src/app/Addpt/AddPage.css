@@ -5,3 +5,15 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.SearchIcon {
+  height: 50px;
+  width: 50px;
+}
+
+.IconWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
