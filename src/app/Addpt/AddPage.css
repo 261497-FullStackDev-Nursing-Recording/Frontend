@@ -6,7 +6,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.SearchIcon {
+.SearchIcon{
   height: 50px;
   width: 50px;
 }
@@ -14,6 +14,18 @@
 .IconWrapper{
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-top: 50px;
+}
+
+.spinner-container {
+  justify-content: center;
+  display: flex;
+  align-items: center; /* Center vertically */
+  position: fixed; /* Fix the position */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7); /* Add a semi-transparent background */
+  z-index: 9999; /* Make sure it's on top of everything */
 }
