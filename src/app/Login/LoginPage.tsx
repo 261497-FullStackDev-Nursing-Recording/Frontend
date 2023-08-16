@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Head from "next/head";
 import "./LoginPage.css";
 import { PasswordInput, TextInput } from "@mantine/core";
@@ -7,6 +7,7 @@ import { IconLock } from "@tabler/icons-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import useAuth from "@/services/useAuth";
+import Spinner from "@/Component/spinner";
 
 export default function Login() {
 	const [username, Setusername] = useState("");
@@ -37,8 +38,21 @@ export default function Login() {
 		}
 	};
 
+
+	const [isPageReady, setIsPageReady] = useState(false); // State for page readiness
+
+	// Simulate some loading process (e.g., fetching data) and then set the page as ready
+	useEffect(() => {
+		// Simulate loading completion after 2 seconds
+		setTimeout(() => {
+			setIsPageReady(true);
+		}, 1000);
+	}, []);
+
 	return (
 		<div>
+			{isPageReady ? (
+				<div>
 			<Head>
 				<title>Nursingrecord</title>
 			</Head>
@@ -70,6 +84,12 @@ export default function Login() {
 					</button>
 				</div>
 			</div>
+			</div>
+			) : (
+				<div className="spinner-container">
+					<Spinner />
+				</div>
+			)}
 		</div>
 	);
 }
