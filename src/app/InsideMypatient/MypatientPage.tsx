@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import Spinner from "@/Component/spinner";
+import LocalHospitalRoundedIcon from '@mui/icons-material/LocalHospitalRounded';
 
 export default function Mypatient() {
     const [isPageReady, setIsPageReady] = React.useState(false); // State for page readiness
@@ -24,6 +25,9 @@ export default function Mypatient() {
         <div>
             {isPageReady ? ( // Conditionally render based on page readiness
                 <div className="Container">
+                    <div>
+                        <LocalHospitalRoundedIcon className="Icon"/>
+                    </div>
                     <div className="Name">Name</div>
                     <div className="ID">ID</div>
                     <div className="buttoncontainer">
