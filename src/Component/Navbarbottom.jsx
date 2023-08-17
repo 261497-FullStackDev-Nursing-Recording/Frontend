@@ -4,6 +4,7 @@ import Link from "next/link";
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded';
 import LocalHospitalRoundedIcon from '@mui/icons-material/LocalHospitalRounded';
+import Mypatient from "@/app/InsideMypatient/MypatientPage";
 
 export default function Navbar() {
 	return (
@@ -20,12 +21,12 @@ export default function Navbar() {
 			<button className="Record">
 			<Link href="/Addpt">
 				<PersonSearchRoundedIcon />
-				<span className="btm-nav-label">Record</span>
+				<span className="btm-nav-label">Search</span>
 			</Link>
 			</button>
 
 			<button className="Patient">
-				<Link href="/InsideMypatient">
+				<Link href="/Mypatient">
 				<LocalHospitalRoundedIcon />
 				<span className="btm-nav-label">Patient</span>
 				</Link>
