@@ -1,10 +1,12 @@
 import Navbar from "../../Component/Navbarbottom";
 import "./InformPage.css";
+import Dropdown from "../../Component/Dropdown";
 // import "../Component/textarea.js" ;
 
 export default function Inform() {
 	return (
 		<div className="inform-container">
+			
 			<div className="svgcontainer">
 				<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -34,26 +36,22 @@ export default function Inform() {
 					</g>
 				</svg>
 			</div>
-			<form>
-				<h3>Name</h3>
-				<div className="name">
-					<input
-						type="text"
-						id="name"
-						placeholder="name"
-						size="14"
-						tabIndex="2"
-					></input>
-					<input
-						type="text"
-						id="lastname"
-						placeholder="lastname"
-						size="14"
-						tabIndex="2"
-					></input>
-				</div>
 
-				<h3>Identification ID</h3>
+			<div className="patientheaddata">
+					<div className="top">Name</div>
+					<div className="Name">
+						Name
+					</div>
+					
+					<div className="top">Identification ID</div>
+					<div className="ID">
+						ID
+					</div>
+				</div>
+			<form>
+				
+
+				 {/* <h3>Identification ID</h3>
 				<input type="int" id="identificationid" placeholder=""></input>
 
 				<h3>ปัญหาและความต้องการ</h3>
@@ -63,9 +61,11 @@ export default function Inform() {
 
 				<h3>กิจกรรมพยาบาล/การประเมิน</h3>
 				<textarea type="text" id="my-text" placeholder="I"></textarea>
-				<textarea type="text" id="my-text" placeholder="E"></textarea>
+				<textarea type="text" id="my-text" placeholder="E"></textarea>  */}
+				
 			</form>
-
+			
+			<Dropdown/>
 			<Navbar />
 		</div>
 	);
