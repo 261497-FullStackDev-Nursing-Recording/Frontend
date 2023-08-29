@@ -19,7 +19,7 @@ export default function Navbar() {
 			</button>
 
 			<button className="Record">
-			<Link href="/Addpt">
+			<Link href="/Search">
 				<PersonSearchRoundedIcon />
 				<span className="btm-nav-label">Search</span>
 			</Link>

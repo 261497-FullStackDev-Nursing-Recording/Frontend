@@ -1,5 +1,5 @@
 import Navbar from "@/Component/Navbarbottom";
-import "./AddPage.css";
+import "./Searchpage.css";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import P_Card from "./P_Card";
@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded';
 import Spinner from "@/Component/spinner";
 
-export default function Addpt() {
+export default function Searchpage() {
 
   const [isPageReady, setIsPageReady] = React.useState(false); // State for page readiness
 

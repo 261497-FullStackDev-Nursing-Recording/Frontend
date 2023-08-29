@@ -3,7 +3,7 @@ import Login from "./Login/LoginPage";
 import Chart from "../Component/DonughnutChart";
 import Dashboard from "./Dashboard/DashboardPage";
 import Inform from "./Inform/InformPage";
-import Add from "./Addpt/AddPage";
+import Add from "./Search/SearchPage";
 import UserList from "./Dashboard/DataNurse";
 // import spinner from "../Component/spinner";
 import { Loader } from "@mantine/core";
