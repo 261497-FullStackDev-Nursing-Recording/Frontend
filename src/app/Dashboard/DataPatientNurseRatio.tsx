@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-
 import { axiosCustom } from "../../services/axiosCustom";
 
 export default function PatientNurseRatio() {
@@ -51,5 +50,6 @@ export default function PatientNurseRatio() {
         }
     };
 
-    return (parseFloat(patientCount / nurseCount).toFixed(2));
+    return (parseFloat((patientCount / nurseCount).toFixed(2)).toString());
+
 }
