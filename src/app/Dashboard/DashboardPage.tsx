@@ -7,10 +7,12 @@ import PatientCount from "./DataPatient";
 import Spinner from "@/Component/spinner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import PatientNurseRatio from "./DataPatientNurseRatio";
 
 export default function Dashboard(): JSX.Element {
 	const queryClient = new QueryClient();
 	const [isPageReady, setIsPageReady] = useState(false); // State for page readiness
+
 
 	// Simulate some loading process (e.g., fetching data) and then set the page as ready
 	useEffect(() => {
@@ -21,6 +23,7 @@ export default function Dashboard(): JSX.Element {
 	}, []);
 	return (
 		<QueryClientProvider client={queryClient}>
+			
 			<div className="dashboard-container">
 				{isPageReady ? ( // Conditionally render based on page readiness
 					<div className="centered-content">
@@ -28,7 +31,7 @@ export default function Dashboard(): JSX.Element {
 						<div className="chart-wrapper">
 							<Chart />
 						</div>
-						<div className="NperP">1 :</div>
+						<span className="NperP">1 : <PatientNurseRatio /></span>
 						<div className="NperPtext">จำนวนพยาบาลต่อผู้ป่วย</div>
 						<div className="countbox">
 							<div className="nursecount">
