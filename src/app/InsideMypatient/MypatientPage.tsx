@@ -31,14 +31,16 @@ export default function Mypatient() {
                     <div className="Name">Name</div>
                     <div className="ID">ID</div>
                     <div className="buttoncontainer">
-                        <Stack direction="row" spacing={2}>
-                            <Button variant="outlined" color="success" size="large" startIcon={<AddIcon />}>
+                            <Button
+                                className="flex h-[40px] text-black items-center ml-[10px] px-[100px] rounded-[5px] bg-[#A2FF86]"
+                                variant="contained"
+                                color="success"
+                                style={{ fontWeight: 'bold' }}
+                                startIcon={<AddIcon />}
+                            >
                                 ADD
                             </Button>
-                            <Button variant="outlined" color="error" size="large" endIcon={<DeleteIcon />}>
-                                DEL
-                            </Button>
-                        </Stack>
+
                     </div>
                     <div className="containercard">
                         <Carddata />

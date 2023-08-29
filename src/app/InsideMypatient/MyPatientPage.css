@@ -52,14 +52,6 @@
 /* .containercard{
 } */
 
-.addButton {
-  background-color: #198754;
-  margin-right: 10px; /* Adjust the margin as needed */
-}
-
-.deleteButton {
-  background-color: #ff6464;
-}
 
 
 .card{
@@ -73,3 +65,4 @@
   height: 50px;
   width: 50px;
 }
+
