@@ -16,7 +16,7 @@ export default function PatientNurseRatio() {
     } = useQuery(["patients"], {
         queryFn: async () => {
             const response = await axiosCustom.post(
-                "http://localhost:5001/api/patient/search",
+            "http://localhost:5001/api/patient/search",
                 body
             );
             return response.data;

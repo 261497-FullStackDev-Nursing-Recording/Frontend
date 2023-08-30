@@ -8,6 +8,7 @@ import Spinner from "@/Component/spinner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import PatientNurseRatio from "./DataPatientNurseRatio";
+import StatusCount from "./GetStatusCount";
 
 export default function Dashboard(): JSX.Element {
 	const queryClient = new QueryClient();
@@ -19,7 +20,7 @@ export default function Dashboard(): JSX.Element {
 		// Simulate loading completion after 2 seconds
 		setTimeout(() => {
 			setIsPageReady(true);
-		}, 1000);
+		}, 300);
 	}, []);
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -29,7 +30,8 @@ export default function Dashboard(): JSX.Element {
 					<div className="centered-content">
 						<HomeRoundedIcon className="IconHome"/>
 						<div className="chart-wrapper">
-							<Chart />
+							{/* <Chart /> */}
+							<StatusCount/>
 						</div>
 						<span className="NperP">1 : <PatientNurseRatio /></span>
 						<div className="NperPtext">จำนวนพยาบาลต่อผู้ป่วย</div>
@@ -46,7 +48,9 @@ export default function Dashboard(): JSX.Element {
 									<PatientCount />
 								</div>
 							</div>
+
 						</div>
+							
 					</div>
 				) : (
 					<div className="spinner-container">
