@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CheckIcon from "@mui/icons-material/Check";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function P_Card() {
   const [open, setOpen] = React.useState(false);
@@ -21,7 +22,7 @@ export default function P_Card() {
 
   return (
     <div>
-      <Card className="w-4/5 flex flex-row justify-between bg-[#d0ebfd] font-semibold mb-[5px] mx-[10%] pl-[30px] rounded-[10px]">
+      <Card className="w-4/5 flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[5px] mx-[10%] pl-[30px] pr-[20px] rounded-[10px] text-[#319795]">
         <div className="PText">
           <div className="mt-[10px]">
             <span className="NameTitle">นาย </span>
@@ -32,11 +33,11 @@ export default function P_Card() {
             <span className="IDNo">XXXXXXXXXX</span>
           </div>
         </div>
-        <div className="pt-[10px]">
-          <CheckIcon sx={{ fontSize: "45px" }} />
+        <div className="py-[10px]">
+          <CheckIcon sx={{ fontSize: "45px" }} style={{ color: "#319795" }} />
         </div>
       </Card>
-      <Card className="w-4/5 flex flex-row justify-between bg-[#d0ebfd] font-semibold mb-[5px] mx-[10%] pl-[30px] rounded-[10px]">
+      <Card className="w-4/5 flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[5px] mx-[10%] pl-[30px] rounded-[10px] text-[#319795]">
         <div className="PText">
           <div className="mt-[10px]">
             <span className="NameTitle">นาย </span>
@@ -48,22 +49,7 @@ export default function P_Card() {
           </div>
         </div>
         <Button onClick={handleClickOpen}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 46 46"
-            fill="none"
-          >
-            <path
-              d="M43.4444 25.5556H2.55556C1.15852 25.5556 0 24.397 0 23C0 21.603 1.15852 20.4444 2.55556 20.4444H43.4444C44.8415 20.4444 46 21.603 46 23C46 24.397 44.8415 25.5556 43.4444 25.5556Z"
-              fill="#292D32"
-            />
-            <path
-              d="M23 46C21.603 46 20.4445 44.8415 20.4445 43.4444V2.55554C20.4445 1.1585 21.603 -1.52588e-05 23 -1.52588e-05C24.3971 -1.52588e-05 25.5556 1.1585 25.5556 2.55554V43.4444C25.5556 44.8415 24.3971 46 23 46Z"
-              fill="#292D32"
-            />
-          </svg>
+          <AddIcon sx={{ fontSize: "50px" }} style={{ color: "#319795" }} />
         </Button>
         <Dialog
           open={open}
