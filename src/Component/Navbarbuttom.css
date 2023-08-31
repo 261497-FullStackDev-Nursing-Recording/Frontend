@@ -1,5 +1,5 @@
 @import "tailwindcss/utilities";
-/* .Home{  
+.Home{  
     background-color: pink;
     color: #B83280;
 }
@@ -12,7 +12,7 @@
 .Patient{
     background-color: #B2F5EA;
     color: #319795;
-} */
+}
 
 /* .Patient,.Home,.Record{ 
     background-color: pink;
@@ -24,9 +24,9 @@
   color: #2563EB; 
 } */
 
-.Patient,
+/* .Patient,
 .Home,
 .Record {
   background-color: #b2f5ea;
   color: #319795;
-}
+} */

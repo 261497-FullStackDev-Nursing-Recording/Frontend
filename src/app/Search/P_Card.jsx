@@ -22,7 +22,7 @@ export default function P_Card() {
 
   return (
     <div>
-      <Card className="w-4/5 flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[5px] mx-[10%] pl-[30px] pr-[20px] rounded-[10px] text-[#319795]">
+      <Card className="w-4/5 flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[5px] mx-[10%] pl-[30px] pr-[20px] rounded-[10px] text-[#2563EB]">
         <div className="PText">
           <div className="mt-[10px]">
             <span className="NameTitle">นาย </span>
@@ -34,10 +34,10 @@ export default function P_Card() {
           </div>
         </div>
         <div className="py-[10px]">
-          <CheckIcon sx={{ fontSize: "45px" }} style={{ color: "#319795" }} />
+          <CheckIcon sx={{ fontSize: "45px" }} style={{ color: "#2563EB" }} />
         </div>
       </Card>
-      <Card className="w-4/5 flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[5px] mx-[10%] pl-[30px] rounded-[10px] text-[#319795]">
+      <Card className="w-4/5 flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[5px] mx-[10%] pl-[30px] rounded-[10px] text-[#2563EB]">
         <div className="PText">
           <div className="mt-[10px]">
             <span className="NameTitle">นาย </span>
@@ -49,7 +49,7 @@ export default function P_Card() {
           </div>
         </div>
         <Button onClick={handleClickOpen}>
-          <AddIcon sx={{ fontSize: "50px" }} style={{ color: "#319795" }} />
+          <AddIcon sx={{ fontSize: "50px" }} style={{ color: "#2563EB" }} />
         </Button>
         <Dialog
           open={open}

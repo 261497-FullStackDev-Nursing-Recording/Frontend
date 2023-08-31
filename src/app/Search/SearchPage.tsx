@@ -38,7 +38,7 @@ export default function Searchpage() {
               />
               <Button
                 variant="contained"
-                style={{ backgroundColor: "#b2f5ea" }}
+                style={{ backgroundColor: "#BFDBFE" }}
                 sx={{
                   height: "40px",
                   width: "40px",
@@ -48,7 +48,7 @@ export default function Searchpage() {
                   boxShadow: 0,
                 }}
               >
-                <SearchIcon style={{ color: "#319795" }} />
+                <SearchIcon style={{ color: "#2563EB" }} />
               </Button>
             </div>
             <div className="text-black font-extrabold text-[20px] flex mt-[20px] mb-[5px] pl-[10%]">
@@ -61,7 +61,7 @@ export default function Searchpage() {
               />
               <Button
                 variant="contained"
-                style={{ backgroundColor: "#b2f5ea" }}
+                style={{ backgroundColor: "#BFDBFE" }}
                 sx={{
                   height: "40px",
                   width: "40px",
@@ -71,7 +71,7 @@ export default function Searchpage() {
                   boxShadow: 0,
                 }}
               >
-                <SearchIcon style={{ color: "#319795" }} />
+                <SearchIcon style={{ color: "#2563EB" }} />
               </Button>
             </div>
           </div>
