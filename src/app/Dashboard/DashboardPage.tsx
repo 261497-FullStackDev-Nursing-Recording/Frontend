@@ -24,14 +24,13 @@ export default function Dashboard(): JSX.Element {
 	}, []);
 	return (
 		<QueryClientProvider client={queryClient}>
-			
+
 			<div className="dashboard-container">
 				{isPageReady ? ( // Conditionally render based on page readiness
 					<div className="centered-content">
-						<HomeRoundedIcon className="IconHome"/>
+						<HomeRoundedIcon sx={{ fontSize: 40 }} />
 						<div className="chart-wrapper">
-							{/* <Chart /> */}
-							<StatusCount/>
+							<StatusCount />
 						</div>
 						<span className="NperP">1 : <PatientNurseRatio /></span>
 						<div className="NperPtext">จำนวนพยาบาลต่อผู้ป่วย</div>
@@ -50,7 +49,7 @@ export default function Dashboard(): JSX.Element {
 							</div>
 
 						</div>
-							
+
 					</div>
 				) : (
 					<div className="spinner-container">

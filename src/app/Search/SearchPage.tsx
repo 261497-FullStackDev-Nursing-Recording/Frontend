@@ -16,7 +16,7 @@ export default function Searchpage() {
     // Simulate loading completion after 1 seconds
     setTimeout(() => {
       setIsPageReady(true);
-    }, 1000);
+    }, 300);
   }, []);
 
   return (

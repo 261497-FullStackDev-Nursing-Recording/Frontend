@@ -46,7 +46,7 @@ export default function Login() {
 		// Simulate loading completion after 2 seconds
 		setTimeout(() => {
 			setIsPageReady(true);
-		}, 1000);
+		}, 300);
 	}, []);
 
 	return (

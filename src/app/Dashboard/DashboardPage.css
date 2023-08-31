@@ -3,6 +3,9 @@
   font-family: 'Kanit', sans-serif;
 }
 
+/* .dashboard-container{
+  background-color: #ecfff0;
+} */
 
 .centered-content {
     display: flex;
@@ -31,9 +34,9 @@ font-weight: bold;
   display: flex;
   flex-direction: row;
   /* background-color: rgb(235, 235, 235); */
-  background-color:  #d3fddc;
+  background-color:  rgb(250, 214, 220);
   border-radius: 20px;
-  border: 2px solid #D4D4D4;
+  /* border: 2px solid #5c1d1d; */
   margin-bottom: 130px;
 }
 
@@ -41,8 +44,6 @@ font-weight: bold;
   margin: 10px 20px;
   font-family: 'Kanit', sans-serif;
   font-weight: bold;
-  /* background-color: blue; */
-  /* padding-bottom: 80px; */
 }
 
 .pateintcount{
@@ -84,7 +85,3 @@ font-weight: bold;
     z-index: 9999; /* Make sure it's on top of everything */
   }
   
-  .IconHome{
-    width: 50px;
-    height: 50px;
-  }
