@@ -35,13 +35,13 @@ export default function Searchpage() {
               <input
                 className="w-full h-[40px] pl-[15px] pr-[79px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px]"
                 id="identificationid"
+                type="search"
               />
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#BFDBFE" }}
                 sx={{
                   height: "40px",
-                  width: "40px",
                   borderRadius: "5px",
                   borderTopLeftRadius: 0,
                   borderBottomLeftRadius: 0,
@@ -58,13 +58,13 @@ export default function Searchpage() {
               <input
                 className="w-full h-[40px] pl-[15px] pr-[79px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px]"
                 id="name"
+                type="search"
               />
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#BFDBFE" }}
                 sx={{
                   height: "40px",
-                  width: "40px",
                   borderRadius: "5px",
                   borderTopLeftRadius: 0,
                   borderBottomLeftRadius: 0,
