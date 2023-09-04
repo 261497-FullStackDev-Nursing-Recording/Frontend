@@ -2,6 +2,7 @@ import Navbar from "../../Component/Navbarbottom";
 import "./InformPage.css";
 import Dropdown from "../../Component/Dropdown";
 // import "../Component/textarea.js" ;
+import Formlayout from "../../Component/formlayout";
 
 export default function Inform() {
 	return (
@@ -48,8 +49,10 @@ export default function Inform() {
 						ID
 					</div>
 				</div>
-			<form>
 				
+			<form>
+			<Dropdown/>
+			<Formlayout/>
 
 				 {/* <h3>Identification ID</h3>
 				<input type="int" id="identificationid" placeholder=""></input>
@@ -65,7 +68,7 @@ export default function Inform() {
 				
 			</form>
 			
-			<Dropdown/>
+			
 			<Navbar />
 		</div>
 	);
