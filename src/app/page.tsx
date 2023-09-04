@@ -7,6 +7,7 @@ import Add from "./Search/SearchPage";
 import UserList from "./Dashboard/DataNurse";
 // import spinner from "../Component/spinner";
 import { Loader } from "@mantine/core";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 export default function Home() {
 	const queryclient = new QueryClient();
@@ -21,6 +22,7 @@ export default function Home() {
 			{/* <Add /> */}
 			{/* <UserList/> */}
 			{/* <Loader color="green" /> */}
+			
 		</div>
 	);
 }

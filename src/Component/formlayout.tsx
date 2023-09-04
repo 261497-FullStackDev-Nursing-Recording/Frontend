@@ -81,7 +81,7 @@ type FormValues = {
                   />
                 </label>
                 <label>
-                  <span>amount</span>
+                  <span>Select types</span>
                   <input
                     type="number"
                     {...register(`cart.${index}.amount`, { valueAsNumber: true })}
@@ -93,6 +93,8 @@ type FormValues = {
               </section>
             );
           })}
+
+          
          
           {/* <button
             type="button"

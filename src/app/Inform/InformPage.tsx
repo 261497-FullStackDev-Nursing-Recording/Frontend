@@ -3,7 +3,7 @@ import "./InformPage.css";
 import Dropdown from "../../Component/Dropdown";
 // import "../Component/textarea.js" ;
 import Formlayout from "../../Component/formlayout";
-
+import MyForm from "../../Component/test";
 export default function Inform() {
 	return (
 		<div className="inform-container">
@@ -51,8 +51,8 @@ export default function Inform() {
 				</div>
 				
 			<form>
-			<Dropdown/>
-			<Formlayout/>
+			{/* <Dropdown/> */}
+			{/* <Formlayout/> */}
 
 				 {/* <h3>Identification ID</h3>
 				<input type="int" id="identificationid" placeholder=""></input>
@@ -68,7 +68,7 @@ export default function Inform() {
 				
 			</form>
 			
-			
+			<MyForm/>
 			<Navbar />
 		</div>
 	);
