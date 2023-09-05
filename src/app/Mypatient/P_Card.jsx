@@ -23,15 +23,15 @@ export default function P_Card() {
       <Card className="w-4/5 flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[5px] mx-[10%] py-[10px] pl-[30px] pr-[10px] rounded-[10px] text-[#319795]">
         <div>
           <div>
-            <span>นาย </span>
+            <span>Name: </span>
             <span>ณัฐพล สายทอง</span>
           </div>
           <div className="mt-[1px]">
-            <span>ID </span>
-            <span>XXXXXXXXXXXXX</span>
+            <span>ID: </span>
+            <span>1XXXXXXXXXXXX</span>
           </div>
           <div className="mt-[1px]">
-            <span>Status </span>
+            <span>Status: </span>
             <span>O</span>
           </div>
         </div>

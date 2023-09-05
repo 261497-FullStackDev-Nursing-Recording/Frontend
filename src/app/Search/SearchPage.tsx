@@ -33,7 +33,7 @@ export default function Searchpage() {
             </div>
             <div className="flex mx-[10%] relative">
               <input
-                className="w-full h-[40px] pl-[15px] pr-[79px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px]"
+                className="w-full h-[40px] pl-[10px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center rounded-tr-none rounded-br-none outline-none"
                 id="identificationid"
                 type="search"
               />
@@ -56,7 +56,7 @@ export default function Searchpage() {
             </div>
             <div className="flex mx-[10%] relative">
               <input
-                className="w-full h-[40px] pl-[15px] pr-[79px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px]"
+                className="w-full h-[40px] pl-[10px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center rounded-tr-none rounded-br-none outline-none"
                 id="name"
                 type="search"
               />
