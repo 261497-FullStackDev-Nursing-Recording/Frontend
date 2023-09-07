@@ -3,11 +3,14 @@ import { Card } from "@mantine/core";
 import { useCounter } from "@mantine/hooks";
 import { Modal, Button, Group, Text, Badge } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
+import PatientHistory from "../PatientHistory/patientHistory";
+import { Link } from "react-router-dom";
 
 interface SearchResult {
     f_name: string;
     l_name: string;
     identification_id: string;
+    id: string;
     status: string;
 }
 
@@ -26,7 +29,7 @@ const getStatusColor = (status: string) => {
         case "STATUS_4":
             return "#EB6569";
         default:
-            return "#000000"; // Default color for unknown statuses
+            return "#000000";
     }
 };
 
@@ -44,13 +47,19 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
         setOpened(false);
     };
 
+    const goToPatientHistory = (identificationId: string) => {
+        // You can navigate to the PatientHistory component with the identificationId
+        // For now, let's just log it
+        console.log("Navigating to PatientHistory with ID:", identificationId);
+    };
+
     return (
         <div>
             {apiData.map((item, index) => (
                 <Card
                     className="w-4/5 flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[15px] mx-[10%] pl-[30px] pr-[0px] rounded-[10px] text-[#2563EB]"
                     key={index}
-                    // onClick={() => console.log("Go to patient data page")} onclick ไปหน้า patientpage
+                    onClick={() => goToPatientHistory(item.id)} //
                 >
                     <div className="PText">
                         <div className="mt-[8px]">
@@ -86,8 +95,6 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
                     <div>
                         <Text>Name: {selectedCard.f_name} {selectedCard.l_name}</Text>
                         <Text>ID: {selectedCard.identification_id}</Text>
-
-
                         <Group mt="xl">
                             <Button variant="outline" color="red" onClick={closeModal}>
                                 Cancel
