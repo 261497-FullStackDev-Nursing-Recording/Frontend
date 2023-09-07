@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 
-import Inform from "./InformPage";
+import PatientHistory from "./patientHistory";
 type Props = {};
 
 export default function page({}: Props) {
-	return <Inform />;
+	return <PatientHistory/>;
 }

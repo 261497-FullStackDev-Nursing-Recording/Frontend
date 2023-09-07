@@ -8,7 +8,7 @@ import LocalHospitalRoundedIcon from '@mui/icons-material/LocalHospitalRounded';
 import { Button } from "@mantine/core";
 
 
-export default function Mypatient() {
+export default function PatientHistory() {
     const [isPageReady, setIsPageReady] = React.useState(false); // State for page readiness
 
     // Simulate some loading process (e.g., fetching data) and then set the page as ready
@@ -28,20 +28,6 @@ export default function Mypatient() {
                     </div>
                     <div className="Name">Name</div>
                     <div className="ID">ID</div>
-                    <div className="buttoncontainer">
-                        <Button
-                            variant="outline"
-                            color="green"
-                            onClick={() => console.log("Add Patient")}
-                            style={{ fontWeight: 'bold' }}
-                        >
-                            Add Record
-                        </Button>
-                        {/* <ActionIcon color="green" size="xl" >
-                            <IconAdjustments size="2.125rem" />
-                        </ActionIcon> */}
-
-                    </div>
                     <div className="containercard">
                         <Carddata />
                     </div>
