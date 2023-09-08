@@ -1,9 +1,11 @@
 import React from "react";
 import { Control, useFieldArray, useForm, useWatch, Controller } from "react-hook-form";
 import "./formlayout.css";
+import { text } from "stream/consumers";
 
 type FormValues = {
   cart: {
+    type: string;
     name: string;
     amount: number;
   }[];
@@ -31,7 +33,7 @@ function TotalAmout({ control }: { control: Control<FormValues> }) {
   return <p>{getTotal(cartValues)}</p>;
 }
 
-export default function MyForm() {
+export default function AForm() {
   const {
     register,
     formState: { errors },
@@ -40,8 +42,8 @@ export default function MyForm() {
     control
   } = useForm<FormValues>({
     defaultValues: {
-      cart: [{ name: "", amount: 0 }],
-      type: "" // Default value for the select
+      cart: [{ type:"select" ,name: "", amount: 0 }],
+       // Default value for the select
     }
   });
   const { fields, append, remove } = useFieldArray({
@@ -62,7 +64,7 @@ export default function MyForm() {
           console.log("Submit data", data);
         })}
       >
-        <div>
+        <div className=" Selectdisease">
           <label>เลือกกลุ่มโรค: </label>
           <Controller
             name="type"
@@ -78,49 +80,67 @@ export default function MyForm() {
             )}
           />
         </div>
-
+      
+        <h1 className="Headform">A</h1>
+        
         <button
           type="button"
           onClick={() => {
             append({
+              type: "select",
               name: "",
               amount: 0
+              
             });
           }}
         >
           Add
         </button>
 
-        {fields.map((field, index) => {
-          return (
-            <section key={field.id}>
-              <label>
-                <span>Name</span>
-                <input
-                  {...register(`cart.${index}.name`, { required: true })}
-                />
-              </label>
-              <label>
-                <span>Mean</span>
-                <input
-                  type="number" // Changed to text input, but you can use select
-                  {...register(`cart.${index}.amount`, { valueAsNumber: true })}
-                />
-              </label>
-              <button type="button" onClick={() => remove(index)}>
-                Delete
-              </button>
-            </section>
-          );
-        })}
+      
 
-       
+{fields.map((field, index) => {
+  return (
+    <section key={field.id}>
 
+<label>
+        <span>Type</span>
+        <select
+          {...register(`cart.${index}.type`, { required: true })}
+        >
+          <option value="type1">Type 1</option>
+          <option value="type2">Type 2</option>
+          {/* Add more type options as needed */}
+        </select>
+      </label>
+
+      <label>
+        <span>Name</span>
+        <input
+          {...register(`cart.${index}.name`, { required: true })}
+        />
+      </label>
+      
+      <label>
+        <span>Mean</span>
+        <input
+          type="number"
+          {...register(`cart.${index}.amount`, { valueAsNumber: true })}
+        />
+      </label>
+      <button type="button" onClick={() => remove(index)}>
+        Delete
+      </button>
+    </section>
+  );
+})}
      
         
 
         <p>{errors.cart?.root?.message}</p>
-        <button type="submit">Submit</button>
+        <button type="submit" className="submitbtn" >Submit</button>
+
+        
       </form>
     </div>
   );

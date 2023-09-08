@@ -1,15 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap');
+*{
+  font-family: 'Kanit', sans-serif;
+}
 
-  
-  .h1 {
-    margin-top: 80px;
-    color: white;
-    font-size: 25px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgb(79, 98, 148);
-  }
-  
+ 
+
   .form {
-    max-width: 800px;
+    max-width: 100%;
+    align-items: center;
     margin: 0 auto;
   }
   
@@ -24,10 +22,11 @@
   }
   
   section > button[type="button"] {
-    background: white;
-    color: black;
+    background: rgb(245, 88, 88);
+    color: rgb(255, 255, 255);
     margin-top: auto;
     margin-bottom: 15px;
+    border-radius: 4px;
   }
   
   input {
@@ -43,6 +42,7 @@
   
   label > span {
     margin-bottom: 10px;
+   
     display: block;
   }
   
@@ -63,11 +63,10 @@
     color: rgb(0, 0, 0);
     text-transform: uppercase;
     border: none;
-    margin-top: 40px;
+    margin-top: 10px;
     padding: 20px;
     font-size: 16px;
     font-weight: 100;
-    letter-spacing: 10px;
     display: block;
     appearance: none;
     border-radius: 4px;
@@ -90,32 +89,50 @@
     grid-gap: 20px;
   }
   
-  .counter {
-    font-weight: 400;
-    background: white;
-    color: black;
-    padding: 10px 15px;
-    border-radius: 4px;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999999;
-    border: 1px solid rgb(79, 98, 148);
-    box-shadow: 0 0 4px rgb(79, 98, 148);
-  }
+  
   
   button[type="button"] {
-    padding: 5px;
+    
     background: #516391;
     color: white;
     letter-spacing: 0px;
     text-transform: none;
     padding: 10px;
-    letter-spacing: 2px;
+    
   }
   
   button[type="button"]:hover {
-    background: #bf1650;
+    background: #232f48;
     color: white;
   }
   
+  .submitbtn{
+    margin-bottom: 10px;
+  }
+
+  .submitbtn1{
+    margin-bottom: 80px;
+  }
+
+  .Selectdisease{
+    display:flex;
+  flex-direction: column;
+  padding: 2vw 4vw;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+  }
+
+  .Headform{
+    font-size: 50px;
+  }
+
+  .Headlayout{
+   
+  flex-direction: column;
+ 
+  justify-content: center;
+
+  }
