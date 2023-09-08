@@ -25,11 +25,11 @@ export default function P_Card() {
       <Card className="w-4/5 flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[5px] mx-[10%] pl-[30px] pr-[20px] rounded-[10px] text-[#2563EB]">
         <div className="PText">
           <div className="mt-[10px]">
-            <span className="NameTitle">นาย </span>
+            <span className="NameTitle">Name: </span>
             <span className="PNameText">ณัฐพล สายทอง</span>
           </div>
           <div className="mt-[1px] mb-[10px]">
-            <span className="IDText">ID </span>
+            <span className="IDText">ID: </span>
             <span className="IDNo">XXXXXXXXXX</span>
           </div>
         </div>
@@ -40,11 +40,11 @@ export default function P_Card() {
       <Card className="w-4/5 flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[5px] mx-[10%] pl-[30px] rounded-[10px] text-[#2563EB]">
         <div className="PText">
           <div className="mt-[10px]">
-            <span className="NameTitle">นาย </span>
+            <span className="NameTitle">Name: </span>
             <span className="PNameText">ณัฐพล สายทอง</span>
           </div>
           <div className="mt-[1px] mb-[10px]">
-            <span className="IDText">ID </span>
+            <span className="IDText">ID: </span>
             <span className="IDNo">XXXXXXXXXX</span>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function P_Card() {
           <DialogTitle id="alert-dialog-title">{"เพิ่มคนไข้"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Name: นาย ณัฐพล สายทอง
+              Name: ณัฐพล สายทอง
             </DialogContentText>
             <DialogContentText id="alert-dialog-description">
               ID: 1XXXXXXXXXXXX

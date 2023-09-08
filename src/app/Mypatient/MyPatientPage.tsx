@@ -34,7 +34,7 @@ export default function Mypatient() {
           </h1>
           <div className="flex mx-[10%] mb-[20px] relative">
             <input
-              className="w-full h-[40px] pl-[35px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px]"
+              className="w-full h-[40px] pl-[35px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px] outline-none"
               id="identificationid"
               type="search"
             />
@@ -44,7 +44,7 @@ export default function Mypatient() {
               sx={{ top: 8, left: 7 }}
             />
           </div>
-          <div className="flex justify-center px-[10%] mb-[20px]">
+          {/* <div className="flex justify-center px-[10%] mb-[20px]">
             <Button variant="outlined" size="small">
               Select
             </Button>
@@ -52,12 +52,12 @@ export default function Mypatient() {
               variant="outlined"
               size="small"
               color="error"
-              sx={{ marginLeft: "3px" }}
+              sx={{ marginLeft: "10px" }}
             >
               Delete All
             </Button>
-          </div>
-          {/* <div className="flex justify-between px-[10%] mb-[20px]">
+          </div> */}
+          <div className="flex justify-between px-[10%] mb-[20px]">
             <p className="py-[3px] text-[17px]">0 Selected</p>
             <div>
               <Button
@@ -75,7 +75,7 @@ export default function Mypatient() {
                 Done
               </Button>
             </div>
-          </div> */}
+          </div>
 
           <div>
             <P_Card />

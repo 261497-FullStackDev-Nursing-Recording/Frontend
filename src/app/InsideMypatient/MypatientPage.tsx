@@ -3,12 +3,10 @@ import Navbar from "@/Component/Navbarbottom";
 import "./MyPatientPage.css";
 import Carddata from "../InsideMypatient/Carddata";
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
 import Spinner from "@/Component/spinner";
 import LocalHospitalRoundedIcon from '@mui/icons-material/LocalHospitalRounded';
+import { Button } from "@mantine/core";
+
 
 export default function Mypatient() {
     const [isPageReady, setIsPageReady] = React.useState(false); // State for page readiness
@@ -26,20 +24,22 @@ export default function Mypatient() {
             {isPageReady ? ( // Conditionally render based on page readiness
                 <div className="Container">
                     <div>
-                        <LocalHospitalRoundedIcon className="Icon"/>
+                        <LocalHospitalRoundedIcon className="Icon" />
                     </div>
                     <div className="Name">Name</div>
                     <div className="ID">ID</div>
                     <div className="buttoncontainer">
-                            <Button
-                                className="flex h-[40px] text-black items-center ml-[10px] px-[100px] rounded-[5px] bg-[#A2FF86]"
-                                variant="contained"
-                                color="success"
-                                style={{ fontWeight: 'bold' }}
-                                startIcon={<AddIcon />}
-                            >
-                                ADD
-                            </Button>
+                        <Button
+                            variant="outline"
+                            color="green"
+                            onClick={() => console.log("Add Patient")}
+                            style={{ fontWeight: 'bold' }}
+                        >
+                            Add Record
+                        </Button>
+                        {/* <ActionIcon color="green" size="xl" >
+                            <IconAdjustments size="2.125rem" />
+                        </ActionIcon> */}
 
                     </div>
                     <div className="containercard">
@@ -49,7 +49,7 @@ export default function Mypatient() {
                 </div>
             ) : (
                 <div className="spinner-container">
-					<Spinner />
+                    <Spinner />
                 </div>
             )}
             <Navbar />
