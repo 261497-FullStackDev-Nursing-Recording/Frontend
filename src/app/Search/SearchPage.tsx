@@ -7,8 +7,6 @@ import PersonSearchRoundedIcon from "@mui/icons-material/PersonSearchRounded";
 import Spinner from "@/Component/spinner";
 import { useDebouncedState } from "@mantine/hooks";
 import axios from "axios";
-import { Card } from "@mantine/core";
-import AddIcon from "@mui/icons-material/Add";
 import SearchPatient from "./SearchPatient";
 import PatientHistory from "../PatientHistory/patientHistory";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -64,6 +62,7 @@ export default function Searchpage() {
       setIsPageReady(true);
     }, 1000);
   }, []);
+  console.log(apiData);
 
   function SearchForm() {
     return (
@@ -144,7 +143,7 @@ export default function Searchpage() {
         <Route path="/Search" element={<SearchForm />} />
         <Route
           path="/patientHistory/:identification_id"
-          element={<PatientHistory />}
+          element={<PatientHistory/>}
         />
       </Routes>
     </Router>
