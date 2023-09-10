@@ -51,8 +51,14 @@ export default function PatientHistory() {
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
   const records = recordData.map(record => {
-    return <div className="Name">
-      {record.visit_number}
+    return <div className="box">
+      กลุ่มโรค:  {record.diseaseGroup}
+      <div/>
+      เตียงที่:  {record.bed_number}
+      <div/>
+      กลุ่มโรค:  {record.visit_number}
+      <div/>
+      สร้างเมื่อ:  {record.created_at}
     </div>
   })
 
@@ -77,6 +83,7 @@ export default function PatientHistory() {
             <LocalHospitalRoundedIcon className="Icon" />
           </div>
           <div className="Name">Name: {patientData?.f_name} {patientData?.l_name}</div>
+          <div className="ID">Citizen ID:<div/> {identification_id}</div>
           <div className="containercard">{records}</div>
           <div className="card"></div>
         </div>
