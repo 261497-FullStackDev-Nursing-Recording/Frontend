@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card } from "@mantine/core";
 import { Modal, Button, Group, Text } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface SearchResult {
   f_name: string;
@@ -34,7 +34,7 @@ const getStatusColor = (status: string) => {
 const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState<SearchResult | null>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleCardClick = (item: SearchResult) => {
     setSelectedCard(item);
@@ -49,7 +49,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   const goToPatientHistory = (identificationId: string) => {
     // You can navigate to the PatientHistory component with the identificationId
     // For now, let's just log it
-    navigate(`/patientHistory/${identificationId}`);
+    // navigate(`/patientHistory/${identificationId}`);
     console.log("Navigating to PatientHistory with ID:", identificationId);
   };
 

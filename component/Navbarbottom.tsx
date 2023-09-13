@@ -1,4 +1,5 @@
 import "daisyui/dist/full.css";
+import "./Navbarbottom.css";
 import Link from "next/link";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PersonSearchRoundedIcon from "@mui/icons-material/PersonSearchRounded";
