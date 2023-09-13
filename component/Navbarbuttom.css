@@ -1,0 +1,32 @@
+@import "tailwindcss/utilities";
+.Home {
+  background-color: pink;
+  color: #b83280;
+}
+
+.Record {
+  background-color: #bfdbfe;
+  color: #2563eb;
+}
+
+.Patient {
+  background-color: #b2f5ea;
+  color: #319795;
+}
+
+/* .Patient,.Home,.Record{ 
+    background-color: pink;
+    color: #B83280;
+} */
+
+/* .Patient,.Home,.Record{
+    background-color: #BFDBFE; 
+  color: #2563EB; 
+} */
+
+/* .Patient,
+.Home,
+.Record {
+  background-color: #b2f5ea;
+  color: #319795;
+} */
