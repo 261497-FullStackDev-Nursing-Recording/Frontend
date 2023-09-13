@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-export const useCurrentNurseryLogin = () => {
+export const useCurrentNurseLogin = () => {
   const query = useQuery(["currentNurse"], async () => {
     const response = await axios.get("http://localhost:5001/api/auth/me");
     return response.data;
