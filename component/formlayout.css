@@ -1,121 +1,114 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap');
-*{
-  font-family: 'Kanit', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap");
+* {
+  font-family: "Kanit", sans-serif;
 }
 
- 
+form {
+  max-width: 100%;
+  margin-inline: auto;
+}
 
-  .form {
-    max-width: 100%;
-    align-items: center;
-    margin: 0 auto;
-  }
-  
-  .p {
-    color: #bf1650;
-    text-align: center;
-  }
-  
-  section {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  section > button[type="button"] {
-    background: rgb(245, 88, 88);
-    color: rgb(255, 255, 255);
-    margin-top: auto;
-    margin-bottom: 15px;
-    border-radius: 4px;
-  }
-  
-  input {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid white;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-  
-  label > span {
-    margin-bottom: 10px;
-   
-    display: block;
-  }
-  
-  .label,
-  section > label {
-    line-height: 2;
-    text-align: left;
-    display: block;
-    margin: 5px 0;
-    color: rgb(2, 2, 2);
-    font-size: 14px;
-    font-weight: 200;
-  }
-  
-  button[type="submit"],
-  .button {
-    background: #61fe93;
-    color: rgb(0, 0, 0);
-    text-transform: uppercase;
-    border: none;
-    margin-top: 10px;
-    padding: 20px;
-    font-size: 16px;
-    font-weight: 100;
-    display: block;
-    appearance: none;
-    border-radius: 4px;
-    width: 100%;
-  }
-  
-  .buttonBlack {
-    background: black;
-    border: 1px solid white;
-  }
-  
-  .App {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-  }
-  
-  
-  
-  button[type="button"] {
-    
-    background: #516391;
-    color: white;
-    letter-spacing: 0px;
-    text-transform: none;
-    padding: 10px;
-    
-  }
-  
-  button[type="button"]:hover {
-    background: #232f48;
-    color: white;
-  }
-  
-  .submitbtn{
-    margin-bottom: 10px;
-  }
+.p {
+  color: #bf1650;
+  text-align: center;
+}
 
-  .submitbtn1{
-    margin-bottom: 80px;
-  }
+section {
+  display: flex;
+  gap: 1rem;
+}
 
-  .Selectdisease{
-    display:flex;
+section > button[type="button"] {
+  background: rgb(245, 88, 88);
+  color: rgb(255, 255, 255);
+  margin-top: auto;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid white;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+label > span {
+  margin-bottom: 10px;
+
+  display: block;
+}
+
+.label,
+section > label {
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin: 5px 0;
+  color: rgb(2, 2, 2);
+  font-size: 14px;
+  font-weight: 200;
+}
+
+button[type="submit"],
+.button {
+  background: #61fe93;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  border: none;
+  margin-top: 10px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 100;
+  display: block;
+  appearance: none;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.buttonBlack {
+  background: black;
+  border: 1px solid white;
+}
+
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+button[type="button"] {
+  background: #516391;
+  color: white;
+  letter-spacing: 0px;
+  text-transform: none;
+  padding: 10px;
+}
+
+button[type="button"]:hover {
+  background: #232f48;
+  color: white;
+}
+
+.submitbtn {
+  margin-bottom: 10px;
+}
+
+.submitbtn1 {
+  margin-bottom: 80px;
+}
+
+.Selectdisease {
+  display: flex;
   flex-direction: column;
   padding: 2vw 4vw;
   width: 100%;
@@ -123,16 +116,14 @@
   border-radius: 10px;
   justify-content: center;
   margin-bottom: 10px;
-  }
+}
 
-  .Headform{
-    font-size: 50px;
-  }
+.Headform {
+  font-size: 50px;
+}
 
-  .Headlayout{
-   
+.Headlayout {
   flex-direction: column;
- 
-  justify-content: center;
 
-  }
+  justify-content: center;
+}
