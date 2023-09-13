@@ -1,13 +1,12 @@
 "use client";
-import Navbar from "@/Component/Navbarbottom";
 import P_Card from "./P_Card";
 import LocalHospitalRoundedIcon from "@mui/icons-material/LocalHospitalRounded";
 import "./MyPatientPage.css";
-import { useState, useEffect } from "react";
-import Spinner from "@/Component/spinner";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
+import Navbar from "../../component/Navbarbottom";
+import Spinner from "../../component/spinner";
 
 export default function Mypatient() {
   const [isPageReady, setIsPageReady] = React.useState(false); // State for page readiness

@@ -1,4 +1,3 @@
-import "./Searchpage.css";
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
