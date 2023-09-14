@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-export const useQueryRecords = () => {
-  const query = useQuery(["records"], async (data) => {
+export const useQueryRecords = (data: any) => {
+  const query = useQuery(["records"], async () => {
     const response = await axios.post(
       "http://localhost:5001/api/records/search",
       data
