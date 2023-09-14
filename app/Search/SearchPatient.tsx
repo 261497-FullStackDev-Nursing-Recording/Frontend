@@ -70,7 +70,6 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
             paddingRight: "0px",
             borderRadius: "10px",
             color: "#2563EB",
-            // Add other styles here
           }}
           //   className="w-4/5 flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[15px] mx-[10%] pl-[30px] pr-[0px] rounded-[10px] text-[#2563EB]"
           key={index}
@@ -104,6 +103,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
         onClose={closeModal}
         size="lg"
         title="ข้อมูลผู้ป่วย"
+        className="items-center"
       >
         {selectedCard && (
           <div>
