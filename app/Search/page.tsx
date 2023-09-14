@@ -51,9 +51,18 @@ export default function Searchpage() {
   console.log(data);
 
   const handleSearchID = () => {
+    // Trim and check if the input is empty
+    if (valueID.trim() === "") {
+      apiData.length = 0;
+      setApiData([]);
+      return; // Exit the function early if the input is empty
+    }
+
+    // Create a regular expression pattern from the search value
+    const searchPattern = new RegExp(valueID.trim(), "i");
     // Filter the data based on the input value for identification_id
     const filteredData = data.filter((item: any) =>
-      item.identification_id.includes(valueID)
+      searchPattern.test(item.identification_id)
     );
     const clonedData = filteredData.map((item: type) => ({ ...item }));
     apiData.length = 0;
@@ -61,12 +70,26 @@ export default function Searchpage() {
   };
 
   const handleSearchName = () => {
-    // Filter the data based on the input value for f_name or l_name
-    const filteredData = data.filter(
-      (item: any) =>
-        item.f_name.toLowerCase().includes(valueName.toLowerCase()) ||
-        item.l_name.toLowerCase().includes(valueName.toLowerCase())
-    );
+    // Trim and check if the input is empty
+    if (valueName.trim() === "") {
+      apiData.length = 0;
+      setApiData([]);
+      return; // Exit the function early if the input is empty
+    }
+
+    // Create a regular expression pattern from the search value
+    const searchPattern = new RegExp(valueName.trim(), "i");
+
+    // Filter the data based on the input value for f_name and l_name
+    const filteredData = data.filter((item: any) => {
+      const fullName = `${item.f_name}${item.l_name}`;
+      return (
+        searchPattern.test(item.f_name) ||
+        searchPattern.test(item.l_name) ||
+        searchPattern.test(fullName)
+      );
+    });
+
     const clonedData = filteredData.map((item: type) => ({ ...item }));
     apiData.length = 0;
     setApiData(clonedData);
