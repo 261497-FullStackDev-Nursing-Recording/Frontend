@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-export const useQueryPatients = () => {
-  const query = useQuery(["patients"], async (data) => {
+export const useQueryPatients = (data: any) => {
+  const query = useQuery(["patients"], async () => {
     const response = await axios.post(
       "http://localhost:5001/api/patient/search",
       data
