@@ -1,22 +1,22 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-
-export const useQueryPatients = (data: any) => {
+import { useCurrentNurseLogin } from "./nurse";
+import { LinkPatient, Patient, removeLinkedPatients } from "../types/patient";
+export const useQueryPatients = (body: Patient) => {
   const query = useQuery(["patients"], async () => {
-    const response = await axios.post(
+    const response = await axios.post<Patient[]>(
       "http://localhost:5001/api/patient/search",
-      data
+      body
     );
     return response.data;
   });
   return query;
 };
 
-export const useQueryLinkedPatients = () => {
-  const query = useQuery(["linkedPatient"], async (data) => {
-    const response = await axios.post(
-      "http://localhost:5001/api/patient/GetLinkedPatients",
-      data
+export const useQueryLinkedPatients = (user_id: string) => {
+  const query = useQuery(["linkedPatient", user_id], async () => {
+    const response = await axios.post<LinkPatient[]>(
+      `http://localhost:5001/api/patient/${user_id}`
     );
     return response.data;
   });
@@ -24,20 +24,36 @@ export const useQueryLinkedPatients = () => {
 };
 
 export const useMutationLinkPatient = () => {
-  const mutation = useMutation(["linkPatient"], async (args) => {
-    const response = await axios.post(
-      "http://localhost:5001/api/patient/linkedPatients",
-      args
-    );
-    return response.data;
-  });
+  const user = useCurrentNurseLogin();
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    ["linkPatient"],
+    async (args: LinkPatient) => {
+      const response = await axios.post<LinkPatient>(
+        "http://localhost:5001/api/patient/linkedPatients",
+        args
+      );
+
+      return response.data;
+    },
+    {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({
+          queryKey: ["linkedPatient", user?.id],
+        });
+      },
+    }
+  );
   return mutation;
 };
 
 export const useMutationUpdateLinkedPatients = () => {
-  const mutation = useMutation(["removeLinkedPatients"], async (args) => {
-    await axios.put("http://localhost:5001/api/patient", args);
-  });
+  const mutation = useMutation(
+    ["removeLinkedPatients"],
+    async (args: removeLinkedPatients) => {
+      await axios.put<null>("http://localhost:5001/api/patient", args);
+    }
+  );
 
   return mutation;
 };
