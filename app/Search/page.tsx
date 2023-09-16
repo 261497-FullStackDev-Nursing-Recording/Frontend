@@ -5,30 +5,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import PersonSearchRoundedIcon from "@mui/icons-material/PersonSearchRounded";
 import { useDebouncedState } from "@mantine/hooks";
-import axios from "axios";
-import SearchPatient from "./SearchPatient";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Spinner from "../../component/spinner";
 import Navbar from "../../component/Navbarbottom";
-import PatientHistory from "../PatientHistory/page";
 import { useQueryPatients } from "../../query/patient";
-import { useParams } from "react-router-dom";
-
-interface type {
-  f_name: string;
-  l_name: string;
-  identification_id: string;
-  id: string;
-  status: string;
-}
+import { PatientType } from "../../types/patient";
+import SearchPatient from "./SearchPatient";
 
 export default function Searchpage() {
-  const [isPageReady, setIsPageReady] = React.useState(false); // State for page readiness
   const [valueID, setValueID] = useDebouncedState("", 500, { leading: true });
   const [valueName, setValueName] = useDebouncedState("", 500, {
     leading: true,
   });
-  const [apiData, setApiData] = useState([]);
+  const [apiData, setApiData] = useState<PatientType[]>([]);
 
   const { data, isLoading, isError } = useQueryPatients({});
 
@@ -61,10 +49,12 @@ export default function Searchpage() {
     // Create a regular expression pattern from the search value
     const searchPattern = new RegExp(valueID.trim(), "i");
     // Filter the data based on the input value for identification_id
-    const filteredData = data.filter((item: any) =>
+    const filteredData = data.filter((item: PatientType) =>
       searchPattern.test(item.identification_id)
     );
-    const clonedData = filteredData.map((item: type) => ({ ...item }));
+    const clonedData = filteredData.map((item: PatientType) => ({
+      ...item,
+    }));
     apiData.length = 0;
     setApiData(clonedData);
   };
@@ -90,7 +80,9 @@ export default function Searchpage() {
       );
     });
 
-    const clonedData = filteredData.map((item: type) => ({ ...item }));
+    const clonedData = filteredData.map((item: PatientType) => ({
+      ...item,
+    }));
     apiData.length = 0;
     setApiData(clonedData);
   };
