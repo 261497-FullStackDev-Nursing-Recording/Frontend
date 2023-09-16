@@ -1,6 +1,6 @@
 import { STATUS } from "./status";
 
-export interface Patient {
+export interface PatientType {
   id: string;
   f_name: string;
   l_name: string;
@@ -10,19 +10,19 @@ export interface Patient {
   created_at: string;
 }
 
-export interface SearchPatient {
-  indentification_id: string;
-  f_name: string;
-  l_name: string;
-  status: STATUS;
-  fromDate: string;
+export interface SearchPatientType {
+  identification_id?: string;
+  f_name?: string;
+  l_name?: string;
+  status?: STATUS;
+  fromDate?: string;
 }
 
-export interface LinkPatient {
+export interface LinkPatientType {
   user_id: string;
   patient_id: string;
 }
 
-export interface removeLinkedPatients {
+export interface RemoveLinkedPatientsType {
   patient_id: string[];
 }

@@ -1,6 +1,6 @@
 import { SHIFT } from "./shift";
 
-export interface Record {
+export interface RecordType {
   id: string;
   user_id: string;
   patient_id: string;
@@ -12,20 +12,20 @@ export interface Record {
   created_at: string;
   modified_at: string;
 }
-export interface SearchRecord {
-  user_id: string;
-  patient_id: string;
-  bed_number: 0;
-  ward: string;
-  diseaseGroup: string;
-  shift: SHIFT;
-  visit_number: string;
-  fromDate: string;
-  toDate: string;
-  includeFields: boolean;
+export interface SearchRecordType {
+  user_id?: string;
+  patient_id?: string;
+  bed_number?: 0;
+  ward?: string;
+  diseaseGroup?: string;
+  shift?: SHIFT;
+  visit_number?: string;
+  fromDate?: string;
+  toDate?: string;
+  includeFields?: boolean;
 }
 
-export interface UpdateRecord {
+export interface UpdateRecordType {
   bed_number: number;
   ward: string;
   diseaseGroup: string;
