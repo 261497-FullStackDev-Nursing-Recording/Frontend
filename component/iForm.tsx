@@ -1,7 +1,11 @@
 import React from "react";
-import { Control, useFieldArray, useForm, useWatch, Controller } from "react-hook-form";
+import {
+  Control,
+  useFieldArray,
+  useForm,
+  useWatch,
+} from "react-hook-form";
 import "./formlayout.css";
-import { text } from "stream/consumers";
 
 type FormValues = {
   cart: {
@@ -9,7 +13,6 @@ type FormValues = {
     name: string;
     amount: number;
   }[];
-  type: string; // New field for select
 };
 
 let renderCount = 0;
@@ -24,108 +27,100 @@ function getTotal(payload: FormValues["cart"]) {
   return total;
 }
 
-function TotalAmout({ control }: { control: Control<FormValues> }) {
-  const cartValues = useWatch({
-    control,
-    name: "cart"
-  });
-
-  return <p>{getTotal(cartValues)}</p>;
-}
-
 export default function IForm() {
   const {
     register,
     formState: { errors },
     handleSubmit,
-    watch,
-    control
+    control,
   } = useForm<FormValues>({
     defaultValues: {
-      cart: [{ type:"select" ,name: "", amount: 0 }],
-       // Default value for the select
-    }
+      cart: [{ type: "", name: "", amount: 0 }],
+    },
   });
   const { fields, append, remove } = useFieldArray({
     name: "cart",
     control,
     rules: {
-      required: "Please add at least 1 item"
-    }
+      required: "Please add at least 1 item",
+    },
+  });
+
+  const cartValues = useWatch({
+    control,
+    name: "cart",
   });
 
   renderCount++;
 
   return (
-    
     <div>
       <form
         onSubmit={handleSubmit((data) => {
           console.log("Submit data", data);
         })}
       >
-       
-       <h1 className="Headform">I</h1>
-       
-       
+        <h1 className="Headform">I</h1>
+
         <button
           type="button"
           onClick={() => {
             append({
-              type: "select",
+              type: "",
               name: "",
-              amount: 0
-              
+              amount: 0,
             });
           }}
         >
           Add
         </button>
 
+        {fields.map((field, index) => {
+          const selectedType = cartValues[index]?.type || "";
 
-        
+          return (
+            <section key={field.id}>
+              <label>
+                <span>Select</span>
+                <select
+                  {...register(`cart.${index}.type`, { required: true })}
+                >
+                  <option value="">Select</option>
+                  <option value="WBC">WBC</option>
+                  <option value="other">Other</option>
+                </select>
+              </label>
 
-       
-{fields.map((field, index) => {
-  return (
-    <section key={field.id}>
+              {selectedType === "WBC" ? (
+                <>
+                  <label>
+                    <span>WBCs per microliter</span>
+                    <input
+                      {...register(`cart.${index}.name`, { required: true })}
+                    />
+                  </label>
 
-<label>
-        <span>Type</span>
-        <select
-          {...register(`cart.${index}.type`, { required: true })}
-        >
-          <option value="type1">Type 1</option>
-          <option value="type2">Type 2</option>
-          {/* Add more type options as needed */}
-        </select>
-      </label>
+                </>
+              ) : (
+                <label>
+                  <span>Name</span>
+                  <input
+                    {...register(`cart.${index}.name`, { required: true })}
+                  />
+                </label>
+              )}
 
-      <label>
-        <span>Name</span>
-        <input
-          {...register(`cart.${index}.name`, { required: true })}
-        />
-      </label>
-      
-      <label>
-        <span>Mean</span>
-        <input
-          type="number"
-          {...register(`cart.${index}.amount`, { valueAsNumber: true })}
-        />
-      </label>
-      <button type="button" onClick={() => remove(index)}>
-        Delete
-      </button>
-    </section>
-  );
-})}
-     
-        
+              <button type="button" onClick={() => remove(index)}>
+                Delete
+              </button>
+            </section>
+          );
+        })}
 
         <p>{errors.cart?.root?.message}</p>
-        <button type="submit" className="submitbtn" >Submit</button>
+        <button type="submit" className="submitbtn">
+          Submit
+        </button>
       </form>
     </div>
   );
