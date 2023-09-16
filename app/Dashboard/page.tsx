@@ -12,17 +12,10 @@ import PatientNurseRatio from "../../utils/patientRatio";
 
 export default function Dashboard(): JSX.Element {
   const queryClient = new QueryClient();
-  const [isPageReady, setIsPageReady] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsPageReady(true);
-    }, 300);
-  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <div className="dashboard-container">
-        {isPageReady ? (
           <div className="centered-content">
             <HomeRoundedIcon sx={{ fontSize: 40 }} />
             <div className="chart-wrapper">
@@ -47,11 +40,6 @@ export default function Dashboard(): JSX.Element {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="spinner-container">
-            <Spinner />
-          </div>
-        )}
         <Navbar />
       </div>
     </QueryClientProvider>

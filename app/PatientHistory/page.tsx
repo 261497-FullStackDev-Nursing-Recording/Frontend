@@ -48,7 +48,6 @@ function apiRequest(
 }
 
 export default function PatientHistory() {
-  const [isPageReady, setIsPageReady] = React.useState(false);
   const { identification_id } = useParams<{ identification_id: string }>();
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
@@ -81,15 +80,10 @@ export default function PatientHistory() {
       },
       (response) => setRecordData(response.data)
     );
-  }, [isPageReady]);
-
-  React.useEffect(() => {
-    setIsPageReady(true);
-  });
+  })
 
   return (
     <div>
-      {isPageReady ? (
         <div className="Container">
           <div>
             <LocalHospitalRoundedIcon className="Icon" />
@@ -104,11 +98,6 @@ export default function PatientHistory() {
           <div className="containercard">{records}</div>
           <div className="card"></div>
         </div>
-      ) : (
-        <div className="spinner-container">
-          <Spinner />
-        </div>
-      )}
       <Navbar />
     </div>
   );

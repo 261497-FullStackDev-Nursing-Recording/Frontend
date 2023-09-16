@@ -33,7 +33,7 @@ export default function Login() {
   useEffect(() => {
     setTimeout(() => {
       setIsPageReady(true);
-    }, 300);
+    }, 100);
   }, []);
 
   return (

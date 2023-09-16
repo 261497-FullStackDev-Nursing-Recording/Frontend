@@ -9,19 +9,9 @@ import Navbar from "../../component/Navbarbottom";
 import Spinner from "../../component/spinner";
 
 export default function Mypatient() {
-  const [isPageReady, setIsPageReady] = React.useState(false); // State for page readiness
-
-  // Simulate some loading process (e.g., fetching data) and then set the page as ready
-  React.useEffect(() => {
-    // Simulate loading completion after 1 seconds
-    setTimeout(() => {
-      setIsPageReady(true);
-    }, 300);
-  }, []);
 
   return (
     <div>
-      {isPageReady ? (
         <div>
           <div className="flex justify-center mt-[40px] mb-[20px] text-xl">
             <LocalHospitalRoundedIcon
@@ -86,11 +76,7 @@ export default function Mypatient() {
           <Navbar />
           {/**/}
         </div>
-      ) : (
-        <div className="spinner-container">
-          <Spinner />
-        </div>
-      )}
+      
     </div>
   );
 }

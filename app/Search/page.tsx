@@ -20,14 +20,6 @@ export default function Searchpage() {
 
   const { data, isLoading, isError } = useQueryPatients({});
 
-  if (isLoading) {
-    return (
-      <div className="spinner-container">
-        <Spinner />
-      </div>
-    );
-  }
-
   if (isError) {
     return <div>Error</div>;
   }
