@@ -23,6 +23,8 @@
 }
 .NperP {
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
   padding-inline: 40px;
   /* background-color: aqua; */
   font-size: 40px;

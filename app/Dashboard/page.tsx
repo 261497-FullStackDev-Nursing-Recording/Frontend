@@ -29,7 +29,7 @@ export default function Dashboard(): JSX.Element {
               <StatusCount />
             </div>
             <span className="NperP">
-              1 : <PatientNurseRatio />
+               1 : <PatientNurseRatio />
             </span>
             <div className="NperPtext">จำนวนพยาบาลต่อผู้ป่วย</div>
             <div className="countbox">
