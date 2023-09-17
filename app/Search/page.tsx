@@ -1,6 +1,6 @@
 "use client";
 import "./styles.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import PersonSearchRoundedIcon from "@mui/icons-material/PersonSearchRounded";
@@ -18,17 +18,27 @@ export default function Searchpage() {
   });
   const [apiData, setApiData] = useState<PatientType[]>([]);
 
-  const { data, isLoading, isError } = useQueryPatients({});
+  const { data, isLoading, isError, error } = useQueryPatients({});
+
+  if (isLoading) {
+    return (
+      <div className="spinner-container">
+        <Spinner />
+      </div>
+    );
+  }
 
   if (isError) {
-    return <div>Error</div>;
+    return (
+      <div className="flex justify-center items-center text-center min-h-screen">
+        {(error as Error).message}
+      </div>
+    );
   }
 
   if (!data) {
-    return null;
+    return undefined;
   }
-
-  console.log(data);
 
   const handleSearchID = () => {
     // Trim and check if the input is empty
@@ -37,18 +47,14 @@ export default function Searchpage() {
       setApiData([]);
       return; // Exit the function early if the input is empty
     }
-
-    // Create a regular expression pattern from the search value
     const searchPattern = new RegExp(valueID.trim(), "i");
     // Filter the data based on the input value for identification_id
-    const filteredData = data.filter((item: PatientType) =>
-      searchPattern.test(item.identification_id)
+    setApiData([]);
+    setApiData(
+      data.filter((item: PatientType) =>
+        searchPattern.test(item.identification_id)
+      )
     );
-    const clonedData = filteredData.map((item: PatientType) => ({
-      ...item,
-    }));
-    apiData.length = 0;
-    setApiData(clonedData);
   };
 
   const handleSearchName = () => {
@@ -58,26 +64,23 @@ export default function Searchpage() {
       setApiData([]);
       return; // Exit the function early if the input is empty
     }
-
     // Create a regular expression pattern from the search value
     const searchPattern = new RegExp(valueName.trim(), "i");
-
     // Filter the data based on the input value for f_name and l_name
-    const filteredData = data.filter((item: any) => {
-      const fullName = `${item.f_name}${item.l_name}`;
-      return (
-        searchPattern.test(item.f_name) ||
-        searchPattern.test(item.l_name) ||
-        searchPattern.test(fullName)
-      );
-    });
-
-    const clonedData = filteredData.map((item: PatientType) => ({
-      ...item,
-    }));
-    apiData.length = 0;
-    setApiData(clonedData);
+    setApiData([]);
+    setApiData(
+      data.filter((item: any) => {
+        const fullName = `${item.f_name} ${item.l_name}`;
+        return (
+          searchPattern.test(item.f_name) ||
+          searchPattern.test(item.l_name) ||
+          searchPattern.test(fullName)
+        );
+      })
+    );
   };
+
+  console.log(data);
 
   return (
     <div>

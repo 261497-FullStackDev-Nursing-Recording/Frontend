@@ -20,9 +20,14 @@ export const useQueryPatients = (body: SearchPatientType) => {
     },
     {
       refetchInterval: 10000,
+      retry: false,
     }
   );
-  return query;
+  const isError = query.isError;
+  return {
+    ...query,
+    isError,
+  };
 };
 
 export const useQueryLinkedPatients = (user_id: string) => {
