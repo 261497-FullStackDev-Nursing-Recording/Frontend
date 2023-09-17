@@ -4,10 +4,20 @@ import { UserType } from "../types/user";
 
 export const useCurrentNurseLogin = () => {
   const query = useQuery(["currentNurse"], async () => {
-    const response = await axios.get<UserType>(
-      "http://localhost:5001/api/auth/me"
-    );
-    return response.data;
+    try {
+      const response = await axios.get<UserType>(
+        "http://localhost:5001/api/auth/me"
+      );
+      return response.data;
+    } catch (error) {
+      throw error; // Re-throw the error to be caught by the caller
+    }
   });
-  return query.data;
+
+  return {
+    isLoading: query.isLoading,
+    isError: query.isError,
+    data: query.data,
+    error: query.error,
+  };
 };
