@@ -32,9 +32,9 @@ export const useQueryPatients = (body: SearchPatientType) => {
 
 export const useQueryLinkedPatients = (user_id: string) => {
   const query = useQuery(
-    ["linkedPatient", user_id],
+    ["linkedPatient"],
     async () => {
-      const response = await axios.post<LinkPatientType[]>(
+      const response = await axios.get<LinkPatientType[]>(
         `http://localhost:5001/api/patient/${user_id}`
       );
       return response.data;

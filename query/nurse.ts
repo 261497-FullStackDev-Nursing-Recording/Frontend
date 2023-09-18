@@ -14,10 +14,5 @@ export const useCurrentNurseLogin = () => {
     }
   });
 
-  return {
-    isLoading: query.isLoading,
-    isError: query.isError,
-    data: query.data,
-    error: query.error,
-  };
+  return query.data;
 };
