@@ -3,6 +3,7 @@ import { Card } from "@mantine/core";
 import { Modal, Button, Group, Text } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
 import { PatientType } from "../../types/patient";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 // import { useNavigate } from "react-router-dom";
 
 interface SearchPatientProps {
@@ -24,7 +25,7 @@ const getStatusColor = (status: string) => {
   }
 };
 
-const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
+const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState<PatientType | null>(null);
   // const navigate = useNavigate();
@@ -50,21 +51,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
     <div>
       {apiData.map((item, index) => (
         <Card
-          style={{
-            width: "80%", // Equivalent to w-4/5
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            backgroundColor: "#BFDBFE",
-            fontWeight: "bold",
-            marginBottom: "15px",
-            marginLeft: "10%",
-            paddingLeft: "30px",
-            paddingRight: "0px",
-            borderRadius: "10px",
-            color: "#2563EB",
-          }}
-          //   className="w-4/5 flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[15px] mx-[10%] pl-[30px] pr-[0px] rounded-[10px] text-[#2563EB]"
+          className="w-4/5 flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[5px] mx-[10%] py-[10px] pl-[30px] pr-[10px] rounded-[10px] text-[#319795]"
           key={index}
         >
           <div className="PText" onClick={() => goToPatientHistory(item.id)}>
@@ -86,7 +73,10 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
           </div>
           <div className="py-[10px]">
             <Button onClick={() => handleCardClick(item)} variant="text">
-              <AddIcon sx={{ fontSize: "45px" }} style={{ color: "#2563EB" }} />
+              <DeleteOutlineIcon
+                sx={{ fontSize: "30px" }}
+                style={{ color: "#319795" }}
+              />
             </Button>
           </div>
         </Card>
@@ -114,7 +104,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
                 onClick={() => console.log("Add Patient")}
               >
                 {/* onclick แล้วเพิ่มไปที่Favorite */}
-                Add Patient
+                Delete
               </Button>
             </Group>
           </div>
@@ -124,4 +114,4 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   );
 };
 
-export default SearchPatient;
+export default PatientCard;
