@@ -26,8 +26,31 @@ function Example() {
   })
 
   if (isLoading) return 'Loading...'
-
   if (error) return 'An error has occurred: ' + error
+
+  const handleSearch = async () => {
+    const patientId = data[0].patient_id;
+
+    try {
+      const response = await fetch('http://localhost:5001/api/patient/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ indentification_id: patientId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send POST request');
+      }
+
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error('An error occurred while sending the POST request:', error);
+    }
+  };
+
 
   console.log(data);
 
@@ -36,7 +59,9 @@ function Example() {
       {data.map((item:any) => (
         <div key={item.id}>
           <p>{item.patient_id}</p>
+          <button onClick={handleSearch}>Search</button>
         </div>
+
       ))}
     </div>
   )
