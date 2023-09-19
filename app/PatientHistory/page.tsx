@@ -28,6 +28,7 @@ interface Record {
   visit_number: string;
   created_at: string;
   modified_at: string;
+  fields:string;
 }
 
 function apiRequest(
@@ -49,6 +50,7 @@ function apiRequest(
 
 export default function PatientHistory() {
   const { identification_id } = useParams<{ identification_id: string }>();
+  // const identification_id = "0c789849-2184-401b-9b1b-b606b2cc83dd"
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
   const records = recordData.map((record) => {
@@ -77,11 +79,12 @@ export default function PatientHistory() {
       "http://localhost:5001/api/records/search",
       {
         patient_id: identification_id,
+        includeFields: true
       },
       (response) => setRecordData(response.data)
     );
   })
-
+  console.log(recordData);
   return (
     <div>
         <div className="Container">
