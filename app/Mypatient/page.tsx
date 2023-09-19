@@ -104,7 +104,7 @@ export default function Mypatient() {
                 className="w-full h-[40px] pl-[35px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px] outline-none"
                 id="identificationid"
                 type="search"
-                placeholder="Search by name or ID"
+                placeholder="Search by Name or ID"
                 value={searchQuery}
                 onChange={handleInputChange}
               />
@@ -114,20 +114,23 @@ export default function Mypatient() {
                 sx={{ top: 8, left: 7 }}
               />
             </div>
-            {/* <div className="flex justify-center px-[10%] mb-[20px]">
-            <Button variant="outlined" size="small">
-              Select
-            </Button>
-            <Button
-              variant="outlined"
-              size="small"
-              color="error"
-              sx={{ marginLeft: "10px" }}
-            >
-              Delete All
-            </Button>
-          </div> */}
             <div className="flex justify-between px-[10%] mb-[20px]">
+              <p className="py-[3px] text-[17px]">
+                Total: {linkedPatientsData.length}
+              </p>
+              <Button
+                variant="outlined"
+                size="small"
+                color="error"
+                sx={{ marginLeft: "10px" }}
+              >
+                Clear All
+              </Button>
+              <Button variant="outlined" size="small">
+                Select
+              </Button>
+            </div>
+            {/* <div className="flex justify-between px-[10%] mb-[20px]">
               <p className="py-[3px] text-[17px]">0 Selected</p>
               <div>
                 <Button
@@ -145,7 +148,7 @@ export default function Mypatient() {
                   Done
                 </Button>
               </div>
-            </div>
+            </div> */}
 
             <div>
               <PatientCard apiData={apiData} />

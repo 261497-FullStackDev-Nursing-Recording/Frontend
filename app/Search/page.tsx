@@ -98,6 +98,7 @@ export default function Searchpage() {
               className="w-full h-[40px] pl-[10px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center rounded-tr-none rounded-br-none outline-none"
               id="identificationid"
               type="search"
+              placeholder="ID"
               onChange={(event) => setValueID(event.currentTarget.value)}
             />
             <Button
@@ -123,6 +124,7 @@ export default function Searchpage() {
               className="w-full h-[40px] pl-[10px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center rounded-tr-none rounded-br-none outline-none"
               id="name"
               type="search"
+              placeholder="Name"
               onChange={(event) => setValueName(event.currentTarget.value)}
             />
             <Button
