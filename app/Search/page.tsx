@@ -8,7 +8,7 @@ import { useDebouncedState } from "@mantine/hooks";
 import Spinner from "../../component/spinner";
 import Navbar from "../../component/Navbarbottom";
 import { useQueryPatients } from "../../query/patient";
-import { PatientType } from "../../types/patient";
+import { Patient } from "../../types/patient";
 import SearchPatient from "./SearchPatient";
 
 export default function Searchpage() {
@@ -16,7 +16,7 @@ export default function Searchpage() {
   const [valueName, setValueName] = useDebouncedState("", 500, {
     leading: true,
   });
-  const [apiData, setApiData] = useState<PatientType[]>([]);
+  const [apiData, setApiData] = useState<Patient[]>([]);
 
   const { data, isLoading, isError, error } = useQueryPatients({});
 
@@ -51,9 +51,7 @@ export default function Searchpage() {
     // Filter the data based on the input value for identification_id
     setApiData([]);
     setApiData(
-      data.filter((item: PatientType) =>
-        searchPattern.test(item.identification_id)
-      )
+      data.filter((item: Patient) => searchPattern.test(item.identification_id))
     );
   };
 

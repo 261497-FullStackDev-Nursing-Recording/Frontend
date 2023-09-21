@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Card } from "@mantine/core";
 import { Modal, Button, Group, Text } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
-import { PatientType } from "../../types/patient";
+import { Patient } from "../../types/patient";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Link from "next/link";
 // import { useNavigate } from "react-router-dom";
 
 interface SearchPatientProps {
-  apiData: PatientType[];
+  apiData: Patient[];
 }
 
 const getStatusColor = (status: string) => {
@@ -28,10 +28,10 @@ const getStatusColor = (status: string) => {
 
 const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<PatientType | null>(null);
+  const [selectedCard, setSelectedCard] = useState<Patient | null>(null);
   // const navigate = useNavigate();
 
-  const handleCardClick = (item: PatientType) => {
+  const handleCardClick = (item: Patient) => {
     setSelectedCard(item);
     setOpened(true);
   };
@@ -68,13 +68,14 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
                 }}
               />
               <Link
-              href={{
-                pathname: `/MypatientHistory`,
-                query: { id: item.id }
-              }}>
-              {item.f_name} {item.l_name}
-              <div />
-              {item.identification_id}
+                href={{
+                  pathname: `/MypatientHistory`,
+                  query: { id: item.id },
+                }}
+              >
+                {item.f_name} {item.l_name}
+                <div />
+                {item.identification_id}
               </Link>
             </div>
           </div>

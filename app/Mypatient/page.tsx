@@ -4,13 +4,14 @@ import LocalHospitalRoundedIcon from "@mui/icons-material/LocalHospitalRounded";
 import "./styles.css";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-  import Button from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import Navbar from "../../component/Navbarbottom";
 import Spinner from "../../component/spinner";
 import { useQueryPatients, useQueryLinkedPatients } from "../../query/patient";
 import { useCurrentNurseLogin } from "../../query/nurse";
 import PatientCard from "./PatientCard";
-import { PatientType } from "../../types/patient";
+import { Patient } from "../../types/patient";
+import Example from "./GetFavPatient";
 
 export default function Mypatient() {
   const nurse_id: string = "498bffa2-97ee-491c-a417-8d44a49e5660";
@@ -29,7 +30,7 @@ export default function Mypatient() {
     error: allPatientsError,
   } = useQueryPatients({});
 
-  const [apiData, setApiData] = useState<PatientType[]>([]);
+  const [apiData, setApiData] = useState<Patient[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
