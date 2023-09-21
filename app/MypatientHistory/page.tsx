@@ -99,25 +99,29 @@ export default function PatientHistory() {
   console.log(recordData);
   return (
     <div>
-        <div className="Container">
-          <div>
-            <LocalHospitalRoundedIcon className="Icon" />
-          </div>
-          <div className="Name">
-            Name: {patientData?.f_name} {patientData?.l_name}
-          </div>
-          <div className="ID">
-            Citizen ID:
-            <div /> {identification_id}
-          </div>
+      <div className="Container">
+        <div>
+          <LocalHospitalRoundedIcon className="Icon" />
+        </div>
+        <div className="Name">
+          Name: {patientData?.f_name} {patientData?.l_name}
+        </div>
+        <div className="ID">
+          Citizen ID:
+          <div /> {patientData?.identification_id}
+        </div>
           <div className="Btn">
             <Link href="/Inform">
-            <Button variant="outlined" size="small" onClick={handleAddRecordClick}>Add Record</Button>
+            <Button variant="outlined" size="small" onClick={handleAddRecordClick}>เพิ่มการบันทึกทางพยาบาล</Button>
             </Link>
           </div>
+          {recordData.length > 0 ? (
           <div className="containercard">{records}</div>
-          <div className="card"></div>
-        </div>
+        ) : (
+          <div className="NoRecord">ยังไม่มีบันทึกการพยาบาล</div>
+        )}
+        <div className="card"></div>
+      </div>
       <Navbar />
     </div>
   );

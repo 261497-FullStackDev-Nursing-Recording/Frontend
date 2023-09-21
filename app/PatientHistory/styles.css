@@ -72,3 +72,9 @@
   border-radius: 6px;
   max-width: 400px;
 }
+
+.NoRecord{
+  margin-top: 30px;
+  font-weight: bold;
+
+}
