@@ -3,7 +3,6 @@ import { Card } from "@mantine/core";
 import { Modal, Button, Group, Text } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
 import { PatientType } from "../../types/patient";
-// import { useNavigate } from "react-router-dom";
 import Link from "next/link";
 
 

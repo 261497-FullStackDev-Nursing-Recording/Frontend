@@ -6,8 +6,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../../component/Navbarbottom";
 import { useSearchParams } from "next/navigation";
-import { log } from "console";
+import Button from "@mui/material/Button";
 // import { useRouter } from "next/router";
+import Link from "next/link";
+
 
 interface Patient {
   id: string;
@@ -56,7 +58,6 @@ export default function PatientHistory() {
   const PatientHistory = searchParams.get('id')
   console.log(PatientHistory);
   
-  
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
   const records = recordData.map((record) => {
@@ -72,6 +73,11 @@ export default function PatientHistory() {
       </div>
     );
   });
+
+  const handleAddRecordClick = () => {
+    // Handle the "Add Record" button click
+    // history.push("/Inform"); // Navigate to "/Inform"
+  };
 
   React.useEffect(() => {
     apiRequest(
@@ -103,6 +109,11 @@ export default function PatientHistory() {
           <div className="ID">
             Citizen ID:
             <div /> {identification_id}
+          </div>
+          <div className="Btn">
+            <Link href="/Inform">
+            <Button variant="outlined" size="small" onClick={handleAddRecordClick}>Add Record</Button>
+            </Link>
           </div>
           <div className="containercard">{records}</div>
           <div className="card"></div>

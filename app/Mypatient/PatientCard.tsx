@@ -4,6 +4,7 @@ import { Modal, Button, Group, Text } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
 import { PatientType } from "../../types/patient";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Link from "next/link";
 // import { useNavigate } from "react-router-dom";
 
 interface SearchPatientProps {
@@ -66,9 +67,15 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
                   marginRight: "10px",
                 }}
               />
+              <Link
+              href={{
+                pathname: `/MypatientHistory`,
+                query: { id: item.id }
+              }}>
               {item.f_name} {item.l_name}
               <div />
               {item.identification_id}
+              </Link>
             </div>
           </div>
           <div className="py-[10px]">
