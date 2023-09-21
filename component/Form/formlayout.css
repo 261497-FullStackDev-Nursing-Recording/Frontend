@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap');
+*{
+  font-family: 'Kanit', sans-serif;
+}
+
+ .select{
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin: 5px 0;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+
+ }
+
+  .form {
+    max-width: 100%;
+    align-items: center;
+    margin: 0 auto;
+  }
+  
+  .p {
+    color: #bf1650;
+    text-align: center;
+  }
+  
+  section {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  section > button[type="button"] {
+    background: rgb(245, 88, 88);
+    color:white;
+    margin-top: auto;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    width: 40px;
+  }
+  
+  input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid white;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  label > span {
+    margin-bottom: 10px;
+   
+    display: block;
+  }
+  
+  .label,
+  section > label {
+    line-height: 2;
+    text-align: left;
+    display: block;
+    margin: 5px 0;
+    color: rgb(2, 2, 2);
+    font-size: 14px;
+    font-weight: 200;
+  }
+  
+  button[type="submit"],
+  .button {
+    background: #61fe93;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 100;
+   
+    border-radius: 4px;
+    width: 400px;
+  }
+  
+ 
+  
+  
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  
+  
+  
+  button[type="button"] {
+    
+    background: #516391;
+    color: white;
+    letter-spacing: 0px;
+    text-transform: none;
+    padding: 10px;
+    width: 400px;
+  }
+  
+  button[type="button"]:hover {
+    background: #232f48;
+    color: white;
+  }
+  
+  .submitbtn{
+    margin-bottom: 10px;
+  }
+
+  .submitbtn1{
+    margin-bottom: 80px;
+  }
+
+
+  .Headform{
+    font-size: 50px;
+  }
+
+  .Headlayout{
+   
+  flex-direction: column;
+ 
+  justify-content: center;
+
+  }
+
+
+  .Headtext{
+    font-size: 20px;
+  }
+ 
+
+  textarea{
+
+    color: white;
+    width: 100%;
+    border-radius: 4px;
+   
+   
+   
+  }
+
+  .Obody{
+    background-color: rgb(189, 217, 253);
+    border-radius: 4px;
+    border: 15px solid rgb(189, 217, 253);
+    width: 400px;
+    margin-bottom: 1px;
+    gap: 10px
+  }
+
+
+
+  .Abody{
+    background-color: rgb(250, 208, 208);
+    border-radius: 4px;
+    border: 15px solid rgb(250, 208, 208);
+    width: 400px;
+    margin-bottom: 1px;
+    gap: 10px
+  }
+
+  .Ibody{
+    background-color: rgb(234, 197, 255);
+    border-radius: 4px;
+    border: 15px solid rgb(234, 197, 255);
+    width: 400px;
+    margin-bottom: 1px;
+    gap: 10px
+  }
+
+
+  .Ebody{
+    background-color: rgb(163, 255, 224);
+    border-radius: 4px;
+    border: 15px solid rgb(163, 255, 224);
+    width: 400px;
+    margin-bottom: 1px;
+    gap: 10px
+  }

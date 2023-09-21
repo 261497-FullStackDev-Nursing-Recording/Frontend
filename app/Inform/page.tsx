@@ -1,10 +1,10 @@
 "use client";
 
 import Navbar from "../../component/Navbarbottom";
-import AForm from "../../component/aForm";
-import EForm from "../../component/eForm";
-import IForm from "../../component/iForm";
-import OForm from "../../component/oForm";
+import AForm from "../../component/Form/aForm";
+import EForm from "../../component/Form/eForm";
+import IForm from "../../component/Form/iForm";
+import OForm from "../../component/Form/oForm";
 import "./styles.css";
 export default function Inform() {
   return (
