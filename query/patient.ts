@@ -2,17 +2,17 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useCurrentNurseLogin } from "./nurse";
 import {
-  LinkPatientType,
-  PatientType,
-  SearchPatientType,
-  RemoveLinkedPatientsType,
+  LinkPatient,
+  Patient,
+  RemoveLinkedPatients,
+  SearchPatient,
 } from "../types/patient";
 
-export const useQueryPatients = (body: SearchPatientType) => {
+export const useQueryPatients = (body: SearchPatient) => {
   const query = useQuery(
     ["patients"],
     async () => {
-      const response = await axios.post<PatientType[]>(
+      const response = await axios.post<Patient[]>(
         "http://localhost:5001/api/patient/search",
         body
       );
@@ -32,7 +32,7 @@ export const useQueryPatients = (body: SearchPatientType) => {
 
 export const useQueryLinkedPatients = (user_id: string) => {
   const query = useQuery(["linkedPatient"], async () => {
-    const response = await axios.get<LinkPatientType[]>(
+    const response = await axios.get<LinkPatient[]>(
       `http://localhost:5001/api/patient/${user_id}`
     );
     return response.data;
@@ -45,8 +45,8 @@ export const useMutationLinkPatient = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["linkPatient"],
-    async (args: LinkPatientType) => {
-      const response = await axios.post<LinkPatientType>(
+    async (args: LinkPatient) => {
+      const response = await axios.post<LinkPatient>(
         "http://localhost:5001/api/patient/linkedPatients",
         args
       );
@@ -69,7 +69,7 @@ export const useMutationUpdateLinkedPatients = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["removeLinkedPatients"],
-    async (args: RemoveLinkedPatientsType) => {
+    async (args: RemoveLinkedPatients) => {
       await axios.put<null>("http://localhost:5001/api/patient", args);
     },
     {

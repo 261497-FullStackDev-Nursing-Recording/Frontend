@@ -1,21 +1,24 @@
-export interface FieldType {
-  id: string;
-  record_id: string;
-  user_id: string;
-  created_by: string;
-  field_code: string;
-  field_pre_label?: string;
-  field_value: string;
-  field_post_label?: string;
-  parents: string;
-  children: string;
-  created_at: string;
-  modified_at: string;
-}
-export interface CreateFieldType {
-  user_id: string;
-  field_code: string;
-  field_pre_label?: string;
-  field_value: string;
-  field_post_label?: string;
-}
+import { z } from "zod";
+
+export const FieldSchema = z.object({
+  id: z.string(),
+  record_id: z.string(),
+  user_id: z.string(),
+  created_by: z.string(),
+  field_code: z.string(),
+  field_pre_label: z.string().optional(),
+  field_value: z.string(),
+  field_post_label: z.string().optional(),
+  parents: z.string(),
+  children: z.string(),
+  created_at: z.string(),
+  modified_at: z.string(),
+});
+
+export const CreateFieldSchema = z.object({
+  user_id: z.string(),
+  field_code: z.string(),
+  field_pre_label: z.string().optional(),
+  field_value: z.string(),
+  field_post_label: z.string().optional(),
+});

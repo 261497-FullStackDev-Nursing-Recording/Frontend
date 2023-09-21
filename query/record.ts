@@ -1,16 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import {
-  CreateRecordType,
-  RecordType,
-  SearchRecordType,
-  UpdateRecordType,
-} from "../types/record";
-import { useCurrentNurseLogin } from "./nurse";
 
-export const useQueryRecords = (data: SearchRecordType) => {
+import { useCurrentNurseLogin } from "./nurse";
+import {
+  CreateRecord,
+  Record,
+  SearchRecord,
+  UpdateRecord,
+} from "../types/record";
+
+export const useQueryRecords = (data: SearchRecord) => {
   const query = useQuery(["records"], async () => {
-    const response = await axios.post<RecordType[]>(
+    const response = await axios.post<Record[]>(
       "http://localhost:5001/api/records/search",
       data
     );
@@ -24,8 +25,8 @@ export const useMuationCreateRecord = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["createRecord"],
-    async (args: CreateRecordType) => {
-      const response = await axios.post<RecordType>(
+    async (args: CreateRecord) => {
+      const response = await axios.post<Record>(
         "http://localhost:5001/api/records",
         args
       );
@@ -46,7 +47,7 @@ export const useMutationUpdateRecord = (recordId: string) => {
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["updateRecord"],
-    async (args: UpdateRecordType) => {
+    async (args: UpdateRecord) => {
       await axios.put<null>(
         `http://localhost:5001/api/record/${recordId}`,
         args
