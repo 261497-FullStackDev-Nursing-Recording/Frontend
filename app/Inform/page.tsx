@@ -47,12 +47,12 @@ export default function Inform() {
         <div className="ID">ID</div>
       </div>
 
-      <div className="formlayout">
+      
         <AForm />
         <OForm />
         <IForm />
         <EForm />
-      </div>
+      
 
       <Navbar />
     </div>
