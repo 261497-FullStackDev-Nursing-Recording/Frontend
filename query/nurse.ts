@@ -10,7 +10,7 @@ export const useCurrentNurseLogin = () => {
       );
       return response.data;
     } catch (error) {
-      throw error; // Re-throw the error to be caught by the caller
+      throw error;
     }
   });
 

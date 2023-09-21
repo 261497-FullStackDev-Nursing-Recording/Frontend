@@ -1,4 +1,5 @@
 import { SHIFT } from "./shift";
+import { CreateFieldType } from "./field";
 
 export interface RecordType {
   id: string;
@@ -9,6 +10,19 @@ export interface RecordType {
   diseaseGroup: string;
   shift: string;
   visit_number: string;
+  created_at: string;
+  modified_at: string;
+}
+export interface CreateRecordType {
+  id: string;
+  user_id: string;
+  patient_id: string;
+  bed_number: string;
+  ward: string;
+  diseaseGroup: string;
+  shift: string;
+  visit_number: string;
+  field: CreateFieldType[];
   created_at: string;
   modified_at: string;
 }
