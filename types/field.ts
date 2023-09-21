@@ -4,9 +4,9 @@ export interface FieldType {
   user_id: string;
   created_by: string;
   field_code: string;
-  field_pre_label: string;
+  field_pre_label?: string;
   field_value: string;
-  field_post_label: string;
+  field_post_label?: string;
   parents: string;
   children: string;
   created_at: string;
@@ -15,7 +15,7 @@ export interface FieldType {
 export interface CreateFieldType {
   user_id: string;
   field_code: string;
-  field_pre_label: string;
+  field_pre_label?: string;
   field_value: string;
-  field_post_label: string;
+  field_post_label?: string;
 }
