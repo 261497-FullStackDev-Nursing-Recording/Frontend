@@ -5,7 +5,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../../component/Navbarbottom";
-import Spinner from "../../component/spinner";
+import { useSearchParams } from "next/navigation";
+import { log } from "console";
+// import { useRouter } from "next/router";
 
 interface Patient {
   id: string;
@@ -48,9 +50,20 @@ function apiRequest(
     });
 }
 
-export default function PatientHistory() {
+export default function PatientHistory() {  
   const { identification_id } = useParams<{ identification_id: string }>();
-  // const identification_id = "0c789849-2184-401b-9b1b-b606b2cc83dd"
+  const searchParams = useSearchParams()
+  const PatientHistory = searchParams.get('id')
+  console.log(PatientHistory);
+  
+  // const { PatientHistory } = router.;
+  // const param = useParams();
+  // console.log(param);
+  
+  // const PatientHistory = 5;
+  // const Patient_id = query.PatientHistory;
+  // console.log(router);
+  
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
   const records = recordData.map((record) => {
@@ -78,12 +91,12 @@ export default function PatientHistory() {
     apiRequest(
       "http://localhost:5001/api/records/search",
       {
-        patient_id: identification_id,
+        patient_id: PatientHistory,
         includeFields: true
       },
       (response) => setRecordData(response.data)
     );
-  })
+  }, []);
   console.log(recordData);
   return (
     <div>

@@ -4,6 +4,8 @@ import { Modal, Button, Group, Text } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
 import { PatientType } from "../../types/patient";
 // import { useNavigate } from "react-router-dom";
+import Link from "next/link";
+
 
 interface SearchPatientProps {
   apiData: PatientType[];
@@ -40,9 +42,6 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   };
 
   const goToPatientHistory = (identificationId: string) => {
-    // You can navigate to the PatientHistory component with the identificationId
-    // For now, let's just log it
-    // navigate(`/patientHistory/${identificationId}`);
     console.log("Navigating to PatientHistory with ID:", identificationId);
   };
 
@@ -79,9 +78,16 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
                   marginRight: "10px",
                 }}
               />
-              {item.f_name} {item.l_name}
-              <div />
-              {item.identification_id}
+                <Link
+                  href={{
+                    pathname: `/PatientHistory`,
+                    query: { id: item.id }
+                  }}
+                >
+                {item.f_name} {item.l_name}
+                <div />
+                {item.identification_id}
+              </Link>
             </div>
           </div>
           <div className="py-[10px]">
