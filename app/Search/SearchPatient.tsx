@@ -55,7 +55,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
             justifyContent: "space-between",
             backgroundColor: "#BFDBFE",
             fontWeight: "bold",
-            marginBottom: "15px",
+            marginBottom: "5px",
             marginLeft: "10%",
             paddingLeft: "30px",
             paddingRight: "0px",
