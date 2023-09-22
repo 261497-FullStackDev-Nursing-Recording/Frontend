@@ -10,7 +10,6 @@ import Button from "@mui/material/Button";
 // import { useRouter } from "next/router";
 import Link from "next/link";
 
-
 interface Patient {
   id: string;
   f_name: string;
@@ -32,7 +31,7 @@ interface Record {
   visit_number: string;
   created_at: string;
   modified_at: string;
-  fields:string;
+  fields: string;
 }
 
 function apiRequest(
@@ -52,12 +51,12 @@ function apiRequest(
     });
 }
 
-export default function PatientHistory() {  
+export default function PatientHistory() {
   const { identification_id } = useParams<{ identification_id: string }>();
-  const searchParams = useSearchParams()
-  const PatientHistory = searchParams.get('id')
+  const searchParams = useSearchParams();
+  const PatientHistory = searchParams.get("id");
   console.log(PatientHistory);
-  
+
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
   const records = recordData.map((record) => {
@@ -81,17 +80,17 @@ export default function PatientHistory() {
 
   React.useEffect(() => {
     apiRequest(
-      "http://localhost:5001/api/patient/search",
+      "http://localhost:5001/api/patient/getAllRecord",
       {
         id: identification_id,
       },
       (response) => setPatientData(response.data[0])
     );
     apiRequest(
-      "http://localhost:5001/api/records/search",
+      "http://localhost:5001/api/records/getAllRecord",
       {
         patient_id: PatientHistory,
-        includeFields: true
+        includeFields: true,
       },
       (response) => setRecordData(response.data)
     );
@@ -110,12 +109,18 @@ export default function PatientHistory() {
           Citizen ID:
           <div /> {patientData?.identification_id}
         </div>
-          <div className="Btn">
-            <Link href="/Inform">
-            <Button variant="outlined" size="small" onClick={handleAddRecordClick}>เพิ่มการบันทึกทางพยาบาล</Button>
-            </Link>
-          </div>
-          {recordData.length > 0 ? (
+        <div className="Btn">
+          <Link href="/Inform">
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={handleAddRecordClick}
+            >
+              เพิ่มการบันทึกทางพยาบาล
+            </Button>
+          </Link>
+        </div>
+        {recordData.length > 0 ? (
           <div className="containercard">{records}</div>
         ) : (
           <div className="NoRecord">ยังไม่มีบันทึกการพยาบาล</div>

@@ -29,7 +29,7 @@ interface Record {
   visit_number: string;
   created_at: string;
   modified_at: string;
-  fields:string;
+  fields: string;
 }
 
 function apiRequest(
@@ -49,20 +49,20 @@ function apiRequest(
     });
 }
 
-export default function PatientHistory() {  
+export default function PatientHistory() {
   const { identification_id } = useParams<{ identification_id: string }>();
-  const searchParams = useSearchParams()
-  const PatientHistory = searchParams.get('id')
+  const searchParams = useSearchParams();
+  const PatientHistory = searchParams.get("id");
   console.log(PatientHistory);
-  
+
   // const { PatientHistory } = router.;
   // const param = useParams();
   // console.log(param);
-  
+
   // const PatientHistory = 5;
   // const Patient_id = query.PatientHistory;
   // console.log(router);
-  
+
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
   const records = recordData.map((record) => {
@@ -81,17 +81,17 @@ export default function PatientHistory() {
 
   React.useEffect(() => {
     apiRequest(
-      "http://localhost:5001/api/patient/search",
+      "http://localhost:5001/api/patient/getAllPatient",
       {
         id: PatientHistory,
       },
       (response) => setPatientData(response.data[0])
     );
     apiRequest(
-      "http://localhost:5001/api/records/search",
+      "http://localhost:5001/api/records/getAllRecord",
       {
         patient_id: PatientHistory,
-        includeFields: true
+        includeFields: true,
       },
       (response) => setRecordData(response.data)
     );

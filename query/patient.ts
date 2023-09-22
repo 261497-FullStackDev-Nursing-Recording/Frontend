@@ -13,7 +13,28 @@ export const useQueryPatients = (body: SearchPatient) => {
     ["patients"],
     async () => {
       const response = await axios.post<Patient[]>(
-        "http://localhost:5001/api/patient/search",
+        "http://localhost:5001/api/patient/getAllPatient",
+        body
+      );
+      return response.data;
+    },
+    {
+      refetchInterval: 10000,
+      retry: false,
+    }
+  );
+  const isError = query.isError;
+  return {
+    ...query,
+    isError,
+  };
+};
+export const useQuerySearchPatients = (body: SearchPatient) => {
+  const query = useQuery(
+    ["patients"],
+    async () => {
+      const response = await axios.post<Patient[]>(
+        "http://localhost:5001/api/patient/searchPatient",
         body
       );
       return response.data;
