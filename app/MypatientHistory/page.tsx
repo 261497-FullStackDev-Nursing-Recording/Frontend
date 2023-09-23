@@ -10,6 +10,13 @@ import Button from "@mui/material/Button";
 // import { useRouter } from "next/router";
 import Link from "next/link";
 import Backbtn from "../../component/backBtn";
+import { useEffect } from "react";
+import useAuth from "../../services/useAuth";
+
+const {user,getAuth, isLoading} = useAuth();
+useEffect(() => {
+  getAuth();
+}, []);
 
 export type Patient = {
   id: string;

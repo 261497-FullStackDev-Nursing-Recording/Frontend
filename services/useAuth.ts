@@ -17,17 +17,19 @@ function useAuth() {
 	]);
 
 	//set user if isLoading is true
-	const bootstrapAsync = async () => {
+	const  getAuth = async () => {
 		setIsLoading(true);
 		try {
 			const res = await axios.get<UserType>(
-				"http://localhost:5001/api/auth/me"
+				"http://localhost:5001/api/auth/me",{withCredentials:true}
 			);
-			if (res.data) {
+			if (res.data !== undefined) {
 				setUser(res.data);
 			}
 		} catch (error) {
 			console.log(error);
+      alert('please sign in...')
+      window.location.href = '/Login';
 		}
 		setIsLoading(false);
 	};
@@ -67,7 +69,14 @@ function useAuth() {
 		setUser(null);
 	}
 
-	return { signIn, user, isLoading, signOut };
+	return { signIn, user, isLoading, signOut, getAuth };
+  async function getUser() {
+    setIsLoading(true);
+    const res = await axios.get<any>("http://localhost:5001/api/auth/me")
+    setIsLoading(false);
+  }
+
+  return { signIn, user, isLoading, signOut, getUser };
 }
 
 export default useAuth;

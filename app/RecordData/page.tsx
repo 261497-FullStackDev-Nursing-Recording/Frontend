@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import Backbtn from "../../component/backBtn";
 import FieldComponent from "./fieldcomponent";
 
+
 interface Patient {
   id: string;
   f_name: string;

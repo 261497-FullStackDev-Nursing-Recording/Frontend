@@ -3,11 +3,17 @@ import "./styles.css";
 import LocalHospitalRoundedIcon from "@mui/icons-material/LocalHospitalRounded";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Navbar from "../../component/Navbarbottom";
 import { useSearchParams } from "next/navigation";
 import Backbtn from "../../component/backBtn";
 import Link from "next/link";
+import useAuth from "../../services/useAuth";
+
+const {user,getAuth, isLoading} = useAuth();
+useEffect(() => {
+  getAuth();
+}, []);
 
 
 interface Patient {

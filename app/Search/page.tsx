@@ -11,6 +11,7 @@ import { useQueryPatients, useQuerySearchPatients } from "../../query/patient";
 import { Patient, SearchPatient } from "../../types/patient";
 import PatientCard from "./SearchPatient";
 import Backbtn from "../../component/backBtn";
+import useAuth from "../../services/useAuth";
 export default function Searchpage() {
   // const [valueID, setValueID] = useDebouncedState("", 500, { leading: true });
   // const [valueName, setValueName] = useDebouncedState("", 500, {
@@ -22,6 +23,10 @@ export default function Searchpage() {
   const [searchBed, setSerachBed] = useState(0);
   const [searchName, setSearchName] = useState("");
   const [params, setParams] = useState({});
+  const {user,getAuth} = useAuth();
+  useEffect(() => {
+    getAuth();
+  }, []);
 
 
   const { data, isLoading, isError, error, refetch } =

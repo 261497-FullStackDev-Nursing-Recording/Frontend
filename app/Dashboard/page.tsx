@@ -10,8 +10,15 @@ import Spinner from "../../component/spinner";
 import Navbar from "../../component/Navbarbottom";
 import PatientNurseRatio from "../../utils/patientRatio";
 import Backbtn from "../../component/backBtn";
+import { useRouter } from "next/navigation";
+import useAuth from "../../services/useAuth";
+
 export default function Dashboard(): JSX.Element {
   const queryClient = new QueryClient();
+  const {user,getAuth, isLoading} = useAuth();
+  useEffect(() => {
+    getAuth();
+  }, []);
 
   return (
     

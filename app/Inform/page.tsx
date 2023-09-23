@@ -11,6 +11,12 @@ import IForm from "../../component/Form/iForm";
 import EForm from "../../component/Form/eForm";
 import Navbar from "../../component/Navbarbottom";
 import "./styles.css";
+import useAuth from "../../services/useAuth";
+
+const {user,getAuth, isLoading} = useAuth();
+useEffect(() => {
+  getAuth();
+}, []);
 
 interface Patient {
   id: string;

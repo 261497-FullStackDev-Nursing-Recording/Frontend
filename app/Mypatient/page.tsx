@@ -16,13 +16,20 @@ import PatientCard from "./PatientCard";
 import { Patient, RemoveLinkedPatients } from "../../types/patient";
 import { useCurrentNurseLogin } from "../../query/nurse";
 import Backbtn from "../../component/backBtn";
+import useAuth from "../../services/useAuth";
 
 export default function Mypatient() {
   const nurse = useCurrentNurseLogin();
+
+
   const [apiData, setApiData] = useState<Patient[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [opened, setOpened] = useState(false);
   const [allIDs, setAllIDs] = useState<string[]>([]);
+  const {user,getAuth, isLoading} = useAuth();
+  useEffect(() => {
+    getAuth();
+  }, []);
 
   const handleClearAll = () => {
     setOpened(true);
