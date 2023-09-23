@@ -7,7 +7,7 @@ import PersonSearchRoundedIcon from "@mui/icons-material/PersonSearchRounded";
 import { useDebouncedState } from "@mantine/hooks";
 import Spinner from "../../component/spinner";
 import Navbar from "../../component/Navbarbottom";
-import { useQueryPatients } from "../../query/patient";
+import { useQuerySearchPatients } from "../../query/patient";
 import { Patient } from "../../types/patient";
 import SearchPatient from "./SearchPatient";
 
@@ -18,7 +18,7 @@ export default function Searchpage() {
   });
   const [apiData, setApiData] = useState<Patient[]>([]);
 
-  const { data, isLoading, isError, error } = useQueryPatients({});
+  const { data, isLoading, isError, error } = useQuerySearchPatients({});
 
   if (isLoading) {
     return (

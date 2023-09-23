@@ -12,7 +12,7 @@ import {
 export const useQueryRecords = (data: SearchRecord) => {
   const query = useQuery(["records"], async () => {
     const response = await axios.post<Record[]>(
-      "http://localhost:5001/api/records/search",
+      "http://localhost:5001/api/records/getAllRecord",
       data
     );
     return response.data;
@@ -27,7 +27,7 @@ export const useMuationCreateRecord = () => {
     ["createRecord"],
     async (args: CreateRecord) => {
       const response = await axios.post<Record>(
-        "http://localhost:5001/api/records",
+        "http://localhost:5001/api/getAllRecord",
         args
       );
       return response.data;
