@@ -12,9 +12,21 @@ import { useCurrentNurseLogin } from "../../query/nurse";
 import PatientCard from "./PatientCard";
 import { Patient } from "../../types/patient";
 import Example from "./GetFavPatient";
+import { redirect } from "next/dist/server/api-utils";
+import { getCookie, setCookie } from 'typescript-cookie'
+import { useRouter } from "next/navigation";
+import useAuth from "../../services/useAuth";
+import { axiosCustom } from "../../services/axiosCustom";
+import WithAuth from "../../services/withAuth";
+import axios from "axios";
+import { useLocalStorage } from "usehooks-ts";
+import { UserType, useAuthStore } from "../../services/authStore";
 
 export default function Mypatient() {
   const nurse_id: string = "498bffa2-97ee-491c-a417-8d44a49e5660";
+  
+  const router = useRouter();
+  
 
   const {
     data: linkedPatientsData,
