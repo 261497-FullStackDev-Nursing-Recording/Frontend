@@ -33,10 +33,12 @@
     background: rgb(245, 88, 88);
     color:white;
     margin-top: auto;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border-radius: 4px;
     width: 40px;
-  }
+    margin-right:5px;
+    
+ }
   
   input {
     display: block;
@@ -71,16 +73,17 @@
     background: #61fe93;
     color: rgb(0, 0, 0);
     text-transform: uppercase;
-    
     margin-top: 10px;
     padding: 10px;
     font-size: 16px;
     font-weight: 100;
-   
     border-radius: 4px;
     width: 400px;
+    position: center;
+    
+    
+   
   }
-  
  
   
   
@@ -93,13 +96,18 @@
   
   
   button[type="button"] {
-    
     background: #516391;
     color: white;
     letter-spacing: 0px;
     text-transform: none;
     padding: 10px;
     width: 400px;
+  }
+  
+  /* Center the button horizontally */
+  button[type="button"] {
+    display: block;
+    margin: 0 auto;
   }
   
   button[type="button"]:hover {
@@ -134,14 +142,14 @@
   }
  
 
-  textarea{
-
-    color: white;
-    width: 100%;
+  .textarearesize {
+    color: #000000;
+    width: 300px;
     border-radius: 4px;
-   
-   
-   
+    resize: inline; /* Disable manual resizing */
+    overflow: hidden; /* Hide any overflowing content */
+    min-height: 150px; /* Set a minimum height to prevent collapsing */
+    font-size: 18px;
   }
 
   .Obody{
@@ -160,8 +168,10 @@
     border-radius: 4px;
     border: 15px solid rgb(250, 208, 208);
     width: 400px;
+    
     margin-bottom: 1px;
     gap: 10px
+   
   }
 
   .Ibody{
@@ -181,4 +191,43 @@
     width: 400px;
     margin-bottom: 1px;
     gap: 10px
+  } */
+
+
+
+
+
+
+  .tab-view {
+    border: 1px solid #ccc;
+    margin: 20px;
+    padding: 10px;
+    max-width: auto;
+    background-color: #fff;
+  }
+  
+  .tab-header {
+    list-style: none;
+    padding-left: 40px;
+    display: flex;
+   gap: 10px;
+    margin-top: 40px;
+  }
+  
+  .tab-item {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .tab-item.active {
+    background-color: #8ec5ff;
+    color: #fff;
+  }
+  
+  .tab-content {
+    padding: 20px;
+    border-top: 1px solid #ccc;
   }

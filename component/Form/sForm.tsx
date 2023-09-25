@@ -12,7 +12,7 @@ type FormValues = {
   }[];
 };
 
-export default function AForm() {
+export default function SForm() {
   const {
     register,
     formState: { errors },
@@ -52,8 +52,8 @@ export default function AForm() {
          
           <><label>
             <section>
-            <span>NDX</span>
-            <textarea 
+            
+            <textarea className="textarearesize"
               {...register(`Adata.${index}.text`)}
               placeholder={`กรอกข้อมูล`}
             />
@@ -77,7 +77,7 @@ export default function AForm() {
           console.log("Submit data", data);
         })}
       >
-        <h1 className="Headform">A <span className="Headtext">ข้อวินิจฉัย</span></h1>
+        <h1 className="Headform">S <span className="Headtext">อาการของผู้ป่วย</span></h1>
        
         {fields.map((item, index) => (
           <div key={item.id} className="Abody">
@@ -87,7 +87,7 @@ export default function AForm() {
               className="select"
             >
               <option value="select">ตัวเลือก</option>
-              <option value="item1">NDX</option>
+              <option value="item1">อาการของผู้ป่วย</option>
               
             </select>
             <label>
@@ -118,7 +118,7 @@ export default function AForm() {
             : "+"}
         </button>
 
-        <button type="submit" className="submitbtn">
+        <button type="submit" className="submitbtn1">
           Submit
         </button>
       </form>

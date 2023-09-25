@@ -1,10 +1,11 @@
 "use client";
-
+import TabView from "../../component/Form/tabview";
 import Navbar from "../../component/Navbarbottom";
-import AForm from "../../component/Form/aForm";
+import SForm from "../../component/Form/sForm";
 import EForm from "../../component/Form/eForm";
 import IForm from "../../component/Form/iForm";
 import OForm from "../../component/Form/oForm";
+import NDXForm from "../../component/Form/ndxForm";
 import "./styles.css";
 export default function Inform() {
   return (
@@ -48,13 +49,36 @@ export default function Inform() {
       </div>
 
       
-        <AForm />
-        <OForm />
-        <IForm />
-        <EForm />
-      
 
-      <Navbar />
-    </div>
+
+
+
+      
+      <TabView tabs={[
+          {
+            label: 'NDX',
+            content: <NDXForm />
+          },
+      {
+        label: 'S',
+        content: <SForm />
+      },
+      {
+        label: 'O',
+        content: <OForm />
+      },
+      {
+        label: 'I',
+        content: <IForm />
+      },
+      {
+        label: 'E',
+        content: <EForm />
+      }
+    ]} />
+
+    <Navbar />
+  </div>
+    
   );
 }
