@@ -46,12 +46,14 @@ function useAuth() {
       accessToken: string;
       refreshToken: string;
       user: UserType;
-    }>("http://localhost:5001/api/auth/signin", {
-      username,
-      password,
-    },
-    {withCredentials: true});
-    
+    }>(
+      "http://localhost:5001/api/auth/signin",
+      {
+        username,
+        password,
+      },
+      { withCredentials: true }
+    );
 
     if (debug) console.log(res);
     setAccessToken(res.data.accessToken);
