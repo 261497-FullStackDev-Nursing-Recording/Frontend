@@ -51,8 +51,8 @@ export default function IForm() {
         return (
          
           <><label>
-            <section>
-            <span>ติดตามระดับน้ำตาลในเลือดโดยการเจาะ DTX</span>
+            <section className="sectiongap">
+            <div className="gapInput">ติดตามระดับน้ำตาลในเลือดโดยการเจาะ DTX</div>
             <textarea 
               {...register(`Idata.${index}.text`)}
               placeholder={`กรอกข้อมูล`}
@@ -66,8 +66,8 @@ export default function IForm() {
         return (
         
           <><label>
-            <section>
-            <span>ดูแลให้รับยา</span>
+            <section className="sectiongap">
+            <div className="gapInput">ดูแลให้รับยา</div>
             <input
               {...register(`Idata.${index}.text`)}
               placeholder={`กรอกข้อมูล`}
@@ -82,9 +82,9 @@ export default function IForm() {
         return (
         
           <><label>
-            <section>
+            <section className="sectiongap">
             
-            <textarea
+            <textarea className="gapInput"
               {...register(`Idata.${index}.text`)}
               placeholder={`กรอกข้อมูล`}
             />
@@ -108,10 +108,10 @@ export default function IForm() {
           console.log("Submit data", data);
         })}
       >
-        <h1 className="Headform">I <span className="Headtext">วิธีการดูแล</span></h1>
+        <h1 className="Headform">I วิธีการดูแล</h1>
        
         {fields.map((item, index) => (
-          <div key={item.id} className="Ibody">
+          <div key={item.id} className="Iformcontainer">
             <select
               value={item.type}
               onChange={(e) => handleTypeChange(e, index)}
@@ -123,18 +123,19 @@ export default function IForm() {
               <option value="item3">ข้อมูลสนับสนุน</option>
               
             </select>
+            <button type="button" onClick={() => remove(index)} className="deletebutton">
+              Delete
+            </button>
             <label>
               <section>
             {renderFormFields(selectedTypes[index]?.type, index)}
             
-            <button type="button" onClick={() => remove(index)}>
-              -
-            </button>
             </section>
             </label>
           </div>
         ))}
 
+<div className="btncontainer">
         <button
           type="button"
           onClick={() => {
@@ -145,15 +146,16 @@ export default function IForm() {
               append({ type: "", name: "", date:"" , text: ""});
             }
           }}
+          className="addbutton"
         >
           {selectedTypes.every((item) => item.type !== "select")
             ? "Add"
-            : "+"}
+            : "Add"}
         </button>
-
         <button type="submit" className="submitbtn">
           Submit
         </button>
+      </div>
       </form>
     </div>
   );

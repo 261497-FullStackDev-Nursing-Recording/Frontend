@@ -51,7 +51,7 @@ export default function IForm() {
         return (
          
           <><label>
-            <section>
+            <section className="sectiongap">
       
             <textarea 
               {...register(`Edata.${index}.text`)}
@@ -81,10 +81,10 @@ export default function IForm() {
           console.log("Submit data", data);
         })}
       >
-        <h1 className="Headform">E <span className="Headtext">ผลขอการรักษา</span></h1>
+        <h1 className="Headform">E ผลขอการรักษา</h1>
        
         {fields.map((item, index) => (
-          <div key={item.id} className="Ebody">
+          <div key={item.id} className="Eformcontainer">
             <select
               value={item.type}
               onChange={(e) => handleTypeChange(e, index)}
@@ -92,21 +92,20 @@ export default function IForm() {
             >
               <option value="select">ตัวเลือก</option>
               <option value="item1">ผลขอการรักษา</option>
-              
-              
             </select>
+            <button type="button" onClick={() => remove(index)} className="deletebutton">
+              Delete
+            </button>
             <label>
               <section>
             {renderFormFields(selectedTypes[index]?.type, index)}
             
-            <button type="button" onClick={() => remove(index)}>
-              -
-            </button>
             </section>
             </label>
           </div>
         ))}
 
+<div className="btncontainer">
         <button
           type="button"
           onClick={() => {
@@ -117,15 +116,16 @@ export default function IForm() {
               append({ type: "", name: "", date:"" , text: ""});
             }
           }}
+          className="addbutton"
         >
           {selectedTypes.every((item) => item.type !== "select")
             ? "Add"
-            : "+"}
+            : "Add"}
         </button>
-
-        <button type="submit" className="submitbtn1">
+        <button type="submit" className="submitbtn">
           Submit
         </button>
+      </div>
       </form>
     </div>
   );
