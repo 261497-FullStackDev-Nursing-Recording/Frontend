@@ -27,7 +27,7 @@ export default function Navbar() {
       <button className="Patient">
         <Link href="/Mypatient">
           <LocalHospitalRoundedIcon />
-          <span className="btm-nav-label">Patient</span>
+          <span className="btm-nav-label">My Patient</span>
         </Link>
       </button>
     </div>
