@@ -64,7 +64,7 @@ export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
 export const useQueryLinkedPatients = (user_id: string) => {
   const query = useQuery(["linkedPatient"], async () => {
     const response = await axios.get<LinkPatient[]>(
-      `http://localhost:5001/api/patient/${user_id}`
+      `http://localhost:5001/api/patient/getLinkedPatients/${user_id}`
     );
     return response.data;
   });
@@ -78,7 +78,7 @@ export const useMutationLinkPatient = () => {
     ["linkPatient"],
     async (args: LinkPatient) => {
       const response = await axios.post<LinkPatient>(
-        "http://localhost:5001/api/patient/linkedPatients",
+        "http://localhost:5001/api/patient/linkPatients",
         args
       );
 
