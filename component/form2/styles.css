@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap");
+* {
+  font-family: "Kanit", sans-serif;
+}
+
+.form{
+  background-color: rgb(151, 250, 209);
+  padding: 5px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.addbutton{
+  padding: 5px;
+  background-color:blueviolet ;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.submitbutton{
+  padding: 5px;
+  background-color:rgb(177, 226, 43) ;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+

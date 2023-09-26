@@ -149,32 +149,28 @@ export default function OForm() {
               <option value="item3">Ketone</option>
               <option value="item4">ข้อมูลสนับสนุน</option>
             </select>
-            <label>
-              <section>
-            {renderFormFields(selectedTypes[index]?.type, index)}
-            
-            <button type="button" onClick={() => remove(index)}>
+            <button type="button" onClick={() => remove(index)} className="deletebutton">
               -
             </button>
-            </section>
-            </label>
+     
+            <div/>
+            {renderFormFields(selectedTypes[index]?.type, index)}
           </div>
         ))}
 
         <button
           type="button"
           onClick={() => {
-            // Check the selected option to determine whether to add a dropdown or a form
             if (selectedTypes.every((item) => item.type !== "select")) {
               append({ type: "select", name: "", date: "" ,text: ""});
             } else {
               append({ type: "", name: "", date:"" , text: ""});
             }
           }}
-        >
+        className="Addbutton">
           {selectedTypes.every((item) => item.type !== "select")
             ? "Add"
-            : "+"}
+            : "Add"}
         </button>
 
         <button type="submit" className="submitbtn">

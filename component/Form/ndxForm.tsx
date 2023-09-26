@@ -52,7 +52,7 @@ export default function NDXForm() {
          
           <><label>
             <section>
-            <span>โรคประจำตัว</span>
+            {/* <span>โรคประจำตัว</span> */}
             <input
               {...register(`Odata.${index}.name`)}
               placeholder={`กรอกโรคประจำตัว`}
@@ -67,7 +67,7 @@ export default function NDXForm() {
           <>
           <label>
             <section>
-          <span>DTX</span>
+          {/* <span>DTX</span> */}
             <input
               {...register(`Odata.${index}.name`)}
               placeholder={`กรอกค่า`}
@@ -87,7 +87,7 @@ export default function NDXForm() {
           <>
           <label>
             <section>
-           <span>Ketone</span>
+           {/* <span>Ketone</span> */}
             <input
               {...register(`Odata.${index}.name`)}
               placeholder={`กรอกค่า`}

@@ -1,127 +1,56 @@
-import React from "react";
-import { useFieldArray, useForm, useWatch } from "react-hook-form";
-import "./formlayout.css";
+import React from 'react';
+import { useForm, Controller, useFieldArray, SubmitHandler } from 'react-hook-form';
 
-type FormValues = {
-  Adata: {
-    type: string;
-    name: string;
-    date: string;
-    text: string;
-
-  }[];
+type FormData = {
+  items: { name: string; type: string }[];
 };
 
-export default function SForm() {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    control,
-    setValue,
-  } = useForm<FormValues>({
-    defaultValues: {
-      Adata: [{ type: "select", name: "", date:"" }],
-    },
-  });
-
+const DynamicForm: React.FC = () => {
+  const { control, handleSubmit, register } = useForm<FormData>();
   const { fields, append, remove } = useFieldArray({
-    name: "Adata",
     control,
-   
+    name: 'items',
   });
 
-  const selectedTypes = useWatch({
-    name: "Adata",
-    control,
-  });
-
-  // Function to handle the selection change in the dropdown
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
-    const selectedType = e.target.value;
-
-    // Update the selected type for the specific item in the cart array
-    setValue(`Adata.${index}.type`, selectedType as any); // Use type casting to resolve the error
-  };
-
-  // Function to render the form fields based on the selected type
-  const renderFormFields = (selectedType: string, index: number) => {
-    switch (selectedType) {
-      case "item1":
-        return (
-         
-          <><label>
-            <section>
-            
-            <textarea className="textarearesize"
-              {...register(`Adata.${index}.text`)}
-              placeholder={`กรอกข้อมูล`}
-            />
-           </section>
-            </label>
-          </>
-        );
-     
-
-
-       
-      default:
-        return null;
-    }
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data);
-        })}
-      >
-        <h1 className="Headform">S <span className="Headtext">อาการของผู้ป่วย</span></h1>
-       
-        {fields.map((item, index) => (
-          <div key={item.id} className="Abody">
-            <select
-              value={item.type}
-              onChange={(e) => handleTypeChange(e, index)}
-              className="select"
-            >
-              <option value="select">ตัวเลือก</option>
-              <option value="item1">อาการของผู้ป่วย</option>
-              
-            </select>
-            <label>
-              <section>
-            {renderFormFields(selectedTypes[index]?.type, index)}
-            
-            <button type="button" onClick={() => remove(index)}>
-              -
-            </button>
-            </section>
-            </label>
-          </div>
-        ))}
-
-        <button
-          type="button"
-          onClick={() => {
-            // Check the selected option to determine whether to add a dropdown or a form
-            if (selectedTypes.every((item) => item.type !== "select")) {
-              append({ type: "select", name: "", date: "" ,text: ""});
-            } else {
-              append({ type: "", name: "", date:"" , text: ""});
-            }
-          }}
-        >
-          {selectedTypes.every((item) => item.type !== "select")
-            ? "Add"
-            : "+"}
-        </button>
-
-        <button type="submit" className="submitbtn1">
-          Submit
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h2>Dynamic Form</h2>
+      {fields.map((field, index) => (
+        <div key={field.id}>
+          <Controller
+            name={`items[${index}].name`}
+            control={control}
+            defaultValue={field.name}
+            render={({ field }) => <input {...field} />}
+          />
+          <Controller
+            name={`items[${index}].type`}
+            control={control}
+            defaultValue={field.type}
+            render={({ field }) => (
+              <select {...field}>
+                <option value="text">Text</option>
+                <option value="number">Number</option>
+                <option value="email">Email</option>
+                {/* Add more input types as needed */}
+              </select>
+            )}
+          />
+          <button type="button" onClick={() => remove(index)}>
+            Remove
+          </button>
+        </div>
+      ))}
+      <button type="button" onClick={() => append({ name: '', type: 'text' })}>
+        Add Item
+      </button>
+      <button type="submit">Submit</button>
+    </form>
   );
-}
+};
+
+export default DynamicForm;

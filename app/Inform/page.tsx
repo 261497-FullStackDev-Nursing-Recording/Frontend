@@ -1,84 +1,81 @@
 "use client";
-import TabView from "../../component/Form/tabview";
-import Navbar from "../../component/Navbarbottom";
-import SForm from "../../component/Form/sForm";
-import EForm from "../../component/Form/eForm";
-import IForm from "../../component/Form/iForm";
-import OForm from "../../component/Form/oForm";
-import NDXForm from "../../component/Form/ndxForm";
-import "./styles.css";
-export default function Inform() {
+
+import Form from "../../component/form2";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../component/Form/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../component/Form/ui/tabs"
+import { FC } from "react";
+
+const FormPage: FC = () => {
   return (
-    <div className="inform-container">
-      <div className="svgcontainer">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            {" "}
-            <path
-              d="M16 4C18.175 4.01211 19.3529 4.10856 20.1213 4.87694C21 5.75562 21 7.16983 21 9.99826V15.9983C21 18.8267 21 20.2409 20.1213 21.1196C19.2426 21.9983 17.8284 21.9983 15 21.9983H9C6.17157 21.9983 4.75736 21.9983 3.87868 21.1196C3 20.2409 3 18.8267 3 15.9983V9.99826C3 7.16983 3 5.75562 3.87868 4.87694C4.64706 4.10856 5.82497 4.01211 8 4"
-              stroke="#1C274C"
-              strokeWidth="1.5"
-            ></path>{" "}
-            <path
-              d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z"
-              stroke="#1C274C"
-              strokeWidth="1.5"
-            ></path>{" "}
-            <path
-              d="M15 13L12 13M12 13L9 13M12 13L12 10M12 13L12 16"
-              stroke="#1C274C"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            ></path>{" "}
-          </g>
-        </svg>
-      </div>
-
-      <div className="patientheaddata">
-        <div className="top">Name</div>
-        <div className="Name">Name</div>
-
-        <div className="top">Identification ID</div>
-        <div className="ID">ID</div>
-      </div>
-
-      
-
-
-
-
-      
-      <TabView tabs={[
-          {
-            label: 'NDX',
-            content: <NDXForm />
-          },
-      {
-        label: 'S',
-        content: <SForm />
-      },
-      {
-        label: 'O',
-        content: <OForm />
-      },
-      {
-        label: 'I',
-        content: <IForm />
-      },
-      {
-        label: 'E',
-        content: <EForm />
-      }
-    ]} />
-
-    <Navbar />
-  </div>
-    
+    <div className="container mx-auto mt-4">
+      <Tabs defaultValue="o_type" className="w-[400px]">
+        <TabsList>
+          <TabsTrigger value="ndx_type">กรอกข้อมูล NDx</TabsTrigger>
+          <TabsTrigger value="I">กรอกข้อมูล I</TabsTrigger> 
+          <TabsTrigger value="o_type">กรอกข้อมูล O</TabsTrigger>
+          <TabsTrigger value="s_type">กรอกข้อมูล S</TabsTrigger>
+          <TabsTrigger value="E">กรอกข้อมูล E</TabsTrigger>
+        </TabsList>
+        <TabsContent value="o_type">
+          <Card className="w-fit">
+            <CardHeader>
+              <CardTitle>กรอกข้อมูล O</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Form formType="O" />
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="s_type">
+          <Card className="w-fit">
+            <CardHeader>
+              <CardTitle>กรอกข้อมูล S</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Form formType="S" />
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="ndx_type">
+          <Card className="w-fit">
+            <CardHeader>
+              <CardTitle>กรอกข้อมูล NDx</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Form formType="NDX" />
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="e_type">
+          <Card className="w-fit">
+            <CardHeader>
+              <CardTitle>กรอกข้อมูล E</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Form formType="E" />
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="i_type">
+          <Card className="w-fit">
+            <CardHeader>
+              <CardTitle>กรอกข้อมูล I</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Form formType="I" />
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
-}
+};
+
+export default FormPage;
