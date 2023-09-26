@@ -34,7 +34,7 @@ export const useQueryPatients = (body: GetAllPatient) => {
 export const useQuerySearchPatients = (body: SearchPatient) => {
   const query = useQuery(["searchPatients"], async () => {
     const response = await axios.post<Patient[]>(
-      "http://localhost:5001/api/patient/searchPatient",
+      "http://localhost:5001/api/patient/search",
       body
     );
     return response.data;
