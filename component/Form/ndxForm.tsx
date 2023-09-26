@@ -1,6 +1,8 @@
 import React from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type FormValues = {
   Odata: {
@@ -51,8 +53,8 @@ export default function NDXForm() {
         return (
          
           <><label>
-            <section>
-            <span>โรคประจำตัว</span>
+            <section className="sectiongap">
+            <div className="gapInput">โรคประจำตัว</div>
             <input
               {...register(`Odata.${index}.name`)}
               placeholder={`กรอกโรคประจำตัว`}
@@ -65,39 +67,54 @@ export default function NDXForm() {
         // Render form fields for item2
         return (
           <>
-          <label>
-            <section>
-          <span>DTX</span>
-            <input
-              {...register(`Odata.${index}.name`)}
-              placeholder={`กรอกค่า`}
-            />
-            <span>mg%</span>
-         <input
-              {...register(`Odata.${index}.date`)}
-              placeholder={`วัน/เดือน/ปี`}
-            />
-            </section>
+            <label>
+              <section className="sectiongap">
+                <div className="gapInput">DTX</div>
+                <input
+                  {...register(`Odata.${index}.name`)}
+                  placeholder={`กรอกค่า`}
+                />
+                <span className="gapInput"> mg%</span>  
+                {/* <input
+                  {...register(`Odata.${index}.date`)}
+                  placeholder={`วัน/เดือน/ปี`}
+                /> */}
+              </section>
+              <div className="gapInput">เลือกวันที่</div>
+              <DatePicker
+                selected={new Date()} // Set the default value to today
+                onChange={(date) => {
+                  
+                }}
+                dateFormat="dd/MM/yyyy" // Specify the date format
+              />
             </label>
           </>
         );
       case "item3":
-        // Render form fields for item3
         return (
           <>
           <label>
-            <section>
-           <span>Ketone</span>
+            <section className="sectiongap">
+           <div className="gapInput">Ketone</div>
             <input
               {...register(`Odata.${index}.name`)}
               placeholder={`กรอกค่า`}
             />
-            <span>mmol/L</span>
-         <input
+            <span className="gapInput"> mmol/L</span>
+         {/* <input
               {...register(`Odata.${index}.date`)}
               placeholder={`วัน/เดือน/ปี`}
-            />
+            /> */}
            </section>
+           <div className="gapInput">เลือกวันที่</div>
+              <DatePicker
+                selected={new Date()} // Set the default value to today
+                onChange={(date) => {
+                  
+                }}
+                dateFormat="dd/MM/yyyy" // Specify the date format
+              />
             </label>
           </>
           
@@ -110,11 +127,10 @@ export default function NDXForm() {
 
           <>
            <label>
-            <section>
+            <section className="sectiongap">
           
             <textarea className="textarearesize"
               {...register(`Odata.${index}.text`)}
-              placeholder={`กรอก`}
             />
 
           </section>
@@ -134,10 +150,10 @@ export default function NDXForm() {
           console.log("Submit data", data);
         })}
       >
-        <h1 className="Headform">NDX<span className="Headtext">ข้อวินิจฉัย</span></h1>
+        <h1 className="Headform">NDX ข้อวินิจฉัย</h1>
        
         {fields.map((item, index) => (
-          <div key={item.id} className="Obody">
+          <div key={item.id} className="NDXformcontainer">
             <select
               value={item.type}
               onChange={(e) => handleTypeChange(e, index)}
@@ -149,18 +165,18 @@ export default function NDXForm() {
               <option value="item3">Ketone</option>
               <option value="item4">ข้อมูลสนับสนุน</option>
             </select>
+            <button type="button" onClick={() => remove(index)} className="deletebutton">
+              Delete
+            </button>
             <label>
               <section>
             {renderFormFields(selectedTypes[index]?.type, index)}
             
-            <button type="button" onClick={() => remove(index)}>
-              -
-            </button>
             </section>
             </label>
           </div>
         ))}
-
+      <div className="btncontainer">
         <button
           type="button"
           onClick={() => {
@@ -171,15 +187,16 @@ export default function NDXForm() {
               append({ type: "", name: "", date:"" , text: ""});
             }
           }}
+          className="addbutton"
         >
           {selectedTypes.every((item) => item.type !== "select")
             ? "Add"
-            : "+"}
+            : "Add"}
         </button>
-
-        <button type="submit" className="submitbtn1">
+        <button type="submit" className="submitbtn">
           Submit
         </button>
+      </div>
       </form>
     </div>
   );

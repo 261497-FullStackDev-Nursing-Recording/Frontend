@@ -1,233 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap');
-*{
-  font-family: 'Kanit', sans-serif;
+
+/* NDX */
+.Headform{
+  font-weight: bold;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
 }
 
- .select{
-  line-height: 2;
-  text-align: left;
-  display: block;
-  margin: 5px 0;
-  color: rgb(0, 0, 0);
-  font-size: 14px;
+.btncontainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 150px;
+}
 
- }
+.addbutton {
+  background-color: rgb(84, 175, 197);
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  flex: 1;
+  margin-left: 20px;
+}
 
-  .form {
-    max-width: 100%;
-    align-items: center;
-    margin: 0 auto;
-  }
-  
-  .p {
-    color: #bf1650;
-    text-align: center;
-  }
-  
-  section {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  section > button[type="button"] {
-    background: rgb(245, 88, 88);
-    color:white;
-    margin-top: auto;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    width: 40px;
-    margin-right:5px;
-    
- }
-  
-  input {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid white;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-  
-  label > span {
-    margin-bottom: 10px;
-   
-    display: block;
-  }
-  
-  .label,
-  section > label {
-    line-height: 2;
-    text-align: left;
-    display: block;
-    margin: 5px 0;
-    color: rgb(2, 2, 2);
-    font-size: 14px;
-    font-weight: 200;
-  }
-  
-  button[type="submit"],
-  .button {
-    background: #61fe93;
-    color: rgb(0, 0, 0);
-    text-transform: uppercase;
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 100;
-    border-radius: 4px;
-    width: 400px;
-    position: center;
-    
-    
-   
-  }
- 
-  
-  
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-  }
-  
-  
-  
-  button[type="button"] {
-    background: #516391;
-    color: white;
-    letter-spacing: 0px;
-    text-transform: none;
-    padding: 10px;
-    width: 400px;
-  }
-  
-  /* Center the button horizontally */
-  button[type="button"] {
-    display: block;
-    margin: 0 auto;
-  }
-  
-  button[type="button"]:hover {
-    background: #232f48;
-    color: white;
-  }
-  
-  .submitbtn{
-    margin-bottom: 10px;
-  }
+.submitbtn{
+  background-color: rgb(90, 199, 90);
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  flex: 1;
+  margin-left: 20px;
+  margin-right: 20px;
+}
 
-  .submitbtn1{
-    margin-bottom: 80px;
-  }
+.deletebutton {
+  background-color: rgb(236, 72, 72);
+  padding: 8px 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  color: white;
+  float: right;
+}
 
+.NDXformcontainer{
+  background-color: #5fe5ac;
+  margin: 20px 20px;
+  padding: 20px 20px;
+  border-radius: 10px;
+}
 
-  .Headform{
-    font-size: 50px;
-  }
-
-  .Headlayout{
-   
-  flex-direction: column;
- 
+.buttongroup{
+  display: flex;
   justify-content: center;
+}
 
-  }
+.sectiongap{
+  margin-top: 15px;
+}
 
-
-  .Headtext{
-    font-size: 20px;
-  }
- 
-
-  .textarearesize {
-    color: #000000;
-    width: 300px;
-    border-radius: 4px;
-    resize: inline; /* Disable manual resizing */
-    overflow: hidden; /* Hide any overflowing content */
-    min-height: 150px; /* Set a minimum height to prevent collapsing */
-    font-size: 18px;
-  }
-
-  .Obody{
-    background-color: rgb(189, 217, 253);
-    border-radius: 4px;
-    border: 15px solid rgb(189, 217, 253);
-    width: 400px;
-    margin-bottom: 1px;
-    gap: 10px
-  }
-
-
-
-  .Abody{
-    background-color: rgb(250, 208, 208);
-    border-radius: 4px;
-    border: 15px solid rgb(250, 208, 208);
-    width: 400px;
-    
-    margin-bottom: 1px;
-    gap: 10px
-   
-  }
-
-  .Ibody{
-    background-color: rgb(234, 197, 255);
-    border-radius: 4px;
-    border: 15px solid rgb(234, 197, 255);
-    width: 400px;
-    margin-bottom: 1px;
-    gap: 10px
-  }
-
-
-  .Ebody{
-    background-color: rgb(163, 255, 224);
-    border-radius: 4px;
-    border: 15px solid rgb(163, 255, 224);
-    width: 400px;
-    margin-bottom: 1px;
-    gap: 10px
-  } */
-
-
-
-
-
-
-  .tab-view {
-    border: 1px solid #ccc;
-    margin: 20px;
-    padding: 10px;
-    max-width: auto;
-    background-color: #fff;
-  }
-  
-  .tab-header {
-    list-style: none;
-    padding-left: 40px;
-    display: flex;
-   gap: 10px;
-    margin-top: 40px;
-  }
-  
-  .tab-item {
-    cursor: pointer;
-    padding: 10px 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .tab-item.active {
-    background-color: #8ec5ff;
-    color: #fff;
-  }
-  
-  .tab-content {
-    padding: 20px;
-    border-top: 1px solid #ccc;
-  }
+.gapInput{
+  margin-bottom: 5px;
+  font-weight: bolder;
+}
