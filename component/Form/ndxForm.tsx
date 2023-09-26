@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 type FormValues = {
-  Odata: {
+  NDXdata: {
     type: string;
     name: string;
     date: string;
@@ -23,18 +23,18 @@ export default function NDXForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Odata: [{ type: "select", name: "", date:"" }],
+      NDXdata: [{ type: "select", name: "", date:"" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
-    name: "Odata",
+    name: "NDXdata",
     control,
    
   });
 
   const selectedTypes = useWatch({
-    name: "Odata",
+    name: "NDXdata",
     control,
   });
 
@@ -43,7 +43,7 @@ export default function NDXForm() {
     const selectedType = e.target.value;
 
     // Update the selected type for the specific item in the cart array
-    setValue(`Odata.${index}.type`, selectedType as any); // Use type casting to resolve the error
+    setValue(`NDXdata.${index}.type`, selectedType as any); // Use type casting to resolve the error
   };
 
   // Function to render the form fields based on the selected type
@@ -53,91 +53,36 @@ export default function NDXForm() {
         return (
          
           <><label>
-            <section className="sectiongap">
-            <div className="gapInput">โรคประจำตัว</div>
-            <input
-              {...register(`Odata.${index}.name`)}
-              placeholder={`กรอกโรคประจำตัว`}
-            />
-           </section>
+            <select {...register(`NDXdata.${index}.name`)} className="sectiongap">
+            <option value="option1">แบบแผนการหายใจไม่มีประสิทธิภาพ</option>
+            <option value="option2">เสี่ยงต่อการเกิดท่อช่วยหายใจเลื่อนหลุด
+</option>
+            <option value="option3">มีภาวะไม่สมดุลสารน้ำและเกลือแร่</option>
+          </select>
             </label>
           </>
         );
-      case "item2":
-        // Render form fields for item2
-        return (
-          <>
-            <label>
+        case "item2":
+          // Render form fields for item3
+          return (
+  
+            <>
+             <label>
               <section className="sectiongap">
-                <div className="gapInput">DTX</div>
-                <input
-                  {...register(`Odata.${index}.name`)}
-                  placeholder={`กรอกค่า`}
-                />
-                <span className="gapInput"> mg%</span>  
-                {/* <input
-                  {...register(`Odata.${index}.date`)}
-                  placeholder={`วัน/เดือน/ปี`}
-                /> */}
-              </section>
-              <div className="gapInput">เลือกวันที่</div>
-              <DatePicker
-                selected={new Date()} // Set the default value to today
-                onChange={(date) => {
-                  
-                }}
-                dateFormat="dd/MM/yyyy" // Specify the date format
+            
+              <textarea className="textarearesize"
+                {...register(`NDXdata.${index}.text`)}
               />
-            </label>
-          </>
-        );
-      case "item3":
-        return (
-          <>
-          <label>
-            <section className="sectiongap">
-           <div className="gapInput">Ketone</div>
-            <input
-              {...register(`Odata.${index}.name`)}
-              placeholder={`กรอกค่า`}
-            />
-            <span className="gapInput"> mmol/L</span>
-         {/* <input
-              {...register(`Odata.${index}.date`)}
-              placeholder={`วัน/เดือน/ปี`}
-            /> */}
-           </section>
-           <div className="gapInput">เลือกวันที่</div>
-              <DatePicker
-                selected={new Date()} // Set the default value to today
-                onChange={(date) => {
-                  
-                }}
-                dateFormat="dd/MM/yyyy" // Specify the date format
-              />
-            </label>
-          </>
-          
-        );
+  
+            </section>
+              </label>
+            
+            </>
+          );
+     
 
 
-        case "item4":
-        // Render form fields for item3
-        return (
-
-          <>
-           <label>
-            <section className="sectiongap">
-          
-            <textarea className="textarearesize"
-              {...register(`Odata.${index}.text`)}
-            />
-
-          </section>
-            </label>
-          
-          </>
-        );
+        
       default:
         return null;
     }
@@ -160,10 +105,8 @@ export default function NDXForm() {
               className="select"
             >
               <option value="select">ตัวเลือก</option>
-              <option value="item1">โรคประจำตัว</option>
-              <option value="item2">DTX</option>
-              <option value="item3">Ketone</option>
-              <option value="item4">ข้อมูลสนับสนุน</option>
+              <option value="item1">ข้อวินิจฉัย</option>
+              <option value="item2">ข้อมูลสนับสนุน</option>
             </select>
             <button type="button" onClick={() => remove(index)} className="deletebutton">
               Delete

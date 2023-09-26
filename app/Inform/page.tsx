@@ -24,8 +24,8 @@ export default function Inform() {
       <Tabs.List>
         <Tabs.Tab value="first" color="teal">NDX Field</Tabs.Tab>
         <Tabs.Tab value="second" color="pink">S Field</Tabs.Tab>
-        <Tabs.Tab value="third" color="grape">I Field</Tabs.Tab>
-        <Tabs.Tab value="fourth" >O Field</Tabs.Tab>
+        <Tabs.Tab value="third" color="grape">O Field</Tabs.Tab>
+        <Tabs.Tab value="fourth" >I Field</Tabs.Tab>
         <Tabs.Tab value="fifth" color="lime">E Field</Tabs.Tab>
       </Tabs.List>
 
@@ -38,11 +38,11 @@ export default function Inform() {
       </Tabs.Panel>
 
       <Tabs.Panel value="third" pt="xs">
-        <IForm/>
+        <OForm/>
       </Tabs.Panel>
 
       <Tabs.Panel value="fourth" pt="xs">
-        <OForm/>
+        <IForm/>
       </Tabs.Panel>
 
       <Tabs.Panel value="fifth" pt="xs">

@@ -108,7 +108,7 @@ export default function IForm() {
           console.log("Submit data", data);
         })}
       >
-        <h1 className="Headform">I วิธีการดูแล</h1>
+        <h1 className="Headform">I การปฏิบัติการพยาบาล</h1>
        
         {fields.map((item, index) => (
           <div key={item.id} className="Iformcontainer">

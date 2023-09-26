@@ -1,9 +1,11 @@
 import React from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type FormValues = {
-  Adata: {
+  Sdata: {
     type: string;
     name: string;
     date: string;
@@ -21,18 +23,18 @@ export default function SForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Adata: [{ type: "select", name: "", date:"" }],
+      Sdata: [{ type: "select", name: "", date:"" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
-    name: "Adata",
+    name: "Sdata",
     control,
    
   });
 
   const selectedTypes = useWatch({
-    name: "Adata",
+    name: "Sdata",
     control,
   });
 
@@ -41,28 +43,100 @@ export default function SForm() {
     const selectedType = e.target.value;
 
     // Update the selected type for the specific item in the cart array
-    setValue(`Adata.${index}.type`, selectedType as any); // Use type casting to resolve the error
+    setValue(`Sdata.${index}.type`, selectedType as any); // Use type casting to resolve the error
   };
 
   // Function to render the form fields based on the selected type
   const renderFormFields = (selectedType: string, index: number) => {
     switch (selectedType) {
       case "item1":
+          return (
+  
+            <><label>
+              <section className="sectiongap">
+                <div className="gapInput">โรคประจำตัว</div>
+                <input
+                  {...register(`Sdata.${index}.name`)}
+                  placeholder={`กรอกโรคประจำตัว`}
+                />
+              </section>
+            </label>
+            </>
+          );
+
+      case "item2":
         return (
          
           <><label>
             <section className="sectiongap">
             
             <textarea className="textarearesize"
-              {...register(`Adata.${index}.text`)}
+              {...register(`Sdata.${index}.text`)}
               placeholder={`กรอกข้อมูล`}
             />
            </section>
             </label>
           </>
         );
-     
 
+
+        case "item3":
+          // Render form fields for item2
+          return (
+            <>
+              <label>
+                <section className="sectiongap">
+                  <div className="gapInput">DTX</div>
+                  <input
+                    {...register(`Sdata.${index}.name`)}
+                    placeholder={`กรอกค่า`}
+                  />
+                  <span className="gapInput"> mg%</span>
+                  {/* <input
+                    {...register(`Odata.${index}.date`)}
+                    placeholder={`วัน/เดือน/ปี`}
+                  /> */}
+                </section>
+                <div className="gapInput">เลือกวันที่</div>
+                <DatePicker
+                  selected={new Date()} // Set the default value to today
+                  onChange={(date) => {
+  
+                  }}
+                  dateFormat="dd/MM/yyyy" // Specify the date format
+                />
+              </label>
+            </>
+          );
+        
+          case "item4":
+            return (
+              <>
+                <label>
+                  <section className="sectiongap">
+                    <div className="gapInput">Ketone</div>
+                    <input
+                      {...register(`Sdata.${index}.name`)}
+                      placeholder={`กรอกค่า`}
+                    />
+                    <span className="gapInput"> mmol/L</span>
+                    {/* <input
+                  {...register(`Odata.${index}.date`)}
+                  placeholder={`วัน/เดือน/ปี`}
+                /> */}
+                  </section>
+                  <div className="gapInput">เลือกวันที่</div>
+                  <DatePicker
+                    selected={new Date()} // Set the default value to today
+                    onChange={(date) => {
+    
+                    }}
+                    dateFormat="dd/MM/yyyy" // Specify the date format
+                  />
+                </label>
+              </>
+    
+            );
 
        
       default:
@@ -87,7 +161,10 @@ export default function SForm() {
               className="select"
             >
               <option value="select">ตัวเลือก</option>
-              <option value="item1">อาการของผู้ป่วย</option>          
+              <option value="item1">โรคประจำตัว</option>
+              <option value="item2">อาการของผู้ป่วย</option>           
+              <option value="item3">DTX</option> 
+              <option value="item4">Ketone</option> 
             </select>
             <button type="button" onClick={() => remove(index)} className="deletebutton">
               Delete

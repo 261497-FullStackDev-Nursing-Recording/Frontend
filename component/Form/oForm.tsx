@@ -51,93 +51,47 @@ export default function OForm() {
     switch (selectedType) {
       case "item1":
         return (
-
+         
           <><label>
             <section className="sectiongap">
-              <div className="gapInput">โรคประจำตัว</div>
-              <input
-                {...register(`Odata.${index}.name`)}
-                placeholder={`กรอกโรคประจำตัว`}
+            <select {...register(`Odata.${index}.name`)}>
+           
+          <option value="op1">VENTILATOR CARE</option>
+          <option value="op2">AIRWAY CARE</option>
+          <option value="op3">รักษาพยาธิสภาพตามโรค</option>
+          <option value="op4">ป้องกันการเกิดท่อช่วยหายใจเลื่อนหลุด</option>
+          <option value="op5">ผู้ป่วยได้รับสารน้ำและอาหารให้เพียงพอ</option>
+          <option value="op6">ผู้ป่วยไม่เกิดภาวะปอดอักเสบ</option>
+          <option value="op7">ผู้ป่วยไม่เกิดภาวะpneumothrorax</option>
+          <option value="op8">ผู้ป่วยและญาติคลายความวิตกกังวล</option>
+          <option value="op9">ผู้ป่วยได้รับการดูแลด้านสุขวิทยาส่วนบุคคล</option>
+          <option value="op10">ผู้ป่วยและญาติคลายความวิตกกังวล</option>
+          <option value="op11">ผู้ป่วยสามารถหย่าเครื่องช่วยหายใจได้สำเร็จ</option>
+        </select>
+           </section>
+            </label>
+          </>
+        );
+        case "item2":
+          // Render form fields for item3
+          return (
+  
+            <>
+             <label>
+              <section className="sectiongap" >
+           
+              <textarea className="textarearesize"
+                {...register(`Odata.${index}.text`)}
+                placeholder={`กรอกข้อมูล`}
               />
+  
             </section>
-          </label>
-          </>
-        );
-      case "item2":
-        // Render form fields for item2
-        return (
-          <>
-            <label>
-              <section className="sectiongap">
-                <div className="gapInput">DTX</div>
-                <input
-                  {...register(`Odata.${index}.name`)}
-                  placeholder={`กรอกค่า`}
-                />
-                <span className="gapInput"> mg%</span>
-                {/* <input
-                  {...register(`Odata.${index}.date`)}
-                  placeholder={`วัน/เดือน/ปี`}
-                /> */}
-              </section>
-              <div className="gapInput">เลือกวันที่</div>
-              <DatePicker
-                selected={new Date()} // Set the default value to today
-                onChange={(date) => {
+              </label>
+            
+            </>
+          );
+     
 
-                }}
-                dateFormat="dd/MM/yyyy" // Specify the date format
-              />
-            </label>
-          </>
-        );
-      case "item3":
-        return (
-          <>
-            <label>
-              <section className="sectiongap">
-                <div className="gapInput">Ketone</div>
-                <input
-                  {...register(`Odata.${index}.name`)}
-                  placeholder={`กรอกค่า`}
-                />
-                <span className="gapInput"> mmol/L</span>
-                {/* <input
-              {...register(`Odata.${index}.date`)}
-              placeholder={`วัน/เดือน/ปี`}
-            /> */}
-              </section>
-              <div className="gapInput">เลือกวันที่</div>
-              <DatePicker
-                selected={new Date()} // Set the default value to today
-                onChange={(date) => {
-
-                }}
-                dateFormat="dd/MM/yyyy" // Specify the date format
-              />
-            </label>
-          </>
-
-        );
-
-
-      case "item4":
-        // Render form fields for item3
-        return (
-
-          <>
-            <label>
-              <section className="sectiongap">
-
-                <textarea className="textarearesize"
-                  {...register(`Odata.${index}.text`)}
-                />
-
-              </section>
-            </label>
-
-          </>
-        );
       default:
         return null;
     }
@@ -150,7 +104,7 @@ export default function OForm() {
           console.log("Submit data", data);
         })}
       >
-        <h1 className="Headform">O ข้อมูลจากผู้ป่วย</h1>
+        <h1 className="Headform">O การวางแผนการพยาบาล</h1>
 
         {fields.map((item, index) => (
           <div key={item.id} className="Oformcontainer" >
@@ -160,10 +114,8 @@ export default function OForm() {
               className="select"
             >
               <option value="select">ตัวเลือก</option>
-              <option value="item1">โรคประจำตัว</option>
-              <option value="item2">DTX</option>
-              <option value="item3">Ketone</option>
-              <option value="item4">ข้อมูลสนับสนุน</option>
+              <option value="item1">การวางแผนการพยาบาล</option>
+              <option value="item2">ข้อมูลสนับสนุน</option>
             </select>
             <button type="button" onClick={() => remove(index)} className="deletebutton">
               Delete
