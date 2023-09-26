@@ -8,10 +8,8 @@ import Button from "@mui/material/Button";
 import Navbar from "../../component/Navbarbottom";
 import Spinner from "../../component/spinner";
 import { useQueryPatients, useQueryLinkedPatients } from "../../query/patient";
-import { useCurrentNurseLogin } from "../../query/nurse";
 import PatientCard from "./PatientCard";
 import { Patient } from "../../types/patient";
-import Example from "./GetFavPatient";
 
 export default function Mypatient() {
   const nurse_id: string = "498bffa2-97ee-491c-a417-8d44a49e5660";
