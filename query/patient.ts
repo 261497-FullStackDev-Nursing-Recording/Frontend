@@ -2,15 +2,17 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useCurrentNurseLogin } from "./nurse";
 import {
+  GetAllPatient,
+  GetPatientsByIds,
   LinkPatient,
   Patient,
   RemoveLinkedPatients,
   SearchPatient,
 } from "../types/patient";
 
-export const useQueryPatients = (body: SearchPatient) => {
+export const useQueryPatients = (body: GetAllPatient) => {
   const query = useQuery(
-    ["patients"],
+    ["getAllpatients"],
     async () => {
       const response = await axios.post<Patient[]>(
         "http://localhost:5001/api/patient/getAllPatient",
@@ -30,20 +32,28 @@ export const useQueryPatients = (body: SearchPatient) => {
   };
 };
 export const useQuerySearchPatients = (body: SearchPatient) => {
-  const query = useQuery(
-    ["patients"],
-    async () => {
-      const response = await axios.post<Patient[]>(
-        "http://localhost:5001/api/patient/searchPatient",
-        body
-      );
-      return response.data;
-    },
-    {
-      refetchInterval: 10000,
-      retry: false,
-    }
-  );
+  const query = useQuery(["searchPatients"], async () => {
+    const response = await axios.post<Patient[]>(
+      "http://localhost:5001/api/patient/searchPatient",
+      body
+    );
+    return response.data;
+  });
+  const isError = query.isError;
+  return {
+    ...query,
+    isError,
+  };
+};
+
+export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
+  const query = useQuery(["getPatientsByIds"], async () => {
+    const response = await axios.post<Patient[]>(
+      "http://localhost:5001/api/patient/getPatientsByIds",
+      body
+    );
+    return response.data;
+  });
   const isError = query.isError;
   return {
     ...query,

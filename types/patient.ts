@@ -11,7 +11,7 @@ export const PatientSchema = z.object({
   created_at: z.string(),
 });
 
-export const SearchPatientSchema = z.object({
+export const GetAllPatientSchema = z.object({
   identification_id: z.string().optional(),
   f_name: z.string().optional(),
   l_name: z.string().optional(),
@@ -19,6 +19,14 @@ export const SearchPatientSchema = z.object({
   fromDate: z.string().optional(),
 });
 
+export const SearchPatientSchema = z.object({
+  identification_id: z.string().optional(),
+  name: z.string().optional(),
+});
+
+export const GetPatientsByIdsSchema = z.object({
+  ids: z.array(z.string()),
+});
 export const LinkPatientSchema = z.object({
   user_id: z.string(),
   patient_id: z.string(),
@@ -29,6 +37,8 @@ export const RemoveLinkedPatientsSchema = z.object({
 });
 
 export type Patient = z.infer<typeof PatientSchema>;
+export type GetAllPatient = z.infer<typeof GetAllPatientSchema>;
 export type SearchPatient = z.infer<typeof SearchPatientSchema>;
+export type GetPatientsByIds = z.infer<typeof GetPatientsByIdsSchema>;
 export type LinkPatient = z.infer<typeof LinkPatientSchema>;
 export type RemoveLinkedPatients = z.infer<typeof RemoveLinkedPatientsSchema>;

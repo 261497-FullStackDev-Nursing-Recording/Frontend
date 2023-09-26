@@ -27,7 +27,7 @@ export const useMuationCreateRecord = () => {
     ["createRecord"],
     async (args: CreateRecord) => {
       const response = await axios.post<Record>(
-        "http://localhost:5001/api/getAllRecord",
+        "http://localhost:5001/api/records",
         args
       );
       return response.data;
@@ -49,7 +49,7 @@ export const useMutationUpdateRecord = (recordId: string) => {
     ["updateRecord"],
     async (args: UpdateRecord) => {
       await axios.put<null>(
-        `http://localhost:5001/api/record/${recordId}`,
+        `http://localhost:5001/api/records/${recordId}`,
         args
       );
     },
@@ -70,7 +70,7 @@ export const useMutationDeleteRecord = (recordId: string) => {
   const mutation = useMutation(
     ["deleteRecord"],
     async () => {
-      await axios.delete<null>(`http://localhost:5001/api/record/${recordId}`);
+      await axios.delete<null>(`http://localhost:5001/api/records/${recordId}`);
     },
     {
       onSuccess: async () => {
