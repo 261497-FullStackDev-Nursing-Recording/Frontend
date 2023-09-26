@@ -1,6 +1,8 @@
 import React from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type FormValues = {
   Odata: {
@@ -21,14 +23,14 @@ export default function OForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Odata: [{ type: "select", name: "", date:"" }],
+      Odata: [{ type: "select", name: "", date: "" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
     name: "Odata",
     control,
-   
+
   });
 
   const selectedTypes = useWatch({
@@ -49,77 +51,91 @@ export default function OForm() {
     switch (selectedType) {
       case "item1":
         return (
-         
+
           <><label>
-            <section>
-            <span>โรคประจำตัว</span>
-            <input
-              {...register(`Odata.${index}.name`)}
-              placeholder={`กรอกโรคประจำตัว`}
-            />
-           </section>
-            </label>
+            <section className="sectiongap">
+              <div className="gapInput">โรคประจำตัว</div>
+              <input
+                {...register(`Odata.${index}.name`)}
+                placeholder={`กรอกโรคประจำตัว`}
+              />
+            </section>
+          </label>
           </>
         );
       case "item2":
         // Render form fields for item2
         return (
           <>
-          <label>
-            <section>
-          <span>DTX</span>
-            <input
-              {...register(`Odata.${index}.name`)}
-              placeholder={`กรอกค่า`}
-            />
-            <span>mg%</span>
-         <input
-              {...register(`Odata.${index}.date`)}
-              placeholder={`วัน/เดือน/ปี`}
-            />
-            </section>
+            <label>
+              <section className="sectiongap">
+                <div className="gapInput">DTX</div>
+                <input
+                  {...register(`Odata.${index}.name`)}
+                  placeholder={`กรอกค่า`}
+                />
+                <span className="gapInput"> mg%</span>
+                {/* <input
+                  {...register(`Odata.${index}.date`)}
+                  placeholder={`วัน/เดือน/ปี`}
+                /> */}
+              </section>
+              <div className="gapInput">เลือกวันที่</div>
+              <DatePicker
+                selected={new Date()} // Set the default value to today
+                onChange={(date) => {
+
+                }}
+                dateFormat="dd/MM/yyyy" // Specify the date format
+              />
             </label>
           </>
         );
       case "item3":
-        // Render form fields for item3
         return (
           <>
-          <label>
-            <section>
-           <span>Ketone</span>
-            <input
-              {...register(`Odata.${index}.name`)}
-              placeholder={`กรอกค่า`}
-            />
-            <span>mmol/L</span>
-         <input
+            <label>
+              <section className="sectiongap">
+                <div className="gapInput">Ketone</div>
+                <input
+                  {...register(`Odata.${index}.name`)}
+                  placeholder={`กรอกค่า`}
+                />
+                <span className="gapInput"> mmol/L</span>
+                {/* <input
               {...register(`Odata.${index}.date`)}
               placeholder={`วัน/เดือน/ปี`}
-            />
-           </section>
+            /> */}
+              </section>
+              <div className="gapInput">เลือกวันที่</div>
+              <DatePicker
+                selected={new Date()} // Set the default value to today
+                onChange={(date) => {
+
+                }}
+                dateFormat="dd/MM/yyyy" // Specify the date format
+              />
             </label>
           </>
-          
+
         );
 
 
-        case "item4":
+      case "item4":
         // Render form fields for item3
         return (
 
           <>
-           <label>
-            <section>
-            <span>ข้อมูลสนับสนุน</span>
-            <textarea
-              {...register(`Odata.${index}.text`)}
-              placeholder={`กรอก`}
-            />
+            <label>
+              <section className="sectiongap">
 
-          </section>
+                <textarea className="textarearesize"
+                  {...register(`Odata.${index}.text`)}
+                />
+
+              </section>
             </label>
-          
+
           </>
         );
       default:
@@ -134,10 +150,10 @@ export default function OForm() {
           console.log("Submit data", data);
         })}
       >
-        <h1 className="Headform">O <span className="Headtext">ข้อมูลจากผู้ป่วย</span></h1>
-       
+        <h1 className="Headform">O ข้อมูลจากผู้ป่วย</h1>
+
         {fields.map((item, index) => (
-          <div key={item.id} className="Obody">
+          <div key={item.id} className="Oformcontainer" >
             <select
               value={item.type}
               onChange={(e) => handleTypeChange(e, index)}
@@ -149,37 +165,39 @@ export default function OForm() {
               <option value="item3">Ketone</option>
               <option value="item4">ข้อมูลสนับสนุน</option>
             </select>
+            <button type="button" onClick={() => remove(index)} className="deletebutton">
+              Delete
+            </button>
             <label>
               <section>
-            {renderFormFields(selectedTypes[index]?.type, index)}
-            
-            <button type="button" onClick={() => remove(index)}>
-              -
-            </button>
-            </section>
+                {renderFormFields(selectedTypes[index]?.type, index)}
+
+              </section>
             </label>
           </div>
         ))}
 
-        <button
-          type="button"
-          onClick={() => {
-            // Check the selected option to determine whether to add a dropdown or a form
-            if (selectedTypes.every((item) => item.type !== "select")) {
-              append({ type: "select", name: "", date: "" ,text: ""});
-            } else {
-              append({ type: "", name: "", date:"" , text: ""});
-            }
-          }}
-        >
-          {selectedTypes.every((item) => item.type !== "select")
-            ? "Add"
-            : "+"}
-        </button>
-
-        <button type="submit" className="submitbtn">
-          Submit
-        </button>
+        <div className="btncontainer">
+          <button
+            type="button"
+            onClick={() => {
+              // Check the selected option to determine whether to add a dropdown or a form
+              if (selectedTypes.every((item) => item.type !== "select")) {
+                append({ type: "select", name: "", date: "", text: "" });
+              } else {
+                append({ type: "", name: "", date: "", text: "" });
+              }
+            }}
+            className="addbutton"
+          >
+            {selectedTypes.every((item) => item.type !== "select")
+              ? "Add"
+              : "Add"}
+          </button>
+          <button type="submit" className="submitbtn">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
