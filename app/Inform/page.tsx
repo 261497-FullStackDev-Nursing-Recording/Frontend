@@ -11,17 +11,14 @@ import { Tabs } from '@mantine/core';
 export default function Inform() {
   return (
     <div className="inform-container">
-      <div className="svgcontainer">
-      </div>
-
       <div className="patientheaddata">
         <div className="top">Name</div>
         <div className="Name">Name</div>
         <div className="top">Identification ID</div>
         <div className="ID">ID</div>
       </div>
-      <Tabs defaultValue="first">
-      <Tabs.List>
+      <Tabs defaultValue="first" variant="pills">
+      <Tabs.List style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Tabs.Tab value="first" color="teal">NDX Field</Tabs.Tab>
         <Tabs.Tab value="second" color="pink">S Field</Tabs.Tab>
         <Tabs.Tab value="third" color="grape">O Field</Tabs.Tab>
@@ -55,3 +52,4 @@ export default function Inform() {
     
   );
 }
+
