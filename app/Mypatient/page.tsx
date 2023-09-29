@@ -13,7 +13,7 @@ import { Patient } from "../../types/patient";
 import App from "./authme";
 
 export default function Mypatient() {
-  const nurse_id: string = "498bffa2-97ee-491c-a417-8d44a49e5660";
+  const nurse_id: string = "0d510c1a-c972-43ae-968c-120abf8e5eee";
 
   const {
     data: linkedPatientsData,

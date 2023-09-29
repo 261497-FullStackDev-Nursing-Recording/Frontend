@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card } from "@mantine/core";
-import { Modal, Button, Group, Text } from "@mantine/core";
+import { Modal, Button, Group, Text, Center } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
 import { Patient } from "../../types/patient";
 import Link from "next/link";
@@ -47,25 +47,11 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
     <div>
       {apiData.map((item, index) => (
         <Card
-          style={{
-            width: "80%", // Equivalent to w-4/5
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            backgroundColor: "#BFDBFE",
-            fontWeight: "bold",
-            marginBottom: "5px",
-            marginLeft: "10%",
-            paddingLeft: "30px",
-            paddingRight: "0px",
-            borderRadius: "10px",
-            color: "#2563EB",
-          }}
-          //   className="w-4/5 flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[15px] mx-[10%] pl-[30px] pr-[0px] rounded-[10px] text-[#2563EB]"
+          className="w-4/5 min-h-[90px] flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[15px] mx-[10%] pl-[30px] pr-[0px] rounded-[10px] text-[#2563EB]"
           key={index}
         >
-          <div className="PText" onClick={() => goToPatientHistory(item.id)}>
-            <div className="mt-[8px]">
+          <div className="my-auto" onClick={() => goToPatientHistory(item.id)}>
+            <div>
               <div
                 style={{
                   backgroundColor: getStatusColor(item.status),
@@ -88,7 +74,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
               </Link>
             </div>
           </div>
-          <div className="py-[10px]">
+          <div className="my-auto">
             <Button onClick={() => handleCardClick(item)} variant="text">
               <AddIcon sx={{ fontSize: "45px" }} style={{ color: "#2563EB" }} />
             </Button>
@@ -98,9 +84,16 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
       <Modal
         opened={opened}
         onClose={closeModal}
-        size="lg"
+        size="sm"
         title="ข้อมูลผู้ป่วย"
-        className="items-center"
+        // yOffset="200px"
+
+        // style={{
+        //   display: 'flex',
+        //   alignItems: 'center',
+        //   justifyContent: 'center',
+        //   minHeight: '100vh', // Set the minimum height to 100% of the viewport height
+        // }}
       >
         {selectedCard && (
           <div>

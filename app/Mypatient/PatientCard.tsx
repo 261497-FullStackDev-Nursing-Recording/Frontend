@@ -52,11 +52,11 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
     <div>
       {apiData.map((item, index) => (
         <Card
-          className="w-4/5 flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[5px] mx-[10%] py-[10px] pl-[30px] pr-[10px] rounded-[10px] text-[#319795]"
+          className="w-4/5 min-h-[90px] flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[15px] mx-[10%] py-[10px] pl-[30px] pr-[10px] rounded-[10px] text-[#319795]"
           key={index}
         >
-          <div className="PText" onClick={() => goToPatientHistory(item.id)}>
-            <div className="mt-[8px]">
+          <div className="my-auto" onClick={() => goToPatientHistory(item.id)}>
+            <div>
               <div
                 style={{
                   backgroundColor: getStatusColor(item.status),
@@ -79,7 +79,7 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
               </Link>
             </div>
           </div>
-          <div className="py-[10px]">
+          <div className="my-auto">
             <Button onClick={() => handleCardClick(item)} variant="text">
               <DeleteOutlineIcon
                 sx={{ fontSize: "30px" }}

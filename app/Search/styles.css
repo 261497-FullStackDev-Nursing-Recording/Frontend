@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap");
 * {
   font-family: "Kanit", sans-serif;
 }
@@ -29,15 +29,14 @@
   flex-wrap: wrap;
   margin-top: 20px;
   flex-direction: column;
-  
 }
 
 .api-data-button {
   margin-right: 10px;
   margin-bottom: 10px;
   padding: 5px 10px;
-  background-color: #BFDBFE;
-  color: #2563EB;
+  background-color: #bfdbfe;
+  color: #2563eb;
   border: none;
   border-radius: 5px;
   cursor: pointer;
