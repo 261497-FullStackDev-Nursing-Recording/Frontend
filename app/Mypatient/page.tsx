@@ -10,6 +10,7 @@ import Spinner from "../../component/spinner";
 import { useQueryPatients, useQueryLinkedPatients } from "../../query/patient";
 import PatientCard from "./PatientCard";
 import { Patient } from "../../types/patient";
+import App from "./authme";
 
 export default function Mypatient() {
   const nurse_id: string = "498bffa2-97ee-491c-a417-8d44a49e5660";
@@ -156,6 +157,8 @@ export default function Mypatient() {
         </div>
       )}
     </div>
-    // <Example/>
+    // <div>
+    //   <App/>
+    // </div>
   );
 }
