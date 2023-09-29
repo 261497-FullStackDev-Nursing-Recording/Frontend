@@ -85,7 +85,33 @@ export default function Searchpage() {
       </div>
       <div className="mb-[40px]">
         <div className="text-black font-extrabold text-[20px] flex mt-[20px] mb-[5px] pl-[10%]">
-          Citizen ID
+          AN
+        </div>
+        <div className="flex mx-[10%] relative">
+          <input
+            className="w-full h-[40px] pl-[10px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center rounded-tr-none rounded-br-none outline-none"
+            id="identificationid"
+            type="search"
+            placeholder="ID"
+            onChange={(event) => setValueID(event.currentTarget.value)}
+          />
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#BFDBFE" }}
+            sx={{
+              height: "40px",
+              borderRadius: "5px",
+              borderTopLeftRadius: 0,
+              borderBottomLeftRadius: 0,
+              boxShadow: 0,
+            }}
+            onClick={handleSearchID}
+          >
+            <SearchIcon style={{ color: "#2563EB" }} />
+          </Button>
+        </div>
+        <div className="text-black font-extrabold text-[20px] flex mt-[20px] mb-[5px] pl-[10%]">
+          BED No.
         </div>
         <div className="flex mx-[10%] relative">
           <input
