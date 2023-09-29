@@ -80,9 +80,9 @@ export default function PatientHistory() {
 
   React.useEffect(() => {
     apiRequest(
-      "http://localhost:5001/api/patient/getAllRecord",
+      "http://localhost:5001/api/patient/getAllPatient",
       {
-        id: identification_id,
+        id: PatientHistory,
       },
       (response) => setPatientData(response.data[0])
     );
@@ -95,7 +95,8 @@ export default function PatientHistory() {
       (response) => setRecordData(response.data)
     );
   }, []);
-  console.log(recordData);
+  // console.log(recordData);
+  // console.log(patientData);
   return (
     <div>
       <div className="Container">
