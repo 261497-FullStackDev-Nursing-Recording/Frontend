@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { axiosCustom } from "../../services/axiosCustom";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const PatientCount: React.FC = () => {
   const [patientCount, setPatientCount] = useState<number>(0);
@@ -14,7 +14,7 @@ const PatientCount: React.FC = () => {
     isError,
   } = useQuery(["patients"], {
     queryFn: async () => {
-      const response = await axiosCustom.post(
+      const response = await axios.post(
         "http://localhost:5001/api/patient/getAllPatient",
         body
       );

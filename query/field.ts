@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { axiosCustom } from "../services/axiosCustom";
+import axios from "axios";
 
 export const useMutationUpdateField = (fieldId: string) => {
   const mutation = useMutation(["updateField"], async (args) => {
-    await axiosCustom.put<null>(`/api/fields/${fieldId}`, args);
+    await axios.put<null>(`http://localhost:5001/api/fields/${fieldId}`, args);
   });
 
   return mutation;

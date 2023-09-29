@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { axiosCustom } from "../services/axiosCustom";
 
 export default function PatientNurseRatio() {
   const [patientCount, setPatientCount] = useState<number>(0);
@@ -15,7 +14,7 @@ export default function PatientNurseRatio() {
     isError,
   } = useQuery(["patients"], {
     queryFn: async () => {
-      const response = await axiosCustom.post(
+      const response = await axios.post(
         "http://localhost:5001/api/patient/getAllPatient",
         body
       );
