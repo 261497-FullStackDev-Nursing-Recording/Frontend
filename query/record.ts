@@ -8,11 +8,12 @@ import {
   SearchRecord,
   UpdateRecord,
 } from "../types/record";
+import { axiosCustom } from "../services/axiosCustom";
 
 export const useQueryRecords = (data: SearchRecord) => {
   const query = useQuery(["records"], async () => {
-    const response = await axios.post<Record[]>(
-      "http://localhost:5001/api/records/getAllRecord",
+    const response = await axiosCustom.post<Record[]>(
+      "records/getAllRecord",
       data
     );
     return response.data;
@@ -26,10 +27,7 @@ export const useMuationCreateRecord = () => {
   const mutation = useMutation(
     ["createRecord"],
     async (args: CreateRecord) => {
-      const response = await axios.post<Record>(
-        "http://localhost:5001/api/records",
-        args
-      );
+      const response = await axiosCustom.post<Record>("/api/records", args);
       return response.data;
     },
     {
@@ -48,10 +46,7 @@ export const useMutationUpdateRecord = (recordId: string) => {
   const mutation = useMutation(
     ["updateRecord"],
     async (args: UpdateRecord) => {
-      await axios.put<null>(
-        `http://localhost:5001/api/records/${recordId}`,
-        args
-      );
+      await axiosCustom.put<null>(`/api/records/${recordId}`, args);
     },
     {
       onSuccess: async () => {
@@ -70,7 +65,7 @@ export const useMutationDeleteRecord = (recordId: string) => {
   const mutation = useMutation(
     ["deleteRecord"],
     async () => {
-      await axios.delete<null>(`http://localhost:5001/api/records/${recordId}`);
+      await axiosCustom.delete<null>(`/api/records/${recordId}`);
     },
     {
       onSuccess: async () => {
