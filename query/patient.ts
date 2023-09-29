@@ -9,14 +9,13 @@ import {
   RemoveLinkedPatients,
   SearchPatient,
 } from "../types/patient";
-import { axiosCustom } from "../services/axiosCustom";
 
 export const useQueryPatients = (body: GetAllPatient) => {
   const query = useQuery(
     ["getAllpatients"],
     async () => {
-      const response = await axiosCustom.post<Patient[]>(
-        "/api/patient/getAllPatient",
+      const response = await axios.post<Patient[]>(
+        "http://localhost:5001/api/patient/getAllPatient",
         body
       );
       return response.data;
@@ -34,8 +33,8 @@ export const useQueryPatients = (body: GetAllPatient) => {
 };
 export const useQuerySearchPatients = (body: SearchPatient) => {
   const query = useQuery(["searchPatients"], async () => {
-    const response = await axiosCustom.post<Patient[]>(
-      "/api/patient/search",
+    const response = await axios.post<Patient[]>(
+      "http://localhost:5001/api/patient/search",
       body
     );
     return response.data;
@@ -49,8 +48,8 @@ export const useQuerySearchPatients = (body: SearchPatient) => {
 
 export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
   const query = useQuery(["getPatientsByIds"], async () => {
-    const response = await axiosCustom.post<Patient[]>(
-      "/api/patient/getPatientsByIds",
+    const response = await axios.post<Patient[]>(
+      "http://localhost:5001/api/patient/getPatientsByIds",
       body
     );
     return response.data;
@@ -64,8 +63,8 @@ export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
 
 export const useQueryLinkedPatients = (user_id: string) => {
   const query = useQuery(["linkedPatient"], async () => {
-    const response = await axiosCustom.get<LinkPatient[]>(
-      `patient/getLinkedPatients/${user_id}`
+    const response = await axios.get<LinkPatient[]>(
+      `http://localhost:5001/api/patient/getLinkedPatients/${user_id}`
     );
     return response.data;
   });
@@ -78,8 +77,8 @@ export const useMutationLinkPatient = () => {
   const mutation = useMutation(
     ["linkPatient"],
     async (args: LinkPatient) => {
-      const response = await axiosCustom.post<LinkPatient>(
-        "patient/linkPatients",
+      const response = await axios.post<LinkPatient>(
+        "http://localhost:5001/api/patient/linkPatients",
         args
       );
 
@@ -102,7 +101,7 @@ export const useMutationUpdateLinkedPatients = () => {
   const mutation = useMutation(
     ["removeLinkedPatients"],
     async (args: RemoveLinkedPatients) => {
-      await axiosCustom.put<null>("patient", args);
+      await axios.put<null>("http://localhost:5001/patient", args);
     },
     {
       onSuccess: async () => {

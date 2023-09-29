@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useLocalStorage } from "usehooks-ts";
-import { axiosCustom } from "./axiosCustom";
 import { UserType, useAuthStore } from "./authStore";
 
 //control logging
@@ -21,7 +20,7 @@ function useAuth() {
   const bootstrapAsync = async () => {
     setIsLoading(true);
     try {
-      const res = await axiosCustom.get<UserType>(
+      const res = await axios.get<UserType>(
         "http://localhost:5001/api/auth/me"
       );
       if (res.data) {

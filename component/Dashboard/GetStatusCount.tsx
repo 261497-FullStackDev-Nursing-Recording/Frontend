@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { axiosCustom } from "../../services/axiosCustom";
 import { useQuery } from "@tanstack/react-query";
 import DonughnutChart from "../DonughnutChart";
+import axios from "axios";
 
 type PatientStatus = "STATUS_1" | "STATUS_2" | "STATUS_3" | "STATUS_4";
 
@@ -22,7 +22,7 @@ const StatusCount: React.FC = () => {
     isError,
   } = useQuery(["patients"], {
     queryFn: async () => {
-      const response = await axiosCustom.post(
+      const response = await axios.post(
         "http://localhost:5001/api/patient/getAllPatient",
         {}
       );
