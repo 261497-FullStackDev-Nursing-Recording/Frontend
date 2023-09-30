@@ -10,17 +10,18 @@ import Spinner from "../../component/spinner";
 import { useQueryPatients, useQueryLinkedPatients } from "../../query/patient";
 import PatientCard from "./PatientCard";
 import { Patient } from "../../types/patient";
-import App from "./authme";
+import { useCurrentNurseLogin } from "../../query/nurse";
 
 export default function Mypatient() {
-  const nurse_id: string = "0d510c1a-c972-43ae-968c-120abf8e5eee";
-
+	const nurse_id = useCurrentNurseLogin()?.id;
+	console.log(nurse_id);
+  
   const {
     data: linkedPatientsData,
     isLoading: isLinkedPatientsLoading,
     isError: isLinkedPatientsError,
     error: linkedPatientsError,
-  } = useQueryLinkedPatients(nurse_id);
+  } = useQueryLinkedPatients({});
 
   const {
     data: allPatientsData,
@@ -77,7 +78,6 @@ export default function Mypatient() {
   const handleInputChange = (event: any) => {
     setSearchQuery(event.target.value);
   };
-
   return (
     <div>
       {isLinkedPatientsError || isAllPatientsError ? (
