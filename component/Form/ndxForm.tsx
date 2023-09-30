@@ -1,7 +1,7 @@
 import React from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 type FormValues = {
@@ -23,14 +23,14 @@ export default function NDXForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      NDXdata: [{ type: "select", name: "", date:"" }],
+      NDXdata: [{ type: "select", name: "", date: "" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
     name: "NDXdata",
     control,
-   
+
   });
 
   const selectedTypes = useWatch({
@@ -42,51 +42,37 @@ export default function NDXForm() {
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const selectedType = e.target.value;
 
-    // Update the selected type for the specific item in the cart array
     setValue(`NDXdata.${index}.type`, selectedType as any); // Use type casting to resolve the error
   };
 
-  // Function to render the form fields based on the selected type
+
+  
   const renderFormFields = (selectedType: string, index: number) => {
     switch (selectedType) {
       case "item1":
         return (
-         
-          <><label>
+          <label>
             <select {...register(`NDXdata.${index}.name`)} className="sectiongap">
-            <option value="option1">แบบแผนการหายใจไม่มีประสิทธิภาพ</option>
-            <option value="option2">เสี่ยงต่อการเกิดท่อช่วยหายใจเลื่อนหลุด
-</option>
-            <option value="option3">มีภาวะไม่สมดุลสารน้ำและเกลือแร่</option>
-          </select>
-            </label>
-          </>
+              <option value="option1">แบบแผนการหายใจไม่มีประสิทธิภาพ</option>
+              <option value="option2">เสี่ยงต่อการเกิดท่อช่วยหายใจเลื่อนหลุด</option>
+              <option value="option3">มีภาวะไม่สมดุลสารน้ำและเกลือแร่</option>
+            </select>
+          </label>
         );
-        case "item2":
-          // Render form fields for item3
-          return (
-  
-            <>
-             <label>
-              <section className="sectiongap">
-            
-              <textarea className="textarearesize"
-                {...register(`NDXdata.${index}.text`)}
-              />
-  
+      case "item2":
+        // Render form fields for item3
+        return (
+          <label>
+            <section className="sectiongap">
+              <textarea className="textarearesize" {...register(`NDXdata.${index}.text`)} />
             </section>
-              </label>
-            
-            </>
-          );
-     
-
-
-        
+          </label>
+        );
       default:
         return null;
     }
   };
+
 
   return (
     <div>
@@ -96,7 +82,7 @@ export default function NDXForm() {
         })}
       >
         <h1 className="Headform">NDX ข้อวินิจฉัย</h1>
-       
+
         {fields.map((item, index) => (
           <div key={item.id} className="NDXformcontainer">
             <select
@@ -113,32 +99,32 @@ export default function NDXForm() {
             </button>
             <label>
               <section>
-            {renderFormFields(selectedTypes[index]?.type, index)}
-            
-            </section>
+                {renderFormFields(selectedTypes[index]?.type, index)}
+
+              </section>
             </label>
           </div>
         ))}
-      <div className="btncontainer">
-        <button
-          type="button"
-          onClick={() => {
-            if (selectedTypes.every((item) => item.type !== "select")) {
-              append({ type: "select", name: "", date: "" ,text: ""});
-            } else {
-              append({ type: "", name: "", date:"" , text: ""});
-            }
-          }}
-          className="addbutton"
-        >
-          {selectedTypes.every((item) => item.type !== "select")
-            ? "Add"
-            : "Add"}
-        </button>
-        <button type="submit" className="submitbtn">
-          Submit
-        </button>
-      </div>
+        <div className="btncontainer">
+          <button
+            type="button"
+            onClick={() => {
+              if (selectedTypes.every((item) => item.type !== "select")) {
+                append({ type: "select", name: "", date: "", text: "" });
+              } else {
+                append({ type: "", name: "", date: "", text: "" });
+              }
+            }}
+            className="addbutton"
+          >
+            {selectedTypes.every((item) => item.type !== "select")
+              ? "Add"
+              : "Add"}
+          </button>
+          <button type="submit" className="submitbtn">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 type FormValues = {
@@ -92,19 +92,19 @@ export default function SForm() {
                     placeholder={`กรอกค่า`}
                   />
                   <span className="gapInput"> mg%</span>
-                  {/* <input
-                    {...register(`Odata.${index}.date`)}
-                    placeholder={`วัน/เดือน/ปี`}
-                  /> */}
                 </section>
                 <div className="gapInput">เลือกวันที่</div>
-                <DatePicker
+                <input
+                  {...register(`Odata.${index}.date`)}
+                  placeholder={`วัน/เดือน/ปี`}
+                />
+                {/* <DatePicker
                   selected={new Date()} // Set the default value to today
                   onChange={(date) => {
   
                   }}
-                  dateFormat="dd/MM/yyyy" // Specify the date format
-                />
+                  dateFormat="dd/MM/yyyy" 
+                /> */}
               </label>
             </>
           );
@@ -120,19 +120,19 @@ export default function SForm() {
                       placeholder={`กรอกค่า`}
                     />
                     <span className="gapInput"> mmol/L</span>
-                    {/* <input
-                  {...register(`Odata.${index}.date`)}
-                  placeholder={`วัน/เดือน/ปี`}
-                /> */}
                   </section>
                   <div className="gapInput">เลือกวันที่</div>
-                  <DatePicker
+                    <input
+                  {...register(`Odata.${index}.date`)}
+                  placeholder={`วัน/เดือน/ปี`}
+                />
+                  {/* <DatePicker
                     selected={new Date()} // Set the default value to today
                     onChange={(date) => {
     
                     }}
                     dateFormat="dd/MM/yyyy" // Specify the date format
-                  />
+                  /> */}
                 </label>
               </>
     

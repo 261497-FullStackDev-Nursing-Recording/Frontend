@@ -29,10 +29,10 @@ export default function Inform() {
 					<Tabs.Tab value="second" color="pink">
 						S Field
 					</Tabs.Tab>
-					<Tabs.Tab value="third" color="grape">
+					<Tabs.Tab value="third">
 						O Field
 					</Tabs.Tab>
-					<Tabs.Tab value="fourth">I Field</Tabs.Tab>
+					<Tabs.Tab value="fourth" color="grape">I Field</Tabs.Tab>
 					<Tabs.Tab value="fifth" color="lime">
 						E Field
 					</Tabs.Tab>
