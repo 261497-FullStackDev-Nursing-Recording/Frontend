@@ -13,9 +13,9 @@ import { Patient } from "../../types/patient";
 import { useCurrentNurseLogin } from "../../query/nurse";
 
 export default function Mypatient() {
-	const nurse_id = useCurrentNurseLogin()?.id;
-	console.log(nurse_id);
-  
+  const nurse_id = useCurrentNurseLogin()?.id;
+  console.log(nurse_id);
+
   const {
     data: linkedPatientsData,
     isLoading: isLinkedPatientsLoading,
@@ -89,7 +89,7 @@ export default function Mypatient() {
           <Spinner />
         </div>
       ) : (
-        <div className="max-w-[414px] mx-auto">
+        <div className=" mx-auto">
           <div className="flex justify-center mt-[40px] mb-[10px] text-xl">
             <LocalHospitalRoundedIcon
               sx={{ fontSize: 40 }}
@@ -98,57 +98,36 @@ export default function Mypatient() {
           <h1 className="flex justify-center mb-[20px] text-black font-extrabold text-[25px]">
             My Patients
           </h1>
-          <div className="flex mx-[10%] mb-[20px] relative">
-            <input
-              className="w-full h-[40px] pl-[35px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px] outline-none"
-              id="identificationid"
-              type="search"
-              placeholder="Search by Name or ID"
-              value={searchQuery}
-              onChange={handleInputChange}
-            />
-            <SearchIcon
-              className="absolute"
-              style={{ color: "#000000" }}
-              sx={{ top: 8, left: 7 }}
-            />
+          <div className="mx-auto max-w-[640px]">
+            <div className="flex mx-[10%] mb-[20px] relative">
+              <input
+                className="w-full h-[40px] pl-[35px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px] outline-none"
+                id="identificationid"
+                type="search"
+                placeholder="Search by Name or ID"
+                value={searchQuery}
+                onChange={handleInputChange}
+              />
+              <SearchIcon
+                className="absolute"
+                style={{ color: "#000000" }}
+                sx={{ top: 8, left: 7 }}
+              />
+            </div>
+            <div className="flex justify-between px-[10%] mb-[20px]">
+              <p className="py-[3px] text-[17px]">
+                Total: {linkedPatientsData.length}
+              </p>
+              <Button
+                variant="outlined"
+                size="small"
+                color="error"
+                sx={{ marginLeft: "10px" }}
+              >
+                Clear All
+              </Button>
+            </div>
           </div>
-          <div className="flex justify-between px-[10%] mb-[20px]">
-            <p className="py-[3px] text-[17px]">
-              Total: {linkedPatientsData.length}
-            </p>
-            <Button
-              variant="outlined"
-              size="small"
-              color="error"
-              sx={{ marginLeft: "10px" }}
-            >
-              Clear All
-            </Button>
-            <Button variant="outlined" size="small">
-              Select
-            </Button>
-          </div>
-          {/* <div className="flex justify-between px-[10%] mb-[20px]">
-              <p className="py-[3px] text-[17px]">0 Selected</p>
-              <div>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{ marginLeft: "1px" }}
-                >
-                  Delete
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{ marginLeft: "1px" }}
-                >
-                  Done
-                </Button>
-              </div>
-            </div> */}
-
           <div className="mb-[70px]">
             <PatientCard apiData={apiData} />
           </div>

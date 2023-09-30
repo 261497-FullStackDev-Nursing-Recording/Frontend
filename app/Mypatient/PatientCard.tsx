@@ -49,23 +49,17 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   };
 
   return (
-    <div>
+    <div className="card_container">
       {apiData.map((item, index) => (
-        <Card
-          className="w-4/5 min-h-[90px] flex flex-row justify-between bg-[#b2f5ea] font-semibold mb-[15px] mx-[10%] py-[10px] pl-[30px] pr-[10px] rounded-[10px] text-[#319795]"
-          key={index}
-        >
-          <div className="my-auto" onClick={() => goToPatientHistory(item.id)}>
+        <Card className="patient-card" key={index}>
+          <div
+            className="my-auto patient-info"
+            onClick={() => goToPatientHistory(item.id)}
+          >
             <div>
               <div
-                style={{
-                  backgroundColor: getStatusColor(item.status),
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  display: "inline-block",
-                  marginRight: "10px",
-                }}
+                className="status-dot"
+                style={{ backgroundColor: getStatusColor(item.status) }}
               />
               <Link
                 href={{
@@ -83,7 +77,7 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
             <Button onClick={() => handleCardClick(item)} variant="text">
               <DeleteOutlineIcon
                 sx={{ fontSize: "30px" }}
-                style={{ color: "#319795" }}
+                className="add-button"
               />
             </Button>
           </div>
