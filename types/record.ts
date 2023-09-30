@@ -8,11 +8,11 @@ export const RecordSchema = z.object({
   patient_id: z.string(),
   bed_number: z.string(),
   ward: z.string(),
-  diseaseGroup: z.string(),
+  disease_group: z.string(),
   shift: z.string(),
   visit_number: z.string(),
-  created_at: z.string(),
-  modified_at: z.string(),
+  created_at: z.string().datetime(),
+  modified_at: z.string().datetime(),
 });
 
 export const CreateRecordSchema = z.object({
@@ -21,12 +21,13 @@ export const CreateRecordSchema = z.object({
   patient_id: z.string(),
   bed_number: z.string(),
   ward: z.string(),
-  diseaseGroup: z.string(),
+  disease_group: z.string(),
+
   shift: z.string(),
   visit_number: z.string(),
   field: z.array(CreateFieldSchema),
-  created_at: z.string(),
-  modified_at: z.string(),
+  created_at: z.string().datetime(),
+  modified_at: z.string().datetime(),
 });
 
 export const SearchRecordSchema = z.object({
@@ -34,18 +35,17 @@ export const SearchRecordSchema = z.object({
   patient_id: z.string().optional(),
   bed_number: z.string().optional(),
   ward: z.string().optional(),
-  diseaseGroup: z.string().optional(),
+  disease_group: z.string().optional(),
   shift: SHIFT.optional(),
   visit_number: z.string().optional(),
   fromDate: z.string().optional(),
-  toDate: z.string().optional(),
   includeFields: z.boolean().optional(),
 });
 
 export const UpdateRecordSchema = z.object({
   bed_number: z.number(),
   ward: z.string(),
-  diseaseGroup: z.string(),
+  disease_group: z.string(),
   shift: SHIFT,
   visit_number: z.string(),
 });

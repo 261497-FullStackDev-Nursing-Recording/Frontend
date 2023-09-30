@@ -11,8 +11,8 @@ export const FieldSchema = z.object({
   field_post_label: z.string().optional(),
   parents: z.string(),
   children: z.string(),
-  created_at: z.string(),
-  modified_at: z.string(),
+  created_at: z.string().datetime(),
+  modified_at: z.string().datetime(),
 });
 
 export const CreateFieldSchema = z.object({

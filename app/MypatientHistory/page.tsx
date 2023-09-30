@@ -26,7 +26,7 @@ interface Record {
   patient_id: string;
   bed_number: string;
   ward: string;
-  diseaseGroup: string;
+  disease_group: string;
   shift: string;
   visit_number: string;
   created_at: string;
@@ -62,7 +62,7 @@ export default function PatientHistory() {
   const records = recordData.map((record) => {
     return (
       <div className="box">
-        กลุ่มโรค: {record.diseaseGroup}
+        กลุ่มโรค: {record.disease_group}
         <div />
         เตียงที่: {record.bed_number}
         <div />
