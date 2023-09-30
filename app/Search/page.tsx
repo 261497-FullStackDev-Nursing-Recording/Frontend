@@ -79,7 +79,7 @@ export default function Searchpage() {
   };
 
   return (
-    <div className="max-w-[414px] mx-auto">
+    <div className="max-w-[80%] mx-auto">
       <div className="flex justify-center mt-[50px]">
         <PersonSearchRoundedIcon sx={{ fontSize: 40 }} />
       </div>
