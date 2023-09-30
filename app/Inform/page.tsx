@@ -7,49 +7,59 @@ import IForm from "../../component/Form/iForm";
 import OForm from "../../component/Form/oForm";
 import NDXForm from "../../component/Form/ndxForm";
 import "./styles.css";
-import { Tabs } from '@mantine/core';
+import { Tabs } from "@mantine/core";
+import { useCurrentNurseLogin } from "../../query/nurse";
 export default function Inform() {
-  return (
-    <div className="inform-container">
-      <div className="patientheaddata">
-        <div className="top">Name</div>
-        <div className="Name">Name</div>
-        <div className="top">Identification ID</div>
-        <div className="ID">ID</div>
-      </div>
-      <Tabs defaultValue="first" variant="pills">
-      <Tabs.List style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Tabs.Tab value="first" color="teal">NDX Field</Tabs.Tab>
-        <Tabs.Tab value="second" color="pink">S Field</Tabs.Tab>
-        <Tabs.Tab value="third" color="grape">O Field</Tabs.Tab>
-        <Tabs.Tab value="fourth" >I Field</Tabs.Tab>
-        <Tabs.Tab value="fifth" color="lime">E Field</Tabs.Tab>
-      </Tabs.List>
+	const user = useCurrentNurseLogin()?.id;
+	console.log(user);
 
-      <Tabs.Panel value="first" pt="xs">
-        <NDXForm/>
-      </Tabs.Panel>
+	return (
+		<div className="inform-container">
+			<div className="patientheaddata">
+				<div className="top">Name</div>
+				<div className="Name">Name</div>
+				<div className="top">Identification ID</div>
+				<div className="ID">ID</div>
+			</div>
+			<Tabs defaultValue="first" variant="pills">
+				<Tabs.List style={{ display: "flex", justifyContent: "space-between" }}>
+					<Tabs.Tab value="first" color="teal">
+						NDX Field
+					</Tabs.Tab>
+					<Tabs.Tab value="second" color="pink">
+						S Field
+					</Tabs.Tab>
+					<Tabs.Tab value="third" color="grape">
+						O Field
+					</Tabs.Tab>
+					<Tabs.Tab value="fourth">I Field</Tabs.Tab>
+					<Tabs.Tab value="fifth" color="lime">
+						E Field
+					</Tabs.Tab>
+				</Tabs.List>
 
-      <Tabs.Panel value="second" pt="xs">
-        <SForm/>
-      </Tabs.Panel>
+				<Tabs.Panel value="first" pt="xs">
+					<NDXForm />
+				</Tabs.Panel>
 
-      <Tabs.Panel value="third" pt="xs">
-        <OForm/>
-      </Tabs.Panel>
+				<Tabs.Panel value="second" pt="xs">
+					<SForm />
+				</Tabs.Panel>
 
-      <Tabs.Panel value="fourth" pt="xs">
-        <IForm/>
-      </Tabs.Panel>
+				<Tabs.Panel value="third" pt="xs">
+					<OForm />
+				</Tabs.Panel>
 
-      <Tabs.Panel value="fifth" pt="xs">
-        <EForm/>
-      </Tabs.Panel>
-    </Tabs>
+				<Tabs.Panel value="fourth" pt="xs">
+					<IForm />
+				</Tabs.Panel>
 
-    <Navbar />
-  </div>
-    
-  );
+				<Tabs.Panel value="fifth" pt="xs">
+					<EForm />
+				</Tabs.Panel>
+			</Tabs>
+
+			<Navbar />
+		</div>
+	);
 }
-

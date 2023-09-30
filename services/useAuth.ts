@@ -7,67 +7,67 @@ const debug = process.env.NEXT_PUBLIC_DEBUG_AUTH === "true";
 
 //get state from authStore.ts created by zustand
 function useAuth() {
-  const [accessToken, setAccessToken] = useLocalStorage("access_token", "");
-  const [refreshToken, setRefreshToken] = useLocalStorage("refresh_token", "");
-  const [user, setUser, isLoading, setIsLoading] = useAuthStore((state) => [
-    state.user,
-    state.setUser,
-    state.isLoading,
-    state.setIsLoading,
-  ]);
+	const [accessToken, setAccessToken] = useLocalStorage("access_token", "");
+	const [refreshToken, setRefreshToken] = useLocalStorage("refresh_token", "");
+	const [user, setUser, isLoading, setIsLoading] = useAuthStore((state) => [
+		state.user,
+		state.setUser,
+		state.isLoading,
+		state.setIsLoading,
+	]);
 
-  //set user if isLoading is true
-  const bootstrapAsync = async () => {
-    setIsLoading(true);
-    try {
-      const res = await axios.get<UserType>(
-        "http://localhost:5001/api/auth/me"
-      );
-      if (res.data) {
-        setUser(res.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  };
+	//set user if isLoading is true
+	const bootstrapAsync = async () => {
+		setIsLoading(true);
+		try {
+			const res = await axios.get<UserType>(
+				"http://localhost:5001/api/auth/me"
+			);
+			if (res.data) {
+				setUser(res.data);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+		setIsLoading(false);
+	};
 
-  // useEffect(() => {
-  // 	if (!user && accessToken) {
-  // 		bootstrapAsync();
-  // 	}
-  // }, []);
+	// useEffect(() => {
+	// 	if (!user && accessToken) {
+	// 		bootstrapAsync();
+	// 	}
+	// }, []);
 
-  //signin use the signin from auth/index.ts from backend
-  async function signIn(username: string, password: string) {
-    setIsLoading(true);
-    const res = await axios.post<{
-      accessToken: string;
-      refreshToken: string;
-      user: UserType;
-    }>(
-      "http://localhost:5001/api/auth/signin",
-      {
-        username,
-        password,
-      },
-      { withCredentials: true }
-    );
+	//signin use the signin from auth/index.ts from backend
+	async function signIn(username: string, password: string) {
+		setIsLoading(true);
+		const res = await axios.post<{
+			// accessToken: string;
+			// refreshToken: string;
+			user: UserType;
+		}>(
+			"http://localhost:5001/api/auth/signin",
+			{
+				username,
+				password,
+			},
+			{ withCredentials: true }
+		);
 
-    if (debug) console.log(res);
-    setAccessToken(res.data.accessToken);
-    setRefreshToken(res.data.refreshToken);
-    setUser(res.data.user);
-    setIsLoading(false);
-  }
+		// if (debug) console.log(res);
+		// setAccessToken(res.data.accessToken);
+		// setRefreshToken(res.data.refreshToken);
+		// setUser(res.data.user);
+		// setIsLoading(false);
+	}
 
-  async function signOut() {
-    setAccessToken("");
-    setRefreshToken("");
-    setUser(null);
-  }
+	async function signOut() {
+		setAccessToken("");
+		setRefreshToken("");
+		setUser(null);
+	}
 
-  return { signIn, user, isLoading, signOut };
+	return { signIn, user, isLoading, signOut };
 }
 
 export default useAuth;
