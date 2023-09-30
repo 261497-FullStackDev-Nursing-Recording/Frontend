@@ -3,6 +3,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { useCurrentNurseLogin } from "../../query/nurse";
 
 const queryClient = new QueryClient();
 
@@ -13,14 +14,14 @@ export default function App() {
     </QueryClientProvider>
   );
 }
-
-const user_id = "498bffa2-97ee-491c-a417-8d44a49e5660";
+const nurse_id = useCurrentNurseLogin()?.id;
+console.log(nurse_id);
 
 function Example() {
   const { isLoading, error, data } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5001/api/patient/${user_id}`).then((res) =>
+      fetch(`http://localhost:5001/api/patient/${nurse_id}`).then((res) =>
         res.json()
       ),
   });
