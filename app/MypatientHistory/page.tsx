@@ -24,7 +24,7 @@ interface Record {
   id: string;
   user_id: string;
   patient_id: string;
-  bed_number: string;
+  bed_number: number;
   ward: string;
   disease_group: string;
   shift: string;
