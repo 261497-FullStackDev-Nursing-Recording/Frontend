@@ -4,6 +4,7 @@ import { Modal, Button, Group, Text, Center } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
 import { Patient } from "../../types/patient";
 import Link from "next/link";
+import "./styles.css";
 
 interface SearchPatientProps {
   apiData: Patient[];
@@ -44,56 +45,40 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   };
 
   return (
-    <div>
+    <div className="card_container">
       {apiData.map((item, index) => (
         <Card
-          className="w-4/5 min-h-[90px] flex flex-row justify-between bg-[#BFDBFE] font-semibold mb-[15px] mx-[10%] pl-[30px] pr-[0px] rounded-[10px] text-[#2563EB]"
-          key={index}
-        >
-          <div className="my-auto" onClick={() => goToPatientHistory(item.id)}>
-            <div>
-              <div
-                style={{
-                  backgroundColor: getStatusColor(item.status),
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  display: "inline-block",
-                  marginRight: "10px",
-                }}
-              />
-              <Link
-                href={{
-                  pathname: `/PatientHistory`,
-                  query: { id: item.id },
-                }}
-              >
-                {item.f_name} {item.l_name}
-                <div />
-                {item.identification_id}
-              </Link>
-            </div>
+        className="patient-card" 
+        key={index}
+      >
+        <div className="my-auto patient-info" onClick={() => goToPatientHistory(item.id)}>
+          <div>
+            <div className="status-dot" style={{ backgroundColor: getStatusColor(item.status) }} />
+            <Link
+              href={{
+                pathname: `/PatientHistory`,
+                query: { id: item.id },
+              }}
+            >
+              {item.f_name} {item.l_name}
+              <div />
+              {item.identification_id}
+            </Link>
           </div>
-          <div className="my-auto">
-            <Button onClick={() => handleCardClick(item)} variant="text">
-              <AddIcon sx={{ fontSize: "45px" }} style={{ color: "#2563EB" }} />
-            </Button>
-          </div>
-        </Card>
+        </div>
+        <div className="my-auto">
+          <Button onClick={() => handleCardClick(item)} variant="text">
+            <AddIcon sx={{ fontSize: "45px" }} className="add-button" />
+          </Button>
+        </div>
+      </Card>
+      
       ))}
       <Modal
         opened={opened}
         onClose={closeModal}
         size="sm"
         title="ข้อมูลผู้ป่วย"
-        // yOffset="200px"
-
-        // style={{
-        //   display: 'flex',
-        //   alignItems: 'center',
-        //   justifyContent: 'center',
-        //   minHeight: '100vh', // Set the minimum height to 100% of the viewport height
-        // }}
       >
         {selectedCard && (
           <div>

@@ -169,4 +169,94 @@ export default function Searchpage() {
 			<Navbar />
 		</div>
 	);
+	return (
+		<div className="max-w-[80%] mx-auto">
+			<div className="flex justify-center mt-[50px]">
+				<PersonSearchRoundedIcon sx={{ fontSize: 40 }} />
+			</div>
+			<div className="mb-[40px]">
+				<div className="text-black font-extrabold text-[20px] flex mt-[20px] mb-[5px] pl-[10%]">
+					AN
+				</div>
+				<div className="flex mx-[10%] relative">
+					<input
+						className="w-full h-[40px] pl-[10px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center rounded-tr-none rounded-br-none outline-none"
+						id="identificationid"
+						type="search"
+						placeholder="ID"
+						onChange={(event) => setValueID(event.currentTarget.value)}
+					/>
+					<Button
+						variant="contained"
+						style={{ backgroundColor: "#BFDBFE" }}
+						sx={{
+							height: "40px",
+							borderRadius: "5px",
+							borderTopLeftRadius: 0,
+							borderBottomLeftRadius: 0,
+							boxShadow: 0,
+						}}
+						onClick={handleSearchID}
+					>
+						<SearchIcon style={{ color: "#2563EB" }} />
+					</Button>
+				</div>
+				<div className="text-black font-extrabold text-[20px] flex mt-[20px] mb-[5px] pl-[10%]">
+					BED No.
+				</div>
+				<div className="flex mx-[10%] relative">
+					<input
+						className="w-full h-[40px] pl-[10px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center rounded-tr-none rounded-br-none outline-none"
+						id="identificationid"
+						type="search"
+						placeholder="ID"
+						onChange={(event) => setValueID(event.currentTarget.value)}
+					/>
+					<Button
+						variant="contained"
+						style={{ backgroundColor: "#BFDBFE" }}
+						sx={{
+							height: "40px",
+							borderRadius: "5px",
+							borderTopLeftRadius: 0,
+							borderBottomLeftRadius: 0,
+							boxShadow: 0,
+						}}
+						onClick={handleSearchID}
+					>
+						<SearchIcon style={{ color: "#2563EB" }} />
+					</Button>
+				</div>
+				<div className="text-black font-extrabold text-[20px] flex mt-[20px] mb-[5px] pl-[10%]">
+					Name
+				</div>
+				<div className="flex mx-[10%] relative">
+					<input
+						className="w-full h-[40px] pl-[10px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center rounded-tr-none rounded-br-none outline-none"
+						id="name"
+						type="search"
+						placeholder="Name"
+						onChange={(event) => setValueName(event.currentTarget.value)}
+					/>
+					<Button
+						variant="contained"
+						style={{ backgroundColor: "#BFDBFE" }}
+						sx={{
+							height: "40px",
+							borderRadius: "5px",
+							borderTopLeftRadius: 0,
+							borderBottomLeftRadius: 0,
+							boxShadow: 0,
+						}}
+						onClick={handleSearchName}
+					>
+						<SearchIcon style={{ color: "#2563EB" }} />
+					</Button>
+				</div>
+			</div>
+			<SearchPatient apiData={apiData} />
+			<div style={{ marginBottom: "80px" }} />
+			<Navbar />
+		</div>
+	);
 }
