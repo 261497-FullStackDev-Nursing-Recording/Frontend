@@ -1,8 +1,13 @@
 import React from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
-// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { Select } from '@mantine/core';
 
 type FormValues = {
   NDXdata: {
@@ -38,28 +43,34 @@ export default function NDXForm() {
     control,
   });
 
-  // Function to handle the selection change in the dropdown
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const selectedType = e.target.value;
 
     setValue(`NDXdata.${index}.type`, selectedType as any); // Use type casting to resolve the error
   };
-
-
   
   const renderFormFields = (selectedType: string, index: number) => {
     switch (selectedType) {
-      case "item1":
+      case 'item1':
         return (
           <label>
-            <select {...register(`NDXdata.${index}.name`)} className="sectiongap">
-              <option value="option1">แบบแผนการหายใจไม่มีประสิทธิภาพ</option>
-              <option value="option2">เสี่ยงต่อการเกิดท่อช่วยหายใจเลื่อนหลุด</option>
-              <option value="option3">มีภาวะไม่สมดุลสารน้ำและเกลือแร่</option>
-            </select>
+            <Select
+              {...register(`NDXdata.${index}.name`)}
+              className="sectiongap"
+              data={[
+                'แบบแผนการหายใจไม่มีประสิทธิภาพ',
+                'เสี่ยงต่อการเกิดท่อช่วยหายใจเลื่อนหลุด',
+                'มีภาวะไม่สมดุลสารน้ำและเกลือแร่',
+              ]}
+              placeholder="Pick value"
+              onChange={(value) => {
+                // Handle the value change here
+                setValue(`NDXdata.${index}.name`, value || ''); // Ensure value is not null
+              }}
+            />
           </label>
         );
-      case "item2":
+      case 'item2':
         // Render form fields for item3
         return (
           <label>
@@ -72,7 +83,6 @@ export default function NDXForm() {
         return null;
     }
   };
-
 
   return (
     <div>
@@ -100,7 +110,6 @@ export default function NDXForm() {
             <label>
               <section>
                 {renderFormFields(selectedTypes[index]?.type, index)}
-
               </section>
             </label>
           </div>
