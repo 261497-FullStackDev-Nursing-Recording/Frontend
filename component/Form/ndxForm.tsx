@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,7 +13,6 @@ type FormValues = {
   NDXdata: {
     type: string;
     name: string;
-    date: string;
     text: string;
 
   }[];
@@ -28,14 +27,13 @@ export default function NDXForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      NDXdata: [{ type: "select", name: "", date: "" }],
+      NDXdata: [{ type: "select", name: "" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
     name: "NDXdata",
     control,
-
   });
 
   const selectedTypes = useWatch({
@@ -45,13 +43,40 @@ export default function NDXForm() {
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const selectedType = e.target.value;
-
-    setValue(`NDXdata.${index}.type`, selectedType as any); // Use type casting to resolve the error
+    setValue(`NDXdata.${index}.type`, selectedType as any);
+    setIsTypeSelected((prevIsTypeSelected) => {
+      const updatedIsTypeSelected = [...prevIsTypeSelected];
+      updatedIsTypeSelected[index] = selectedType !== "select";
+      return updatedIsTypeSelected;
+    });
   };
+
+  const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
   
+  const handleDelete = (index: number) => {
+    remove(index);
+
+    setIsTypeSelected((prevIsTypeSelected) => {
+      const updatedIsTypeSelected = [...prevIsTypeSelected];
+      updatedIsTypeSelected.splice(index, 1);
+      return updatedIsTypeSelected;
+    });
+  };
+
+  const handleAdd = () => {
+    // Initialize the state for the new field
+    setIsTypeSelected((prevIsTypeSelected) => [...prevIsTypeSelected, false]);
+
+    if (selectedTypes.every((item) => item.type !== "select")) {
+      append({ type: "select", name: "", text: "" });
+    } else {
+      append({ type: "", name: "", text: "" });
+    }
+  };
+
   const renderFormFields = (selectedType: string, index: number) => {
     switch (selectedType) {
-      case 'item1':
+      case 'ข้อวินิจฉัย':
         return (
           <label>
             <Select
@@ -62,16 +87,14 @@ export default function NDXForm() {
                 'เสี่ยงต่อการเกิดท่อช่วยหายใจเลื่อนหลุด',
                 'มีภาวะไม่สมดุลสารน้ำและเกลือแร่',
               ]}
-              placeholder="Pick value"
+              placeholder="เลือกข้อวินิจฉัย"
               onChange={(value) => {
-                // Handle the value change here
-                setValue(`NDXdata.${index}.name`, value || ''); // Ensure value is not null
+                setValue(`NDXdata.${index}.name`, value || '');
               }}
             />
           </label>
         );
-      case 'item2':
-        // Render form fields for item3
+      case 'ข้อมูลสนับสนุน':
         return (
           <label>
             <section className="sectiongap">
@@ -99,12 +122,13 @@ export default function NDXForm() {
               value={item.type}
               onChange={(e) => handleTypeChange(e, index)}
               className="select"
+              disabled={isTypeSelected[index]}
             >
               <option value="select">ตัวเลือก</option>
-              <option value="item1">ข้อวินิจฉัย</option>
-              <option value="item2">ข้อมูลสนับสนุน</option>
+              <option value="ข้อวินิจฉัย">ข้อวินิจฉัย</option>
+              <option value="ข้อมูลสนับสนุน">ข้อมูลสนับสนุน</option>
             </select>
-            <button type="button" onClick={() => remove(index)} className="deletebutton">
+            <button type="button" onClick={() => handleDelete(index)} className="deletebutton">
               Delete
             </button>
             <label>
@@ -117,13 +141,7 @@ export default function NDXForm() {
         <div className="btncontainer">
           <button
             type="button"
-            onClick={() => {
-              if (selectedTypes.every((item) => item.type !== "select")) {
-                append({ type: "select", name: "", date: "", text: "" });
-              } else {
-                append({ type: "", name: "", date: "", text: "" });
-              }
-            }}
+            onClick={handleAdd}
             className="addbutton"
           >
             {selectedTypes.every((item) => item.type !== "select")
