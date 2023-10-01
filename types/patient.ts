@@ -34,7 +34,7 @@ export const GetAllPatientSchema = z.object({
 
 export const SearchPatientSchema = z.object({
   an: z.string().optional(),
-  bed_number: z.string().optional(),
+  bed_number: z.number().optional(),
   name: z.string().optional(),
 });
 
