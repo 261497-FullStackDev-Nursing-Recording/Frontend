@@ -9,12 +9,14 @@ import NDXForm from "../../component/Form/ndxForm";
 import "./styles.css";
 import { Tabs } from "@mantine/core";
 import { useCurrentNurseLogin } from "../../query/nurse";
+import Backbtn from "../../component/backBtn";
 export default function Inform() {
 	const user = useCurrentNurseLogin()?.id;
 	console.log(user);
 
 	return (
 		<div className="inform-container">
+			<Backbtn/>
 			<div className="patientheaddata">
 				<div className="top">Name</div>
 				<div className="Name">Name</div>

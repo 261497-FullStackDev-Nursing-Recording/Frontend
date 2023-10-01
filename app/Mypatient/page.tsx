@@ -11,6 +11,7 @@ import { useQueryPatients, useQueryLinkedPatients } from "../../query/patient";
 import PatientCard from "./PatientCard";
 import { Patient } from "../../types/patient";
 import { useCurrentNurseLogin } from "../../query/nurse";
+import Backbtn from "../../component/backBtn";
 
 export default function Mypatient() {
   const nurse_id = useCurrentNurseLogin()?.id;
@@ -79,7 +80,9 @@ export default function Mypatient() {
     setSearchQuery(event.target.value);
   };
   return (
+    
     <div>
+      <Backbtn/>
       {isLinkedPatientsError || isAllPatientsError ? (
         <div className="flex justify-center items-center text-center min-h-screen">
           <p className="text-red-500">Error</p>

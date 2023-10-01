@@ -6,6 +6,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../../component/Navbarbottom";
 import { useSearchParams } from "next/navigation";
+import Backbtn from "../../component/backBtn";
 // import { useRouter } from "next/router";
 
 interface Patient {
@@ -99,6 +100,7 @@ export default function PatientHistory() {
   console.log(recordData);
   return (
     <div>
+       <Backbtn/>
       <div className="Container">
         <div>
           <LocalHospitalRoundedIcon className="Icon" />

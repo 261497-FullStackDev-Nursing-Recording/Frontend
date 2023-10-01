@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import Button from "@mui/material/Button";
 // import { useRouter } from "next/router";
 import Link from "next/link";
+import Backbtn from "../../component/backBtn";
 
 interface Patient {
   id: string;
@@ -99,6 +100,7 @@ export default function PatientHistory() {
   // console.log(patientData);
   return (
     <div>
+      <Backbtn/>
       <div className="Container">
         <div>
           <LocalHospitalRoundedIcon className="Icon" />

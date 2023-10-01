@@ -1,0 +1,29 @@
+/* components/BackButton.module.css */
+@import url("https://fonts.googleapis.com/css2?family=Kanit&family=Overpass:wght@800&display=swap");
+* {
+  font-family: "Kanit", sans-serif;
+}
+
+.backButton {
+    
+    color: #000000;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
+  .backButton:hover {
+    color: #2a91ff;
+  }
+
+
+
+  .backbtnlayout{
+
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }

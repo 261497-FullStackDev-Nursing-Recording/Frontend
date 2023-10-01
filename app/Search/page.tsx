@@ -10,7 +10,7 @@ import Navbar from "../../component/Navbarbottom";
 import { useQueryPatients, useQuerySearchPatients } from "../../query/patient";
 import { Patient, SearchPatient } from "../../types/patient";
 import PatientCard from "./SearchPatient";
-
+import Backbtn from "../../component/backBtn";
 export default function Searchpage() {
   // const [valueID, setValueID] = useDebouncedState("", 500, { leading: true });
   // const [valueName, setValueName] = useDebouncedState("", 500, {
@@ -96,7 +96,9 @@ export default function Searchpage() {
   };
 
   return (
+
     <div className="mx-auto">
+      <Backbtn/>
       <div className="flex justify-center mt-[50px]">
         <PersonSearchRoundedIcon sx={{ fontSize: 40 }} />
       </div>
