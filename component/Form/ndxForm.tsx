@@ -111,7 +111,7 @@ export default function NDXForm() {
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data);
+          console.log("Submit data", data.NDXdata);
         })}
       >
         <h1 className="Headform">NDX ข้อวินิจฉัย</h1>
