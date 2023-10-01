@@ -100,10 +100,11 @@
 .textarearesize{
   width: 300px;
  padding: 6px;
+ border-radius: 7px ;
 }
 
 
 input {
 padding: 6px;
-
+border-radius: 7px ;
 }
