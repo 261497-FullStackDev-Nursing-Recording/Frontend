@@ -1,12 +1,18 @@
-import React from "react";
+import React,{useState} from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
+import "react-datepicker/dist/react-datepicker.css";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { Select } from '@mantine/core';
 
 type FormValues = {
   Idata: {
     type: string;
     name: string;
-    date: string;
     text: string;
 
   }[];
@@ -21,14 +27,13 @@ export default function IForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Idata: [{ type: "select", name: "", date:"" }],
+      Idata: [{ type: "select", name: "" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
     name: "Idata",
     control,
-   
   });
 
   const selectedTypes = useWatch({
@@ -36,66 +41,80 @@ export default function IForm() {
     control,
   });
 
-  // Function to handle the selection change in the dropdown
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const selectedType = e.target.value;
-
-    // Update the selected type for the specific item in the cart array
-    setValue(`Idata.${index}.type`, selectedType as any); // Use type casting to resolve the error
+    setValue(`Idata.${index}.type`, selectedType as any);
+    setIsTypeSelected((prevIsTypeSelected) => {
+      const updatedIsTypeSelected = [...prevIsTypeSelected];
+      updatedIsTypeSelected[index] = selectedType !== "select";
+      return updatedIsTypeSelected;
+    });
   };
 
-  // Function to render the form fields based on the selected type
+  const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
+  
+  const handleDelete = (index: number) => {
+    remove(index);
+
+    setIsTypeSelected((prevIsTypeSelected) => {
+      const updatedIsTypeSelected = [...prevIsTypeSelected];
+      updatedIsTypeSelected.splice(index, 1);
+      return updatedIsTypeSelected;
+    });
+  };
+
+  const handleAdd = () => {
+    // Initialize the state for the new field
+    setIsTypeSelected((prevIsTypeSelected) => [...prevIsTypeSelected, false]);
+
+    if (selectedTypes.every((item) => item.type !== "select")) {
+      append({ type: "select", name: "", text: "" });
+    } else {
+      append({ type: "", name: "", text: "" });
+    }
+  };
+
   const renderFormFields = (selectedType: string, index: number) => {
     switch (selectedType) {
-      case "item1":
+      case 'ติดตามระดับน้ำตาลDTX':
         return (
          
-          <><label>
+            <label>
             <section className="sectiongap">
-            <div className="gapInput">ติดตามระดับน้ำตาลในเลือดโดยการเจาะ DTX</div>
-            <textarea 
+           
+            <textarea className="textarearesize"
               {...register(`Idata.${index}.text`)}
-              placeholder={`กรอกข้อมูล`}
+              placeholder={`กรอกข้อมูลการติดตามระดับน้ำตาลDTX`}
             />
            </section>
             </label>
-          </>
+          
         );
 
-        case "item2":
-        return (
-        
-          <><label>
+        case 'การดูแลให้รับยา':
+          return (
+           
+            <label>
             <section className="sectiongap">
-            <div className="gapInput">ดูแลให้รับยา</div>
+           
             <input
               {...register(`Idata.${index}.text`)}
-              placeholder={`กรอกข้อมูล`}
+              placeholder={`กรอกข้อมูลการดูแลรับยา`}
             />
            </section>
             </label>
-          </>
-        );
+          );
 
 
-        case "item3":
+
+      case 'ข้อมูลสนับสนุน':
         return (
-        
-          <><label>
+          <label>
             <section className="sectiongap">
-            
-            <textarea className="gapInput"
-              {...register(`Idata.${index}.text`)}
-              placeholder={`กรอกข้อมูล`}
-            />
-           </section>
-            </label>
-          </>
+              <textarea className="textarearesize" {...register(`Idata.${index}.text`)} placeholder="กรอกข้อมูลสนับสนุน" />
+            </section>
+          </label>
         );
-     
-
-
-       
       default:
         return null;
     }
@@ -109,53 +128,44 @@ export default function IForm() {
         })}
       >
         <h1 className="Headform">I การปฏิบัติการพยาบาล</h1>
-       
+
         {fields.map((item, index) => (
           <div key={item.id} className="Iformcontainer">
             <select
               value={item.type}
               onChange={(e) => handleTypeChange(e, index)}
               className="select"
+              disabled={isTypeSelected[index]}
             >
               <option value="select">ตัวเลือก</option>
-              <option value="item1">ติดตามระดับน้ำตาลDTX</option>
-              <option value="item2">ดูแลให้รับยา</option>
-              <option value="item3">ข้อมูลสนับสนุน</option>
-              
+              <option value="ติดตามระดับน้ำตาลDTX">ติดตามระดับน้ำตาลDTX</option>
+              <option value="การดูแลให้รับยา">การดูแลให้รับยา</option>
+              <option value="ข้อมูลสนับสนุน">ข้อมูลสนับสนุน</option>
             </select>
-            <button type="button" onClick={() => remove(index)} className="deletebutton">
+            <button type="button" onClick={() => handleDelete(index)} className="deletebutton">
               Delete
             </button>
             <label>
               <section>
-            {renderFormFields(selectedTypes[index]?.type, index)}
-            
-            </section>
+                {renderFormFields(selectedTypes[index]?.type, index)}
+              </section>
             </label>
           </div>
         ))}
-
-<div className="btncontainer">
-        <button
-          type="button"
-          onClick={() => {
-            // Check the selected option to determine whether to add a dropdown or a form
-            if (selectedTypes.every((item) => item.type !== "select")) {
-              append({ type: "select", name: "", date: "" ,text: ""});
-            } else {
-              append({ type: "", name: "", date:"" , text: ""});
-            }
-          }}
-          className="addbutton"
-        >
-          {selectedTypes.every((item) => item.type !== "select")
-            ? "Add"
-            : "Add"}
-        </button>
-        <button type="submit" className="submitbtn">
-          Submit
-        </button>
-      </div>
+        <div className="btncontainer">
+          <button
+            type="button"
+            onClick={handleAdd}
+            className="addbutton"
+          >
+            {selectedTypes.every((item) => item.type !== "select")
+              ? "Add"
+              : "Add"}
+          </button>
+          <button type="submit" className="submitbtn">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

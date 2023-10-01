@@ -1,16 +1,20 @@
-import React from "react";
+import React,{useState} from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
-// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { Select } from '@mantine/core';
 
 type FormValues = {
   Sdata: {
     type: string;
     name: string;
-    date: string;
     text: string;
-
+    date: string;
   }[];
 };
 
@@ -23,14 +27,13 @@ export default function SForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Sdata: [{ type: "select", name: "", date:"" }],
+      Sdata: [{ type: "select", name: "" , date: ""}],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
     name: "Sdata",
     control,
-   
   });
 
   const selectedTypes = useWatch({
@@ -38,53 +41,65 @@ export default function SForm() {
     control,
   });
 
-  // Function to handle the selection change in the dropdown
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const selectedType = e.target.value;
-
-    // Update the selected type for the specific item in the cart array
-    setValue(`Sdata.${index}.type`, selectedType as any); // Use type casting to resolve the error
+    setValue(`Sdata.${index}.type`, selectedType as any);
+    setIsTypeSelected((prevIsTypeSelected) => {
+      const updatedIsTypeSelected = [...prevIsTypeSelected];
+      updatedIsTypeSelected[index] = selectedType !== "select";
+      return updatedIsTypeSelected;
+    });
   };
 
-  // Function to render the form fields based on the selected type
+  const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
+  
+  const handleDelete = (index: number) => {
+    remove(index);
+
+    setIsTypeSelected((prevIsTypeSelected) => {
+      const updatedIsTypeSelected = [...prevIsTypeSelected];
+      updatedIsTypeSelected.splice(index, 1);
+      return updatedIsTypeSelected;
+    });
+  };
+
+  const handleAdd = () => {
+    // Initialize the state for the new field
+    setIsTypeSelected((prevIsTypeSelected) => [...prevIsTypeSelected, false]);
+
+    if (selectedTypes.every((item) => item.type !== "select")) {
+      append({ type: "select", name: "", text: "",date: "" });
+    } else {
+      append({ type: "", name: "", text: "" ,date: ""});
+    }
+  };
+
   const renderFormFields = (selectedType: string, index: number) => {
     switch (selectedType) {
-      case "item1":
-          return (
-  
-            <><label>
-              <section className="sectiongap">
-                <div className="gapInput">โรคประจำตัว</div>
-                <input
-                  {...register(`Sdata.${index}.name`)}
-                  placeholder={`กรอกโรคประจำตัว`}
-                />
-              </section>
-            </label>
-            </>
-          );
-
-      case "item2":
+      case 'โรคประจำตัว':
         return (
-         
-          <><label>
-            <section className="sectiongap">
+          
+          <label>
+          <section className="sectiongap">
+            <input  {...register(`Sdata.${index}.name`) } placeholder={`กรอกโรคประจำตัว`}/>
             
-            <textarea className="textarearesize"
-              {...register(`Sdata.${index}.text`)}
-              placeholder={`กรอกข้อมูล`}
-            />
-           </section>
-            </label>
-          </>
+          </section>
+        </label>
+          
+        );
+      case 'อาการของผู้ป่วย':
+        return (
+          <label>
+            <section className="sectiongap">
+              <textarea className="textarearesize" {...register(`Sdata.${index}.text`)}  placeholder={`กรอกอาการของผู้ป่วย`} />
+            </section>
+          </label>
         );
 
 
-        case "item3":
-          // Render form fields for item2
+        case 'DTX':
           return (
-            <>
-              <label>
+            <label>
                 <section className="sectiongap">
                   <div className="gapInput">DTX</div>
                   <input
@@ -95,21 +110,21 @@ export default function SForm() {
                 </section>
                 <div className="gapInput">เลือกวันที่</div>
                 <input
-                  {...register(`Odata.${index}.date`)}
+                  {...register(`Sdata.${index}.date`)}
                   placeholder={`วัน/เดือน/ปี`}
                 />
-                {/* <DatePicker
+                 {/* <DatePicker
                   selected={new Date()} // Set the default value to today
                   onChange={(date) => {
   
                   }}
                   dateFormat="dd/MM/yyyy" 
                 /> */}
-              </label>
-            </>
+                
+              </label>  
           );
-        
-          case "item4":
+
+          case 'Ketone':
             return (
               <>
                 <label>
@@ -123,7 +138,7 @@ export default function SForm() {
                   </section>
                   <div className="gapInput">เลือกวันที่</div>
                     <input
-                  {...register(`Odata.${index}.date`)}
+                  {...register(`Sdata.${index}.date`)}
                   placeholder={`วัน/เดือน/ปี`}
                 />
                   {/* <DatePicker
@@ -135,10 +150,11 @@ export default function SForm() {
                   /> */}
                 </label>
               </>
-    
-            );
+            );    
 
-       
+
+
+
       default:
         return null;
     }
@@ -152,51 +168,45 @@ export default function SForm() {
         })}
       >
         <h1 className="Headform">S อาการของผู้ป่วย</h1>
-       
+
         {fields.map((item, index) => (
           <div key={item.id} className="Sformcontainer">
             <select
               value={item.type}
               onChange={(e) => handleTypeChange(e, index)}
               className="select"
+              disabled={isTypeSelected[index]}
             >
               <option value="select">ตัวเลือก</option>
-              <option value="item1">โรคประจำตัว</option>
-              <option value="item2">อาการของผู้ป่วย</option>           
-              <option value="item3">DTX</option> 
-              <option value="item4">Ketone</option> 
+              <option value="โรคประจำตัว">โรคประจำตัว</option>
+              <option value="อาการของผู้ป่วย">อาการของผู้ป่วย</option>
+              <option value="DTX">DTX</option>
+              <option value="Ketone">Ketone</option>
             </select>
-            <button type="button" onClick={() => remove(index)} className="deletebutton">
+            <button type="button" onClick={() => handleDelete(index)} className="deletebutton">
               Delete
             </button>
             <label>
               <section>
-            {renderFormFields(selectedTypes[index]?.type, index)}
-            </section>
+                {renderFormFields(selectedTypes[index]?.type, index)}
+              </section>
             </label>
           </div>
         ))}
-
-<div className="btncontainer">
-        <button
-          type="button"
-          onClick={() => {
-            if (selectedTypes.every((item) => item.type !== "select")) {
-              append({ type: "select", name: "", date: "" ,text: ""});
-            } else {
-              append({ type: "", name: "", date:"" , text: ""});
-            }
-          }}
-          className="addbutton"
-        >
-          {selectedTypes.every((item) => item.type !== "select")
-            ? "Add"
-            : "Add"}
-        </button>
-        <button type="submit" className="submitbtn">
-          Submit
-        </button>
-      </div>
+        <div className="btncontainer">
+          <button
+            type="button"
+            onClick={handleAdd}
+            className="addbutton"
+          >
+            {selectedTypes.every((item) => item.type !== "select")
+              ? "Add"
+              : "Add"}
+          </button>
+          <button type="submit" className="submitbtn">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

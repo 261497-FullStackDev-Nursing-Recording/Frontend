@@ -99,5 +99,11 @@
 
 .textarearesize{
   width: 300px;
- 
+ padding: 6px;
+}
+
+
+input {
+padding: 6px;
+
 }

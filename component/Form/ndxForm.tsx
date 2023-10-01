@@ -98,7 +98,7 @@ export default function NDXForm() {
         return (
           <label>
             <section className="sectiongap">
-              <textarea className="textarearesize" {...register(`NDXdata.${index}.text`)} />
+              <textarea className="textarearesize" {...register(`NDXdata.${index}.text`)} placeholder="กรอกข้อมูลสนับสนุน"/>
             </section>
           </label>
         );
