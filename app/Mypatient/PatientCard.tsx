@@ -68,8 +68,8 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
                 }}
               >
                 {item.f_name} {item.l_name}
-                <div />
-                {item.identification_id}
+                <div>AN: {item.an}</div>
+                <div>Bed: {item.current_bed_number}</div>
               </Link>
             </div>
           </div>
