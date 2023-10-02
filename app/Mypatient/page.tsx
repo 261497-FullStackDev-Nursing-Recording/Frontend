@@ -17,7 +17,6 @@ import { useCurrentNurseLogin } from "../../query/nurse";
 import { number } from "zod";
 import Backbtn from "../../component/backBtn";
 
-
 export default function Mypatient() {
   const nurse_id: any = useCurrentNurseLogin()?.id;
   const [myPatientIDs, setMyPatientIDs] = useState([]);
@@ -87,22 +86,17 @@ export default function Mypatient() {
     setSearchQuery(event.target.value);
   };
 
-  console.log(nurse_id);
-  console.log(LP_data);
-  console.log(PBID_data);
-
   return (
-    
     <div>
+      <Backbtn />
+      {LP_isError || PBID_isError} ? (
+      <div className="flex justify-center items-center text-center min-h-screen">
+        <p className="text-red-500">Error</p>
+      </div>{" "}
+      ):
       <div className=" mx-auto">
         <div className="flex justify-center mt-[40px] mb-[10px] text-xl">
-          <LocalHospitalRoundedIcon
-            sx={{ fontSize: 40 }}
-          ></LocalHospitalRoundedIcon>
-      <Backbtn/>
-      {isLinkedPatientsError || isAllPatientsError ? (
-        <div className="flex justify-center items-center text-center min-h-screen">
-          <p className="text-red-500">Error</p>
+          <LocalHospitalRoundedIcon sx={{ fontSize: 40 }} />
         </div>
         <h1 className="flex justify-center mb-[20px] text-black font-extrabold text-[25px]">
           My Patient
@@ -139,11 +133,10 @@ export default function Mypatient() {
           <PatientCard apiData={apiData} />
         </div>
         <Navbar />
-        {/**/}
       </div>
     </div>
-    // <div>
-    //   <App/>
+    //  <div>
+    //    <App/>
     // </div>
   );
 }
