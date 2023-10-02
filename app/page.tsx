@@ -12,6 +12,6 @@ export default function Home() {
     // <Inform />
     // <Add />
     //  <UserList />
-    // <Loader color="green" />
+    // <Loader color="green" />s
   );
 }
