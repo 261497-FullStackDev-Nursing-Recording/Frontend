@@ -89,11 +89,6 @@ export default function Mypatient() {
   return (
     <div>
       <Backbtn />
-      {LP_isError || PBID_isError} ? (
-      <div className="flex justify-center items-center text-center min-h-screen">
-        <p className="text-red-500">Error</p>
-      </div>{" "}
-      ):
       <div className=" mx-auto">
         <div className="flex justify-center mt-[40px] mb-[10px] text-xl">
           <LocalHospitalRoundedIcon sx={{ fontSize: 40 }} />
