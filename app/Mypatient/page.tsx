@@ -15,6 +15,8 @@ import PatientCard from "./PatientCard";
 import { Patient } from "../../types/patient";
 import { useCurrentNurseLogin } from "../../query/nurse";
 import { number } from "zod";
+import Backbtn from "../../component/backBtn";
+
 
 export default function Mypatient() {
   const nurse_id: any = useCurrentNurseLogin()?.id;
@@ -90,12 +92,17 @@ export default function Mypatient() {
   console.log(PBID_data);
 
   return (
+    
     <div>
       <div className=" mx-auto">
         <div className="flex justify-center mt-[40px] mb-[10px] text-xl">
           <LocalHospitalRoundedIcon
             sx={{ fontSize: 40 }}
           ></LocalHospitalRoundedIcon>
+      <Backbtn/>
+      {isLinkedPatientsError || isAllPatientsError ? (
+        <div className="flex justify-center items-center text-center min-h-screen">
+          <p className="text-red-500">Error</p>
         </div>
         <h1 className="flex justify-center mb-[20px] text-black font-extrabold text-[25px]">
           My Patient

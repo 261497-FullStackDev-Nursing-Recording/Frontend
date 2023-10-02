@@ -57,6 +57,7 @@
 }
 
 .gapInput{
+  margin-top: 15px;
   margin-bottom: 5px;
   font-weight: bolder;
 }
@@ -99,5 +100,12 @@
 
 .textarearesize{
   width: 300px;
- 
+ padding: 6px;
+ border-radius: 7px ;
+}
+
+
+input {
+padding: 6px;
+border-radius: 7px ;
 }

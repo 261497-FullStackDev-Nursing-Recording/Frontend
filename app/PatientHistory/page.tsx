@@ -6,6 +6,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../../component/Navbarbottom";
 import { useSearchParams } from "next/navigation";
+import Backbtn from "../../component/backBtn";
 // import { useRouter } from "next/router";
 
 interface Patient {
@@ -22,7 +23,7 @@ interface Record {
   id: string;
   user_id: string;
   patient_id: string;
-  bed_number: string;
+  bed_number: number;
   ward: string;
   disease_group: string;
   shift: string;
@@ -65,19 +66,18 @@ export default function PatientHistory() {
 
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
-  const records = recordData.map((record) => {
-    return (
-      <div className="box">
-        กลุ่มโรค: {record.disease_group}
-        <div />
-        เตียงที่: {record.bed_number}
-        <div />
-        กลุ่มโรค: {record.visit_number}
-        <div />
-        สร้างเมื่อ: {record.created_at}
-      </div>
-    );
-  });
+  const records = recordData.map((record) => (
+    <div className="box" key={record.id}>
+      กลุ่มโรค: {record.disease_group}
+      <div />
+      เตียงที่: {record.bed_number}
+      <div />
+      กลุ่มโรค: {record.visit_number}
+      <div />
+      สร้างเมื่อ: {record.created_at}
+    </div>
+  ));
+  
 
   React.useEffect(() => {
     apiRequest(
@@ -99,6 +99,7 @@ export default function PatientHistory() {
   console.log(recordData);
   return (
     <div>
+       <Backbtn/>
       <div className="Container">
         <div>
           <LocalHospitalRoundedIcon className="Icon" />

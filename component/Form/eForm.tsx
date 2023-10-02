@@ -1,18 +1,24 @@
-import React from "react";
+import React,{useState} from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
+import "react-datepicker/dist/react-datepicker.css";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { Select } from '@mantine/core';
 
 type FormValues = {
   Edata: {
     type: string;
     name: string;
-    date: string;
     text: string;
 
   }[];
 };
 
-export default function IForm() {
+export default function EForm() {
   const {
     register,
     formState: { errors },
@@ -21,14 +27,13 @@ export default function IForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Edata: [{ type: "select", name: "", date:"" }],
+      Edata: [{ type: "select", name: "" }],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
     name: "Edata",
     control,
-   
   });
 
   const selectedTypes = useWatch({
@@ -36,36 +41,44 @@ export default function IForm() {
     control,
   });
 
-  // Function to handle the selection change in the dropdown
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const selectedType = e.target.value;
-
-    // Update the selected type for the specific item in the cart array
-    setValue(`Edata.${index}.type`, selectedType as any); // Use type casting to resolve the error
+    setValue(`Edata.${index}.type`, selectedType as any);
+    setIsTypeSelected((prevIsTypeSelected) => {
+      const updatedIsTypeSelected = [...prevIsTypeSelected];
+      updatedIsTypeSelected[index] = selectedType !== "select";
+      return updatedIsTypeSelected;
+    });
   };
 
-  // Function to render the form fields based on the selected type
+  const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
+  
+  const handleDelete = (index: number) => {
+    remove(index);
+
+    setIsTypeSelected((prevIsTypeSelected) => {
+      const updatedIsTypeSelected = [...prevIsTypeSelected];
+      updatedIsTypeSelected.splice(index, 1);
+      return updatedIsTypeSelected;
+    });
+  };
+
+  const handleAdd = () => {
+    // Initialize the state for the new field
+    setIsTypeSelected((prevIsTypeSelected) => [...prevIsTypeSelected, false]);
+
+    if (selectedTypes.every((item) => item.type !== "select")) {
+      append({ type: "select", name: "", text: "" });
+    } else {
+      append({ type: "", name: "", text: "" });
+    }
+  };
+
   const renderFormFields = (selectedType: string, index: number) => {
     switch (selectedType) {
-      case "item1":
+      case 'O2 Saturation':
         return (
-         
-          <><label>
-            <section className="sectiongap">
-      
-            <textarea className="textarearesize"
-              {...register(`Edata.${index}.text`)}
-              placeholder={`กรอกข้อมูล`}
-            />
-           </section>
-            </label>
-          </>
-        );
-
-        case "item2":
-          return (
-            <>
-              <label>
+          <label>
                 <section className="sectiongap">
                   <div className="gapInput">O2 Saturationอยู่ระหว่าง</div>
                   <input
@@ -77,15 +90,10 @@ export default function IForm() {
                 </section>
                
               </label>
-            </>
-  
-          );
-
-
-          case "item3":
-          return (
-            <>
-              <label>
+        );
+      case 'ก๊าซในเลือดแดงมีค่าปกติ PaO2':
+        return (
+          <label>
                 <section className="sectiongap">
                   <div className="gapInput">ก๊าซในเลือดแดงมีค่า PaO2</div>
                   <input
@@ -97,14 +105,12 @@ export default function IForm() {
                 </section>
                
               </label>
-            </>
-  
-          );
+        );
 
-          case "item4":
-            return (
-              <>
-                <label>
+
+        case 'ก๊าซในเลือดแดงมีค่าปกติ PaCO2':
+          return (
+            <label>
                   <section className="sectiongap">
                     <div className="gapInput">ก๊าซในเลือดแดงมีค่า PaCO2</div>
                     <input
@@ -116,44 +122,51 @@ export default function IForm() {
                   </section>
                  
                 </label>
-              </>
-    
-            );
+          );
 
 
-
-            case "item5":
+          case 'เลือกผลของการรักษา':
         return (
-         
-          <><label>
-            <section className="sectiongap">
-            <select {...register(`Edata.${index}.name`)}>
-           
-          <option value="op1">สัญญาณชีพอยู่ในเกณฑ์ ปกติ</option>
-          <option value="op2">ไม่มีภาวะพร่องออกซิเจน</option>
-          <option value="op3">ไม่เกิดท่อช่วยหายใจเลื่อนหลุด </option>
-          <option value="op4">ไม่เกิดการบาดเจ็บจากการผูกมัด</option>
-          <option value="op5">I/O balance</option>
-          <option value="op6">ไม่มีภาวะทุพโภชนาการ</option>
-          <option value="op7">Electrolyte,Albumin อยู่ในเกณฑ์ปกติ</option>
-          <option value="op8">ไม่เกิดปอดอักเสบจากการใช้เครื่องช่วยหายใจ</option>
-          <option value="op9">ไม่เกิดภาวะ pneumothrorax</option>
-          <option value="op10">ผู้ป่วยและญาติทุเลาจากความวิตกกังวล</option>
-          <option value="op11">ผู้ป่วยมีสีหน้าสดชื่น นอนหลับพักผ่อนได้</option>
-          <option value="op12">ผู้ป่วยสามารถสื่อสารความต้องการได้</option>
-          <option value="op13">ผู้ป่วยสุขสบาย ไม่เกิดแผลกดทับ พักผ่อนได้</option>
-          <option value="op14">ไม่เกิดการใส่ท่อช่วยหายใจใหม่ภายใน 48 ชม.</option>
-        </select>
-           </section>
-            </label>
-          </>
+          <label>
+            <Select
+              {...register(`Edata.${index}.name`)}
+              className="sectiongap"
+              data={[
+                'สัญญาณชีพอยู่ในเกณฑ์ ปกติ',
+                'สัญญาณชีพอยู่ในเกณฑ์ ไม่ปกติ',
+                'ไม่มีภาวะพร่องออกซิเจน',
+                'ไม่เกิดท่อช่วยหายใจเลื่อนหลุด',
+                'ไม่เกิดการบาดเจ็บจากการผูกมัด',
+                'I/O balance',
+                'ไม่มีภาวะทุพโภชนาการ',
+                'Electrolyte,Albumin อยู่ในเกณฑ์ ปกติ',
+                'Electrolyte,Albumin อยู่ในเกณฑ์ ไม่ปกติ',
+                'ไม่เกิดปอดอักเสบจากการใช้เครื่องช่วยหายใจ',
+                'ไม่เกิดภาวะ pneumothrorax',
+                'ผู้ป่วยและญาติทุเลาจากความวิตกกังวล',
+                'ผู้ป่วยมีสีหน้าสดชื่น นอนหลับพักผ่อนได้',
+                'ผู้ป่วยสามารถสื่อสารความต้องการได้',
+                'ไม่เกิดการใส่ท่อช่วยหายใจใหม่ภายใน 48 ชม.',
+
+              ]}
+              placeholder="เลือกผลการประเมิน"
+              onChange={(value) => {
+                setValue(`Edata.${index}.name`, value || '');
+              }}
+            />
+          </label>
         );
-  
-
-        
 
 
-       
+
+        case 'ข้อมูลเพิ่มเติม':
+          return (
+            <label>
+              <section className="sectiongap">
+                <textarea className="textarearesize" {...register(`Edata.${index}.text`)} placeholder="กรอกข้อมูลเพิ่มเติม" />
+              </section>
+            </label>
+          );
       default:
         return null;
     }
@@ -163,58 +176,50 @@ export default function IForm() {
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data);
+          console.log("Submit data", data.Edata);
         })}
       >
         <h1 className="Headform">E การประเมินผล</h1>
-       
+
         {fields.map((item, index) => (
           <div key={item.id} className="Eformcontainer">
             <select
               value={item.type}
               onChange={(e) => handleTypeChange(e, index)}
               className="select"
+              disabled={isTypeSelected[index]}
             >
               <option value="select">ตัวเลือก</option>
-              <option value="item1">ข้อมูลเพิ่มเติม </option>
-              <option value="item2">O2 Saturation</option>
-              <option value="item3">ก๊าซในเลือดแดงมีค่าปกติ PaO2</option>
-              <option value="item4">ก๊าซในเลือดแดงมีค่าปกติ PaCO2</option>
-              <option value="item5">ผลของการรักษา</option>
+              <option value="O2 Saturation">O2 Saturation</option>
+              <option value="ก๊าซในเลือดแดงมีค่าปกติ PaO2">ก๊าซในเลือดแดงมีค่าปกติ PaO2</option>
+              <option value="ก๊าซในเลือดแดงมีค่าปกติ PaCO2">ก๊าซในเลือดแดงมีค่าปกติ PaCO2</option>
+              <option value="เลือกผลของการรักษา">เลือกผลของการรักษา</option>
+              <option value="ข้อมูลเพิ่มเติม">ข้อมูลเพิ่มเติม</option>
             </select>
-            <button type="button" onClick={() => remove(index)} className="deletebutton">
+            <button type="button" onClick={() => handleDelete(index)} className="deletebutton">
               Delete
             </button>
             <label>
               <section>
-            {renderFormFields(selectedTypes[index]?.type, index)}
-            
-            </section>
+                {renderFormFields(selectedTypes[index]?.type, index)}
+              </section>
             </label>
           </div>
         ))}
-
-<div className="btncontainer">
-        <button
-          type="button"
-          onClick={() => {
-            // Check the selected option to determine whether to add a dropdown or a form
-            if (selectedTypes.every((item) => item.type !== "select")) {
-              append({ type: "select", name: "", date: "" ,text: ""});
-            } else {
-              append({ type: "", name: "", date:"" , text: ""});
-            }
-          }}
-          className="addbutton"
-        >
-          {selectedTypes.every((item) => item.type !== "select")
-            ? "Add"
-            : "Add"}
-        </button>
-        <button type="submit" className="submitbtn">
-          Submit
-        </button>
-      </div>
+        <div className="btncontainer">
+          <button
+            type="button"
+            onClick={handleAdd}
+            className="addbutton"
+          >
+            {selectedTypes.every((item) => item.type !== "select")
+              ? "Add"
+              : "Add"}
+          </button>
+          <button type="submit" className="submitbtn">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

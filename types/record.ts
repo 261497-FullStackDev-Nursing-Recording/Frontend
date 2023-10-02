@@ -6,7 +6,7 @@ export const RecordSchema = z.object({
   id: z.string(),
   user_id: z.string(),
   patient_id: z.string(),
-  bed_number: z.string(),
+  bed_number: z.number(),
   ward: z.string(),
   disease_group: z.string(),
   shift: z.string(),
@@ -19,7 +19,7 @@ export const CreateRecordSchema = z.object({
   id: z.string(),
   user_id: z.string(),
   patient_id: z.string(),
-  bed_number: z.string(),
+  bed_number: z.number(),
   ward: z.string(),
   disease_group: z.string(),
 
@@ -33,7 +33,7 @@ export const CreateRecordSchema = z.object({
 export const SearchRecordSchema = z.object({
   user_id: z.string().optional(),
   patient_id: z.string().optional(),
-  bed_number: z.string().optional(),
+  bed_number: z.number().optional(),
   ward: z.string().optional(),
   disease_group: z.string().optional(),
   shift: SHIFT.optional(),

@@ -26,7 +26,7 @@ export const GetAllPatientSchema = z.object({
   birthday: z.string().datetime(),
   an: z.string(),
   hn: z.string(),
-  current_bed_number: z.string(),
+  current_bed_number: z.number(),
   isQuit: z.boolean(),
   status: STATUS.optional(),
   fromDate: z.string().optional(),
