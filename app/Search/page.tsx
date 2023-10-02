@@ -29,9 +29,7 @@ export default function Searchpage() {
   const [params, setParams] = useState({});
 
   const { data, isLoading, isError, error, refetch } = useQuerySearchPatients({
-    an: searchAN,
-    bed_number: searchBed,
-    name: searchName,
+    
   });
 
   if (isLoading) {
