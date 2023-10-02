@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useCurrentNurseLogin } from "./nurse";
@@ -47,13 +48,17 @@ export const useQuerySearchPatients = (body: SearchPatient) => {
 };
 
 export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
-  const query = useQuery(["getPatientsByIds"], async () => {
-    const response = await axios.post<Patient[]>(
-      "http://localhost:5001/api/patient/getPatientsByIds",
-      body
-    );
-    return response.data;
-  });
+  const query = useQuery(
+    ["getPatientsByIds"],
+    async () => {
+      const response = await axios.post<Patient[]>(
+        "http://localhost:5001/api/patient/getPatientsByIds",
+        body
+      );
+      return response.data;
+    },
+    { refetchInterval: 10000 }
+  );
   const isError = query.isError;
   return {
     ...query,
@@ -62,12 +67,16 @@ export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
 };
 
 export const useQueryLinkedPatients = (user_id: string) => {
-  const query = useQuery(["linkedPatient"], async () => {
-    const response = await axios.get<LinkPatient[]>(
-      `http://localhost:5001/api/patient/getLinkedPatients/${user_id}`
-    );
-    return response.data;
-  });
+  const query = useQuery(
+    ["linkedPatient"],
+    async () => {
+      const response = await axios.get<LinkPatient[]>(
+        `http://localhost:5001/api/patient/getLinkedPatients/${user_id}`
+      );
+      return response.data;
+    },
+    { refetchInterval: 10000 }
+  );
   return query;
 };
 

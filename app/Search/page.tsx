@@ -18,19 +18,15 @@ export default function Searchpage() {
   // });
 
   const [apiData, setApiData] = useState<Patient[]>([]);
-
-  const [searchAN, setSearchAN] = useDebouncedState("", 500, { leading: true });
-  const [searchBed, setSerachBed] = useDebouncedState("", 500, {
-    leading: true,
-  });
-  const [searchName, setSearchName] = useDebouncedState("", 500, {
-    leading: true,
-  });
+  const [searchAN, setSearchAN] = useState("");
+  const [searchBed, setSerachBed] = useState(0);
+  const [searchName, setSearchName] = useState("");
   const [params, setParams] = useState({});
 
-  const { data, isLoading, isError, error, refetch } = useQuerySearchPatients({
-    
-  });
+
+  const { data, isLoading, isError, error, refetch } =
+    useQuerySearchPatients(params);
+
 
   if (isLoading) {
     return (
@@ -58,25 +54,16 @@ export default function Searchpage() {
       setApiData([]);
       return;
     }
-    setParams({ an: searchAN, bed_number: "", name: "" });
+    setParams({ an: searchAN });
     refetch();
-    setParams({ an: searchAN, bed_number: "", name: "" });
     console.log(data);
-    setApiData([]);
     setApiData(data);
   };
 
   const handleSearchBed = () => {
-    if (searchBed.trim() === "") {
-      apiData.length = 0;
-      setApiData([]);
-      return;
-    }
-    setParams({ an: "", bed_number: searchBed, name: "" });
+    setParams({ bed_number: searchBed });
     refetch();
-    setParams({ an: "", bed_number: searchBed, name: "" });
     console.log(data);
-    setApiData([]);
     setApiData(data);
   };
 
@@ -86,10 +73,10 @@ export default function Searchpage() {
       setApiData([]);
       return;
     }
-    setParams({ an: "", bed_number: "", name: searchName });
+    setApiData([]);
+    setParams({ name: searchName });
     refetch();
     console.log(data);
-    setApiData([]);
     setApiData(data);
   };
 
@@ -137,7 +124,9 @@ export default function Searchpage() {
             id="Bed"
             type="search"
             placeholder="Bed No."
-            onChange={(event) => setSerachBed(event.currentTarget.value)}
+            onChange={(event) =>
+              setSerachBed(parseInt(event.currentTarget.value, 10))
+            }
           />
           <Button
             variant="contained"

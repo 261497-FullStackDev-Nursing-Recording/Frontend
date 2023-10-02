@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import "./backBtn.css"
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import './backBtn.css';
+
 const Backbtn: React.FC = () => {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
   const goBack = () => {
     window.history.back();
   };
 
   return (
     <div className="backbtnlayout">
-     
-      
-      <button onClick={goBack} className="backButton">&larr; Back</button>
+      <button onClick={goBack} className="backButton">
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </button>
     </div>
   );
 };
