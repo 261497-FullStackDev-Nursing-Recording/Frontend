@@ -60,8 +60,15 @@ export default function PatientHistory() {
 
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
-  const records = recordData.map((record) => {
+  const records = recordData.map((record, index) => {
     return (
+      <Link 
+      href={{
+        pathname: `/RecordData`,
+        query: { id:PatientHistory },
+      }}
+      key={`${record.id}-${index}`} // Use a combination of id and index for uniqueness
+    >
       <div className="box" key={record.id}>
         กลุ่มโรค: {record.disease_group}
         <div />
@@ -71,6 +78,7 @@ export default function PatientHistory() {
         <div />
         สร้างเมื่อ: {record.created_at}
       </div>
+      </Link>
     );
   });
 
@@ -114,13 +122,12 @@ export default function PatientHistory() {
         </div>
         <div className="Btn">
           <Link href="/Inform">
-            <Button
-              variant="outlined"
-              size="small"
+            <div
               onClick={handleAddRecordClick}
+              className="addbutton"
             >
               เพิ่มการบันทึกทางพยาบาล
-            </Button>
+            </div>
           </Link>
         </div>
         {recordData.length > 0 ? (
