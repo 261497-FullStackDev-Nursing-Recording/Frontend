@@ -9,6 +9,29 @@ import { useSearchParams } from "next/navigation";
 import Backbtn from "../../component/backBtn";
 import FieldComponent from "./fieldcomponent";
 
+interface Patient {
+  id: string;
+  f_name: string;
+  l_name: string;
+  hn: string;
+  identification_id: string;
+  status: string;
+  created_at: string;
+}
+
+interface Record {
+  id: string;
+  user_id: string;
+  patient_id: string;
+  bed_number: number;
+  ward: string;
+  disease_group: string;
+  shift: string;
+  visit_number: string;
+  created_at: string;
+  modified_at: string;
+  fields: string;
+}
 
 function apiRequest(
   url: string,
@@ -35,7 +58,7 @@ export default function FieldinRecord() {
 
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
-  
+
   React.useEffect(() => {
     apiRequest(
       "http://localhost:5001/api/patient/getAllPatient",
@@ -70,13 +93,13 @@ export default function FieldinRecord() {
           Citizen ID:
           <div /> {patientData?.identification_id}
         </div>
-        <div >
+        <div>
           {recordData.map((record) => (
-              <div key={record.id}>
-                {record.fields.map((field) => (
-                  <FieldComponent key={field.id} field={field} />
-                ))}
-              </div>
+            <div key={record.id}>
+              {Array.isArray(record.fields) && record.fields.map((field) => (
+                <FieldComponent key={field.id} field={field} />
+              ))}
+            </div>
           ))}
         </div>
       </div>
