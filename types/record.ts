@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { SHIFT } from "./shift";
-import { CreateFieldSchema } from "./field";
 
 export const RecordSchema = z.object({
   id: z.string(),
@@ -16,18 +15,13 @@ export const RecordSchema = z.object({
 });
 
 export const CreateRecordSchema = z.object({
-  id: z.string(),
   user_id: z.string(),
   patient_id: z.string(),
   bed_number: z.number(),
   ward: z.string(),
   disease_group: z.string(),
-
   shift: z.string(),
   visit_number: z.string(),
-  field: z.array(CreateFieldSchema),
-  created_at: z.string().datetime(),
-  modified_at: z.string().datetime(),
 });
 
 export const SearchRecordSchema = z.object({
