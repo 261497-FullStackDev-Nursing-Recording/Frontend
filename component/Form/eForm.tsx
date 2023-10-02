@@ -176,7 +176,7 @@ export default function EForm() {
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data);
+          console.log("Submit data", data.Edata);
         })}
       >
         <h1 className="Headform">E การประเมินผล</h1>

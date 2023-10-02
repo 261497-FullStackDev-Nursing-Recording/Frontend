@@ -164,7 +164,7 @@ export default function SForm() {
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data);
+          console.log("Submit data", data.Sdata);
         })}
       >
         <h1 className="Headform">S อาการของผู้ป่วย</h1>

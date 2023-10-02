@@ -124,7 +124,7 @@ export default function IForm() {
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data);
+          console.log("Submit data", data.Idata);
         })}
       >
         <h1 className="Headform">I การปฏิบัติการพยาบาล</h1>

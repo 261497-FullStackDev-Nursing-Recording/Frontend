@@ -117,7 +117,7 @@ export default function OForm() {
     <div>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data);
+          console.log("Submit data", data.Odata);
         })}
       >
         <h1 className="Headform">O การวางแผนการพยาบาล</h1>
