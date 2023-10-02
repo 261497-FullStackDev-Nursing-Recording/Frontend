@@ -7,32 +7,8 @@ import React, { useState } from "react";
 import Navbar from "../../component/Navbarbottom";
 import { useSearchParams } from "next/navigation";
 import Backbtn from "../../component/backBtn";
-import Link from "next/link";
+import FieldComponent from "./fieldcomponent";
 
-
-interface Patient {
-  id: string;
-  f_name: string;
-  l_name: string;
-  hn: string;
-  identification_id: string;
-  status: string;
-  created_at: string;
-}
-
-interface Record {
-  id: string;
-  user_id: string;
-  patient_id: string;
-  bed_number: number;
-  ward: string;
-  disease_group: string;
-  shift: string;
-  visit_number: string;
-  created_at: string;
-  modified_at: string;
-  fields: string;
-}
 
 function apiRequest(
   url: string,
@@ -51,41 +27,15 @@ function apiRequest(
     });
 }
 
-export default function PatientHistory() {
+export default function FieldinRecord() {
   const { identification_id } = useParams<{ identification_id: string }>();
   const searchParams = useSearchParams();
   const PatientHistory = searchParams.get("id");
   console.log(PatientHistory);
 
-  // const { PatientHistory } = router.;
-  // const param = useParams();
-  // console.log(param);
-
-  // const PatientHistory = 5;
-  // const Patient_id = query.PatientHistory;
-  // console.log(router);
-
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
-  const records = recordData.map((record) => (
-    <Link 
-    href={{
-      pathname: `/RecordData`,
-      query: { id:PatientHistory },
-    }}>
-    <div className="box" key={record.id} >
-      กลุ่มโรค: {record.disease_group}
-      <div />
-      เตียงที่: {record.bed_number}
-      <div />
-      กลุ่มโรค: {record.visit_number}
-      <div />
-      สร้างเมื่อ: {record.created_at}
-    </div>
-    </Link>
-  ));
   
-
   React.useEffect(() => {
     apiRequest(
       "http://localhost:5001/api/patient/getAllPatient",
@@ -103,10 +53,12 @@ export default function PatientHistory() {
       (response) => setRecordData(response.data)
     );
   }, []);
+
   console.log(recordData);
+
   return (
     <div>
-       <Backbtn/>
+      <Backbtn />
       <div className="Container">
         <div>
           <LocalHospitalRoundedIcon className="Icon" />
@@ -118,12 +70,15 @@ export default function PatientHistory() {
           Citizen ID:
           <div /> {patientData?.identification_id}
         </div>
-        {recordData.length > 0 ? (
-          <div className="containercard">{records}</div>
-        ) : (
-          <div className="NoRecord">ยังไม่มีบันทึกการพยาบาล</div>
-        )}
-        <div className="card"></div>
+        <div >
+          {recordData.map((record) => (
+              <div key={record.id}>
+                {record.fields.map((field) => (
+                  <FieldComponent key={field.id} field={field} />
+                ))}
+              </div>
+          ))}
+        </div>
       </div>
       <Navbar />
     </div>
