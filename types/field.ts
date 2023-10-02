@@ -15,10 +15,12 @@ export const FieldSchema = z.object({
   modified_at: z.string().datetime(),
 });
 
-export const CreateFieldSchema = z.object({
+export const CreateFieldsSchema = z.object({
+  record_id: z.string(),
   user_id: z.string(),
   field_code: z.string(),
   field_pre_label: z.string().optional(),
   field_value: z.string(),
   field_post_label: z.string().optional(),
 });
+export type CreateFields = z.infer<typeof CreateFieldsSchema>;
