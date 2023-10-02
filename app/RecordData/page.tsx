@@ -95,7 +95,7 @@ export default function FieldinRecord() {
         </div>
         <div>
           {recordData.map((record) => (
-            <div key={record.id}>
+            <div key={record.id} className="containerbox">
               {Array.isArray(record.fields) && record.fields.map((field) => (
                 <FieldComponent key={field.id} field={field} />
               ))}

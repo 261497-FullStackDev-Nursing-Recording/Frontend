@@ -16,6 +16,7 @@
 }
 
 .addbutton {
+  font-weight: bold;
   background-color: rgb(84, 175, 197);
   padding: 8px 10px;
   border-radius: 5px;
@@ -26,6 +27,7 @@
 }
 
 .submitbtn{
+  font-weight: bold;
   background-color: rgb(90, 199, 90);
   padding: 8px 10px;
   border-radius: 5px;
