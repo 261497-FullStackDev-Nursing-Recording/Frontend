@@ -9,13 +9,16 @@ import PatientCount from "../../component/Dashboard/PatientCount";
 import Spinner from "../../component/spinner";
 import Navbar from "../../component/Navbarbottom";
 import PatientNurseRatio from "../../utils/patientRatio";
-
+import Backbtn from "../../component/backBtn";
 export default function Dashboard(): JSX.Element {
   const queryClient = new QueryClient();
 
   return (
+    
     <QueryClientProvider client={queryClient}>
+      <Backbtn/>
       <div className="dashboard-container">
+        
           <div className="centered-content">
             <HomeRoundedIcon sx={{ fontSize: 40 }} />
             <div className="chart-wrapper">

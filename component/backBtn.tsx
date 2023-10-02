@@ -1,6 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import './backBtn.css';
 
 const Backbtn: React.FC = () => {
@@ -11,7 +10,7 @@ const Backbtn: React.FC = () => {
   return (
     <div className="backbtnlayout">
       <button onClick={goBack} className="backButton">
-        <FontAwesomeIcon icon={faArrowLeft} />
+     <NavigateBeforeIcon/>
       </button>
     </div>
   );

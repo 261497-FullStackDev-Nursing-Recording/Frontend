@@ -18,6 +18,7 @@ export default function Inform() {
 		<div className="inform-container">
 			<Backbtn/>
 			<div className="patientheaddata">
+			
 				<div className="top">Name</div>
 				<div className="Name">Name</div>
 				<div className="top">Identification ID</div>
