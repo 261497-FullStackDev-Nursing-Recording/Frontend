@@ -66,19 +66,18 @@ export default function PatientHistory() {
 
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const [recordData, setRecordData] = useState<Record[]>([]);
-  const records = recordData.map((record) => {
-    return (
-      <div className="box">
-        กลุ่มโรค: {record.disease_group}
-        <div />
-        เตียงที่: {record.bed_number}
-        <div />
-        กลุ่มโรค: {record.visit_number}
-        <div />
-        สร้างเมื่อ: {record.created_at}
-      </div>
-    );
-  });
+  const records = recordData.map((record) => (
+    <div className="box" key={record.id}>
+      กลุ่มโรค: {record.disease_group}
+      <div />
+      เตียงที่: {record.bed_number}
+      <div />
+      กลุ่มโรค: {record.visit_number}
+      <div />
+      สร้างเมื่อ: {record.created_at}
+    </div>
+  ));
+  
 
   React.useEffect(() => {
     apiRequest(
