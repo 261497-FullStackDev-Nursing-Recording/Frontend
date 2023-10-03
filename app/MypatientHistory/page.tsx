@@ -82,11 +82,6 @@ export default function PatientHistory() {
     );
   });
 
-  const handleAddRecordClick = () => {
-    // Handle the "Add Record" button click
-    // history.push("/Inform"); // Navigate to "/Inform"
-  };
-
   React.useEffect(() => {
     apiRequest(
       "http://localhost:5001/api/patient/getAllPatient",
@@ -104,8 +99,7 @@ export default function PatientHistory() {
       (response) => setRecordData(response.data)
     );
   }, []);
-  // console.log(recordData);
-  // console.log(patientData);
+
   return (
     <div>
       <Backbtn/>
@@ -121,9 +115,13 @@ export default function PatientHistory() {
           <div /> {patientData?.identification_id}
         </div>
         <div className="Btn">
-          <Link href="/Inform">
+          <Link 
+      href={{
+        pathname: `/Inform`,
+        query: { id:PatientHistory },
+      }}
+    >
             <div
-              onClick={handleAddRecordClick}
               className="addbutton"
             >
               เพิ่มการบันทึกทางพยาบาล
