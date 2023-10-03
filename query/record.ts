@@ -21,7 +21,7 @@ export const useQueryRecords = (data: SearchRecord) => {
 };
 
 export const useMuationCreateRecord = () => {
-  const user = useCurrentNurseLogin();
+  const userQuery = useCurrentNurseLogin();
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["createRecord"],
@@ -35,7 +35,7 @@ export const useMuationCreateRecord = () => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["records", user?.id],
+          queryKey: ["records", userQuery?.data?.id],
         });
       },
     }
@@ -43,7 +43,7 @@ export const useMuationCreateRecord = () => {
   return mutation;
 };
 export const useMutationUpdateRecord = (recordId: string) => {
-  const user = useCurrentNurseLogin();
+  const userQuery = useCurrentNurseLogin();
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["updateRecord"],
@@ -56,7 +56,7 @@ export const useMutationUpdateRecord = (recordId: string) => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["records", user?.id],
+          queryKey: ["records", userQuery?.data?.id],
         });
       },
     }
@@ -65,7 +65,7 @@ export const useMutationUpdateRecord = (recordId: string) => {
 };
 
 export const useMutationDeleteRecord = (recordId: string) => {
-  const user = useCurrentNurseLogin();
+  const userQuery = useCurrentNurseLogin();
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["deleteRecord"],
@@ -75,7 +75,7 @@ export const useMutationDeleteRecord = (recordId: string) => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["records", user?.id],
+          queryKey: ["records", userQuery?.data?.id],
         });
       },
     }

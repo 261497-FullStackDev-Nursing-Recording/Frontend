@@ -14,14 +14,14 @@ export default function App() {
     </QueryClientProvider>
   );
 }
-const nurse_id = useCurrentNurseLogin()?.id;
-console.log(nurse_id);
+const nurseQuery = useCurrentNurseLogin();
+const nurseId = nurseQuery?.data?.id;
 
 function Example() {
   const { isLoading, error, data } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
-      fetch(`http://localhost:5001/api/patient/${nurse_id}`).then((res) =>
+      fetch(`http://localhost:5001/api/patient/${nurseId}`).then((res) =>
         res.json()
       ),
   });

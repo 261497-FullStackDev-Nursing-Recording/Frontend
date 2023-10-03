@@ -81,7 +81,7 @@ export const useQueryLinkedPatients = (user_id: string) => {
 };
 
 export const useMutationLinkPatient = () => {
-  const user = useCurrentNurseLogin();
+  const userQuery = useCurrentNurseLogin();
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["linkPatient"],
@@ -96,7 +96,7 @@ export const useMutationLinkPatient = () => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["linkedPatient", user?.id],
+          queryKey: ["linkedPatient", userQuery?.data?.id],
         });
       },
     }
@@ -105,7 +105,7 @@ export const useMutationLinkPatient = () => {
 };
 
 export const useMutationUpdateLinkedPatients = () => {
-  const user = useCurrentNurseLogin();
+  const userQuery = useCurrentNurseLogin();
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["removeLinkedPatients"],
@@ -115,7 +115,7 @@ export const useMutationUpdateLinkedPatients = () => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["linkedPatient", user?.id],
+          queryKey: ["linkedPatient", userQuery?.data?.id],
         });
       },
     }
