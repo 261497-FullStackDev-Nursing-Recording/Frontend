@@ -85,13 +85,13 @@ export const useMutationLinkPatient = () => {
   return mutation;
 };
 
-export const useMutationUpdateLinkedPatients = () => {
+export const useMutationUpdateLinkedPatients = (user_id: string) => {
   const user = useCurrentNurseLogin();
   const queryClient = useQueryClient();
   const mutation = useMutation(
     ["removeLinkedPatients"],
     async (args: RemoveLinkedPatients) => {
-      await axios.put<null>("http://localhost:5001/patient", args);
+      await axios.put<null>(`http://localhost:5001/patient/${user_id}`, args);
     },
     {
       onSuccess: async () => {
