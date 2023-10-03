@@ -87,3 +87,16 @@
   flex: 1;
   margin-left: 20px;
 }
+
+.containercard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #BFDBFE;
+}
+
+@media(min-width:768px){
+  .containercard{
+    width: 80%;
+  }
+}

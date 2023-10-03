@@ -24,3 +24,4 @@ export const CreateFieldsSchema = z.object({
   field_post_label: z.string().optional(),
 });
 export type CreateFields = z.infer<typeof CreateFieldsSchema>;
+

@@ -23,9 +23,9 @@ const FieldComponent: React.FC<FieldProps> = ({ field }) => {
       <p>
         <strong>ประเภทบันทึก:</strong> {field.field_code}
       </p>
-      <p>
+      {/* <p>
         <strong>field_post_label:</strong> {field.field_post_label}
-      </p>
+      </p> */}
       <p>
         <strong>field_pre_label:</strong> {field.field_pre_label}
       </p>
