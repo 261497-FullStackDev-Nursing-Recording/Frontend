@@ -34,7 +34,8 @@ export default function Mypatient() {
         searchPattern.test(patient.f_name) ||
         searchPattern.test(patient.l_name) ||
         searchPattern.test(`${patient.f_name} ${patient.l_name}`) ||
-        searchPattern.test(patient.identification_id)
+        searchPattern.test(patient.an) ||
+        searchPattern.test(patient.current_bed_number)
     );
     setApiData(searchedPatients);
   }, [lp.data, searchQuery]);
@@ -75,7 +76,7 @@ export default function Mypatient() {
               className="w-full h-[40px] pl-[35px] pr-[10px] bg-[#f5f5f5] text-[15px] rounded-[5px] items-center mr-[-64px] outline-none"
               id="identificationid"
               type="search"
-              placeholder="Search by Name or ID"
+              placeholder="Name / AN / Bed No."
               value={searchQuery}
               onChange={handleInputChange}
             />
