@@ -41,9 +41,9 @@ const FieldComponent: React.FC<FieldProps> = ({ field }) => {
       <p>
         <strong>record_id:</strong> {field.record_id}
       </p>
-      <p>
+      {/* <p>
         <strong>user_id:</strong> {field.user_id}
-      </p>
+      </p> */}
     </div>  
   );
 };
