@@ -11,7 +11,6 @@ import { useQueryLinkedPatients } from "../../query/patient";
 import PatientCard from "./PatientCard";
 import { Patient } from "../../types/patient";
 import { useCurrentNurseLogin } from "../../query/nurse";
-import { number } from "zod";
 import Backbtn from "../../component/backBtn";
 
 export default function Mypatient() {
