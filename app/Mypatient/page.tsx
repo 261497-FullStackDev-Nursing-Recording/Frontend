@@ -7,10 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import Navbar from "../../component/Navbarbottom";
 import Spinner from "../../component/spinner";
-import {
-  useQueryLinkedPatients,
-  useQueryPatientsByIds,
-} from "../../query/patient";
+import { useQueryLinkedPatients } from "../../query/patient";
 import PatientCard from "./PatientCard";
 import { Patient } from "../../types/patient";
 import { useCurrentNurseLogin } from "../../query/nurse";
@@ -27,20 +24,12 @@ export default function Mypatient() {
 
   const lp = useQueryLinkedPatients(nurse_id);
 
-  const pbi = useQueryPatientsByIds({
-    ids: lp.data ? lp.data.map((link) => link.patient_id) : [],
-  });
-
   useEffect(() => {
-    const nursePatientIds = lp.data
-      ? lp.data.map((link) => link.patient_id)
-      : [];
-    const filteredPatients =
-      pbi.data?.filter((patient) => nursePatientIds.includes(patient.id)) || [];
-
-    // Filter patients based on search query
+    if (!lp.data) {
+      return;
+    }
     const searchPattern = new RegExp(searchQuery.trim(), "i");
-    const searchedPatients = filteredPatients.filter(
+    const searchedPatients = lp.data.filter(
       (patient) =>
         searchPattern.test(patient.f_name) ||
         searchPattern.test(patient.l_name) ||
@@ -48,13 +37,13 @@ export default function Mypatient() {
         searchPattern.test(patient.identification_id)
     );
     setApiData(searchedPatients);
-  }, [lp.data, pbi.data, searchQuery]);
+  }, [lp.data, searchQuery]);
 
   const handleInputChange = (event: any) => {
     setSearchQuery(event.target.value);
   };
 
-  if (nurse.isLoading || lp.isLoading || pbi.isLoading) {
+  if (nurse.isLoading || lp.isLoading) {
     return (
       <div className="spinner-container">
         <Spinner />
@@ -62,19 +51,13 @@ export default function Mypatient() {
     );
   }
 
-  if (nurse.isError || lp.isError || pbi.isError) {
+  if (nurse.isError || lp.isError) {
     return (
       <div className="flex justify-center items-center text-center min-h-screen">
-        {(nurse.error as Error)?.message ||
-          (lp.error as Error)?.message ||
-          (pbi.error as Error)?.message}
+        {(nurse.error as Error)?.message || (lp.error as Error)?.message}
       </div>
     );
   }
-
-  console.log(nurse.data);
-  console.log(lp.data);
-  console.log(pbi.data);
 
   return (
     <div>

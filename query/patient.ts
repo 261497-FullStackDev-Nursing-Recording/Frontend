@@ -48,12 +48,16 @@ export const useQuerySearchPatients = (body: SearchPatient) => {
 };
 
 export const useQueryLinkedPatients = (user_id: string) => {
-  const query = useQuery(["linkedPatient"], async () => {
-    const response = await axios.get<LinkPatient[]>(
-      `http://localhost:5001/api/patient/getLinkedPatients/${user_id}`
-    );
-    return response.data;
-  });
+  const query = useQuery(
+    ["linkedPatient"],
+    async () => {
+      const response = await axios.get<Patient[]>(
+        `http://localhost:5001/api/patient/getLinkedPatients/${user_id}`
+      );
+      return response.data;
+    },
+    { enabled: !!user_id }
+  );
   return query;
 };
 
