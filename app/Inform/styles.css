@@ -7,3 +7,22 @@
   background-color: aliceblue;
   padding: 20px 0;
 }
+
+.patientheaddata{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.Name,.ID{
+  color: rgb(0, 0, 0);
+  background-color: #e5fffb;
+  color: #1d5554;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  max-width: 400px;
+  width: 80%;
+  text-align: center;
+}
