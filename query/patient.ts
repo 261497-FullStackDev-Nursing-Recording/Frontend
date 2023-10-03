@@ -48,18 +48,6 @@ export const useQuerySearchPatients = (body: SearchPatient) => {
   return query;
 };
 
-export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
-  const query = useQuery(["getPatientsByIds"], async () => {
-    const response = await axios.post<Patient[]>(
-      "http://localhost:5001/api/patient/getPatientsByIds",
-      body
-    );
-    return response.data;
-  });
-  const isError = query.isError;
-  return query;
-};
-
 export const useQueryLinkedPatients = (user_id: string) => {
   const query = useQuery(["linkedPatient"], async () => {
     const response = await axios.get<LinkPatient[]>(
