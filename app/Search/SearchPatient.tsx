@@ -5,6 +5,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { Patient } from "../../types/patient";
 import Link from "next/link";
 import "./styles.css";
+import { useCurrentNurseLogin } from "../../query/nurse";
+import Spinner from "../../component/spinner";
 
 interface SearchPatientProps {
   apiData: Patient[];
@@ -43,6 +45,13 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   const goToPatientHistory = (identificationId: string) => {
     console.log("Navigating to PatientHistory with ID:", identificationId);
   };
+
+  const userQuery =  useCurrentNurseLogin();
+  // console.log(userQuery.data);
+  if(userQuery.isLoading) return <Spinner/>
+  console.log(userQuery.data?.id);
+  
+  
 
   return (
     <div className="card_container">
@@ -95,9 +104,9 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
               <Button
                 variant="outline"
                 color="green"
-                onClick={() => console.log("Add Patient")}
+                onClick={() => console.log("Add Patient") }
               >
-                {/* onclick แล้วเพิ่มไปที่Favorite */}
+               
                 Add Patient
               </Button>
             </Group>

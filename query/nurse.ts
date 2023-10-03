@@ -15,5 +15,5 @@ export const useCurrentNurseLogin = () => {
 		}
 	});
 
-	return query.data;
+	return query;
 };
