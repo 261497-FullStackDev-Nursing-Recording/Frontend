@@ -7,6 +7,7 @@ import Link from "next/link";
 import "./styles.css";
 import { useCurrentNurseLogin } from "../../query/nurse";
 import Spinner from "../../component/spinner";
+import axios from "axios";
 
 interface SearchPatientProps {
   apiData: Patient[];
@@ -27,10 +28,26 @@ const getStatusColor = (status: string) => {
   }
 };
 
+function apiRequest(
+  url: string,
+  payload: object,
+  callback: (response: any) => void
+) {
+  axios
+    .post<any>(url, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(callback)
+    .catch((error) => {
+      console.error("API Error for ID:", error);
+    });
+}
+
 const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState<Patient | null>(null);
-  // const navigate = useNavigate();
 
   const handleCardClick = (item: Patient) => {
     setSelectedCard(item);
@@ -46,12 +63,32 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
     console.log("Navigating to PatientHistory with ID:", identificationId);
   };
 
-  const userQuery =  useCurrentNurseLogin();
-  // console.log(userQuery.data);
-  if(userQuery.isLoading) return <Spinner/>
+  const userQuery = useCurrentNurseLogin();
+  if (userQuery.isLoading) return <Spinner />
   console.log(userQuery.data?.id);
+
+
+  const handleClickAddPatient = () => {
+    if (!selectedCard) {
+      console.error("No patient selected");
+      closeModal();
+      return;
+    }
+    console.log("Adding Patient...");
+    apiRequest(
+      "http://localhost:5001/api/patient/linkPatients",
+      {
+        user_id: userQuery.data?.id,
+        patient_id: selectedCard.id,
+      },
+      (response) => {
+        console.log("Response data:", response.data);
+        closeModal();
+      }
+    );
+  };
   
-  
+
 
   return (
     <div className="card_container">
@@ -97,6 +134,8 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
               Name: {selectedCard.f_name} {selectedCard.l_name}
             </Text>
             <Text>ID: {selectedCard.identification_id}</Text>
+            <Text>PTID: {selectedCard.id}</Text>
+            <Text>User: {userQuery.data?.id}</Text>
             <Group mt="xl">
               <Button variant="outline" color="red" onClick={closeModal}>
                 Cancel
@@ -104,9 +143,8 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
               <Button
                 variant="outline"
                 color="green"
-                onClick={() => console.log("Add Patient") }
+                onClick={handleClickAddPatient}
               >
-               
                 Add Patient
               </Button>
             </Group>
