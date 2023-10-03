@@ -4,7 +4,6 @@ import axios from "axios";
 import { useCurrentNurseLogin } from "./nurse";
 import {
   GetAllPatient,
-  GetPatientsByIds,
   LinkPatient,
   Patient,
   RemoveLinkedPatients,

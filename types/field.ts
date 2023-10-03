@@ -17,11 +17,9 @@ export const FieldSchema = z.object({
 
 export const CreateFieldsSchema = z.object({
   record_id: z.string(),
-  user_id: z.string(),
   field_code: z.string(),
   field_pre_label: z.string().optional(),
-  field_value: z.string(),
-  field_post_label: z.string().optional(),
+  field_data: z.string(),
+  field_date: z.string().datetime().optional(),
 });
 export type CreateFields = z.infer<typeof CreateFieldsSchema>;
-

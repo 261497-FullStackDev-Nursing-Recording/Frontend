@@ -17,11 +17,11 @@ export const RecordSchema = z.object({
 export const CreateRecordSchema = z.object({
   user_id: z.string(),
   patient_id: z.string(),
-  bed_number: z.number(),
-  ward: z.string(),
-  disease_group: z.string(),
-  shift: z.string(),
-  visit_number: z.string(),
+  bed_number: z.number().optional(),
+  ward: z.string().optional(),
+  disease_group: z.string().optional(),
+  shift: z.string().optional(),
+  visit_number: z.string().optional(),
 });
 
 export const SearchRecordSchema = z.object({
