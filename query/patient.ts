@@ -86,7 +86,7 @@ export const useMutationLinkPatient = () => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["linkedPatient", user?.id],
+          queryKey: ["linkedPatient", user?.data?.id],
         });
       },
     }
@@ -105,7 +105,7 @@ export const useMutationUpdateLinkedPatients = () => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["linkedPatient", user?.id],
+          queryKey: ["linkedPatient", user?.data?.id],
         });
       },
     }

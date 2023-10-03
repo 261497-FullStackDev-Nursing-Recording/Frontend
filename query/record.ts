@@ -35,7 +35,7 @@ export const useMuationCreateRecord = () => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["records", user?.id],
+          queryKey: ["records", user?.data?.id],
         });
       },
     }
@@ -56,7 +56,7 @@ export const useMutationUpdateRecord = (recordId: string) => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["records", user?.id],
+          queryKey: ["records", user?.data?.id],
         });
       },
     }
@@ -75,7 +75,7 @@ export const useMutationDeleteRecord = (recordId: string) => {
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey: ["records", user?.id],
+          queryKey: ["records", user?.data?.id],
         });
       },
     }
