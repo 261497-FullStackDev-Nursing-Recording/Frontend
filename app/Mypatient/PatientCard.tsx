@@ -5,7 +5,10 @@ import AddIcon from "@mui/icons-material/Add";
 import { Patient } from "../../types/patient";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Link from "next/link";
-// import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useCurrentNurseLogin } from "../../query/nurse";
+import Spinner from "../../component/spinner";
+
 
 interface SearchPatientProps {
   apiData: Patient[];
@@ -26,10 +29,28 @@ const getStatusColor = (status: string) => {
   }
 };
 
+const apiRequest = (
+  url: string,
+  payload: object,
+  user_id: string,
+  callback: (response: any) => void
+) => {
+  axios
+    .put<any>(url, { ...payload, user_id }, { 
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(callback)
+    .catch((error) => {
+      console.error("API Error for ID:", error);
+    });
+};
+
+
 const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState<Patient | null>(null);
-  // const navigate = useNavigate();
 
   const handleCardClick = (item: Patient) => {
     setSelectedCard(item);
@@ -42,11 +63,36 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   };
 
   const goToPatientHistory = (identificationId: string) => {
-    // You can navigate to the PatientHistory component with the identificationId
-    // For now, let's just log it
-    // navigate(`/patientHistory/${identificationId}`);
     console.log("Navigating to PatientHistory with ID:", identificationId);
   };
+
+  const userQuery = useCurrentNurseLogin();
+  if (userQuery.isLoading) return <Spinner />
+  console.log(userQuery.data?.id);
+
+
+  const handleClickDeletePatient = () => {
+    if (!selectedCard || !userQuery.data?.id) {
+      console.error("No patient or user selected");
+      closeModal();
+      return;
+    }
+  
+    const user_id = userQuery.data.id;
+    const patient_id = selectedCard.id;
+  
+    console.log("Deleting Patient...");
+    apiRequest(
+      "http://localhost:5001/api/patient/updateLikedPatient",
+      { ids: [patient_id] }, 
+      user_id,
+      (response) => {
+        console.log("Response data:", response.data);
+        closeModal();
+      }
+    );
+  };
+  
 
   return (
     <div className="card_container">
@@ -103,9 +149,8 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
               <Button
                 variant="outline"
                 color="green"
-                onClick={() => console.log("Add Patient")}
+                onClick={handleClickDeletePatient}
               >
-                {/* onclick แล้วเพิ่มไปที่Favorite */}
                 Delete
               </Button>
             </Group>
