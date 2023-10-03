@@ -18,49 +18,25 @@ import { number } from "zod";
 import Backbtn from "../../component/backBtn";
 
 export default function Mypatient() {
-  const nurse_id: any = useCurrentNurseLogin()?.id;
+  const nurse = useCurrentNurseLogin();
   const [myPatientIDs, setMyPatientIDs] = useState([]);
   const [apiData, setApiData] = useState<Patient[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const {
-    data: LP_data,
-    isLoading: LP_isLoading,
-    isError: LP_isError,
-    error: LP_error,
-  } = useQueryLinkedPatients(nurse_id);
+  const nurse_id: any = nurse?.data?.id;
 
-  const {
-    data: PBID_data,
-    isLoading: PBID_isLoading,
-    isError: PBID_isError,
-    error: PBID_error,
-    refetch,
-  } = useQueryPatientsByIds({
-    ids: LP_data ? LP_data.map((link) => link.patient_id) : [],
+  const lp = useQueryLinkedPatients(nurse_id);
+
+  const pbi = useQueryPatientsByIds({
+    ids: lp.data ? lp.data.map((link) => link.patient_id) : [],
   });
 
   useEffect(() => {
-    if (LP_isLoading || PBID_isLoading) {
-      return;
-    }
-
-    if (LP_isError) {
-      console.error((LP_error as Error).message);
-      return;
-    }
-
-    if (PBID_isError) {
-      console.error((PBID_error as Error).message);
-      return;
-    }
-
-    const nursePatientIds = LP_data
-      ? LP_data.map((link) => link.patient_id)
+    const nursePatientIds = lp.data
+      ? lp.data.map((link) => link.patient_id)
       : [];
     const filteredPatients =
-      PBID_data?.filter((patient) => nursePatientIds.includes(patient.id)) ||
-      [];
+      pbi.data?.filter((patient) => nursePatientIds.includes(patient.id)) || [];
 
     // Filter patients based on search query
     const searchPattern = new RegExp(searchQuery.trim(), "i");
@@ -72,19 +48,33 @@ export default function Mypatient() {
         searchPattern.test(patient.identification_id)
     );
     setApiData(searchedPatients);
-  }, [
-    LP_isLoading,
-    PBID_isLoading,
-    LP_isError,
-    PBID_isError,
-    LP_data,
-    PBID_data,
-    searchQuery,
-  ]);
+  }, [lp.data, pbi.data, searchQuery]);
 
   const handleInputChange = (event: any) => {
     setSearchQuery(event.target.value);
   };
+
+  if (nurse.isLoading || lp.isLoading || pbi.isLoading) {
+    return (
+      <div className="spinner-container">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (nurse.isError || lp.isError || pbi.isError) {
+    return (
+      <div className="flex justify-center items-center text-center min-h-screen">
+        {(nurse.error as Error)?.message ||
+          (lp.error as Error)?.message ||
+          (pbi.error as Error)?.message}
+      </div>
+    );
+  }
+
+  console.log(nurse.data);
+  console.log(lp.data);
+  console.log(pbi.data);
 
   return (
     <div>
@@ -113,7 +103,7 @@ export default function Mypatient() {
             />
           </div>
           <div className="flex justify-between px-[10%] mb-[20px]">
-            <p className="py-[3px] text-[17px]">Total: {LP_data?.length}</p>
+            <p className="py-[3px] text-[17px]">Total: {lp.data?.length}</p>
             <Button
               variant="outlined"
               size="small"

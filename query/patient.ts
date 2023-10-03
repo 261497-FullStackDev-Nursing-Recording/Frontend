@@ -33,50 +33,40 @@ export const useQueryPatients = (body: GetAllPatient) => {
   };
 };
 export const useQuerySearchPatients = (body: SearchPatient) => {
-  const query = useQuery(["searchPatients"], async () => {
+  const query = useQuery(
+    ["searchPatients"],
+    async () => {
+      const response = await axios.post<Patient[]>(
+        "http://localhost:5001/api/patient/search",
+        body
+      );
+      return response.data;
+    },
+    { refetchInterval: 1000 }
+  );
+  const isError = query.isError;
+  return query;
+};
+
+export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
+  const query = useQuery(["getPatientsByIds"], async () => {
     const response = await axios.post<Patient[]>(
-      "http://localhost:5001/api/patient/search",
+      "http://localhost:5001/api/patient/getPatientsByIds",
       body
     );
     return response.data;
   });
   const isError = query.isError;
-  return {
-    ...query,
-    isError,
-  };
-};
-
-export const useQueryPatientsByIds = (body: GetPatientsByIds) => {
-  const query = useQuery(
-    ["getPatientsByIds"],
-    async () => {
-      const response = await axios.post<Patient[]>(
-        "http://localhost:5001/api/patient/getPatientsByIds",
-        body
-      );
-      return response.data;
-    },
-    { refetchInterval: 10000 }
-  );
-  const isError = query.isError;
-  return {
-    ...query,
-    isError,
-  };
+  return query;
 };
 
 export const useQueryLinkedPatients = (user_id: string) => {
-  const query = useQuery(
-    ["linkedPatient"],
-    async () => {
-      const response = await axios.get<LinkPatient[]>(
-        `http://localhost:5001/api/patient/getLinkedPatients/${user_id}`
-      );
-      return response.data;
-    },
-    { refetchInterval: 10000 }
-  );
+  const query = useQuery(["linkedPatient"], async () => {
+    const response = await axios.get<LinkPatient[]>(
+      `http://localhost:5001/api/patient/getLinkedPatients/${user_id}`
+    );
+    return response.data;
+  });
   return query;
 };
 
