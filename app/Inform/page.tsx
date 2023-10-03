@@ -24,8 +24,8 @@ export default function Inform() {
 				<div className="top">Identification ID</div>
 				<div className="ID">ID</div>
 			</div>
-			<Tabs defaultValue="first" variant="pills">
-				<Tabs.List style={{ display: "flex", justifyContent: "space-between" }}>
+			<Tabs defaultValue="first" variant="pills" >
+				<Tabs.List style={{ display: "flex", justifyContent: "space-between" }} className="tabs">
 					<Tabs.Tab value="first" color="teal">
 						NDX Field
 					</Tabs.Tab>
