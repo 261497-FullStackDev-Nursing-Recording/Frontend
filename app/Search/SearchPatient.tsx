@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Card } from "@mantine/core";
 import { Modal, Button, Group, Text, Center } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
+import CheckIcon from "@mui/icons-material/Check";
 import { Patient } from "../../types/patient";
 import Link from "next/link";
 import "./styles.css";
 import { useCurrentNurseLogin } from "../../query/nurse";
+import { useQueryLinkedPatients } from "../../query/patient";
 import Spinner from "../../component/spinner";
 import axios from "axios";
 
@@ -64,9 +66,16 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   };
 
   const userQuery = useCurrentNurseLogin();
-  if (userQuery.isLoading) return <Spinner />
   console.log(userQuery.data?.id);
 
+  const nurse_id: any = userQuery?.data?.id;
+
+  const lp = useQueryLinkedPatients(nurse_id);
+  if (userQuery.isLoading || lp.isLoading) return <Spinner />;
+
+  const isPatientInLinkedPatients = (patient: Patient) => {
+    return lp.data?.some((linkedPatient) => linkedPatient.id === patient.id);
+  };
 
   const handleClickAddPatient = () => {
     if (!selectedCard) {
@@ -87,8 +96,6 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
       }
     );
   };
-  
-
 
   return (
     <div className="card_container">
@@ -116,9 +123,16 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
             </div>
           </div>
           <div className="my-auto">
-            <Button onClick={() => handleCardClick(item)} variant="text">
-              <AddIcon sx={{ fontSize: "45px" }} className="add-button" />
-            </Button>
+            {isPatientInLinkedPatients(item) ? (
+              <CheckIcon
+                sx={{ fontSize: "40px", marginRight: "15px" }}
+                className="add-button"
+              />
+            ) : (
+              <Button onClick={() => handleCardClick(item)} variant="text">
+                <AddIcon sx={{ fontSize: "45px" }} className="add-button" />
+              </Button>
+            )}
           </div>
         </Card>
       ))}
