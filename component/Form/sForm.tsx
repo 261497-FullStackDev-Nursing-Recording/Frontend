@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
-import { Select } from '@mantine/core';
+import { Select } from "@mantine/core";
+import { useCurrentNurseLogin } from "../../query/nurse";
+import Spinner from "../spinner";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
+import { Record } from "../../types/record";
 
 type FormValues = {
   Sdata: {
@@ -19,6 +19,10 @@ type FormValues = {
 };
 
 export default function SForm() {
+
+  const searchParams = useSearchParams();
+  const patientId = searchParams.get("id");
+
   const {
     register,
     formState: { errors },
@@ -160,10 +164,34 @@ export default function SForm() {
     }
   };
 
-  const handleFormSubmit = () => {
-    const formData = fields.map((field) => field.text);
-    console.log("Submit data", formData);
-    // Perform any further processing or API calls here
+  const userQuery = useCurrentNurseLogin();
+  if (userQuery.isLoading) return <Spinner />;
+
+  const handleFormSubmit = async (data: FormValues) => {
+    console.log("Submit data", data.Sdata);
+    const userId = userQuery.data?.id;
+    const requestRecordBody = {
+      user_id: userId,
+      patient_id: patientId,
+    };
+    const record = await axios.post<Record>(
+      "http://localhost:5001/api/records",
+      requestRecordBody
+    );
+    const recordId = record.data.id;
+    const requestFieldsBody = data.Sdata.map(Sdata => {
+      return {
+        record_id: recordId,
+        field_type: "S_TEXT",
+        field_data: Sdata.text,
+        field_pre_label: Sdata.type
+      }
+    })
+    await axios.post(
+      "http://localhost:5001/api/fields",
+      requestFieldsBody
+    );
+    window.location.reload();
   };
 
   return (
@@ -203,7 +231,7 @@ export default function SForm() {
               ? "Add"
               : "Add"}
           </div>
-          <div onClick={handleFormSubmit} className="submitbtn">
+          <div onClick={() => handleFormSubmit({ Sdata: fields })} className="submitbtn">
             Submit
           </div>
         </div>
