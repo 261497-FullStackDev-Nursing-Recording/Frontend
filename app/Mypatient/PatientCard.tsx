@@ -9,7 +9,6 @@ import axios from "axios";
 import { useCurrentNurseLogin } from "../../query/nurse";
 import Spinner from "../../component/spinner";
 
-
 interface SearchPatientProps {
   apiData: Patient[];
 }
@@ -36,17 +35,20 @@ const apiRequest = (
   callback: (response: any) => void
 ) => {
   axios
-    .put<any>(url, { ...payload, user_id }, { 
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    .put<any>(
+      url,
+      { ...payload, user_id },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
     .then(callback)
     .catch((error) => {
       console.error("API Error for ID:", error);
     });
 };
-
 
 const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
@@ -67,9 +69,8 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   };
 
   const userQuery = useCurrentNurseLogin();
-  if (userQuery.isLoading) return <Spinner />
+  if (userQuery.isLoading) return <Spinner />;
   console.log(userQuery.data?.id);
-
 
   const handleClickDeletePatient = () => {
     if (!selectedCard || !userQuery.data?.id) {
@@ -77,14 +78,14 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
       closeModal();
       return;
     }
-  
+
     const user_id = userQuery.data.id;
     const patient_id = selectedCard.id;
-  
+
     console.log("Deleting Patient...");
     apiRequest(
       "http://localhost:5001/api/patient/updateLikedPatient",
-      { ids: [patient_id] }, 
+      { ids: [patient_id] },
       user_id,
       (response) => {
         console.log("Response data:", response.data);
@@ -92,7 +93,6 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
       }
     );
   };
-  
 
   return (
     <div className="card_container">
@@ -141,7 +141,8 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
             <Text>
               Name: {selectedCard.f_name} {selectedCard.l_name}
             </Text>
-            <Text>ID: {selectedCard.identification_id}</Text>
+            <Text>AN: {selectedCard.an}</Text>
+            <Text>Bed: {selectedCard.current_bed_number}</Text>
             <Group mt="xl">
               <Button variant="outline" color="red" onClick={closeModal}>
                 Cancel
