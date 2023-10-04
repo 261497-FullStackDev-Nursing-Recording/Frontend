@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,7 +14,6 @@ type FormValues = {
     type: string;
     name: string;
     text: string;
-
   }[];
 };
 
@@ -22,7 +21,6 @@ export default function OForm() {
   const {
     register,
     formState: { errors },
-    handleSubmit,
     control,
     setValue,
   } = useForm<FormValues>({
@@ -52,7 +50,7 @@ export default function OForm() {
   };
 
   const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
-  
+
   const handleDelete = (index: number) => {
     remove(index);
 
@@ -113,52 +111,51 @@ export default function OForm() {
     }
   };
 
+  const handleFormSubmit = () => {
+    const formData = fields.map((field) => field.text);
+    console.log("Submit data", formData);
+    // Perform any further processing or API calls here
+  };
+
   return (
     <div>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data.Odata);
-        })}
-      >
-        <h1 className="Headform">O การวางแผนการพยาบาล</h1>
+      <div className="Headform">O การวางแผนการพยาบาล</div>
 
-        {fields.map((item, index) => (
-          <div key={item.id} className="Oformcontainer">
-            <select
-              value={item.type}
-              onChange={(e) => handleTypeChange(e, index)}
-              className="select"
-              disabled={isTypeSelected[index]}
-            >
-              <option value="select">ตัวเลือก</option>
-              <option value="การวางแผนการพยาบาล">การวางแผนการพยาบาล</option>
-              <option value="ข้อมูลสนับสนุน">ข้อมูลสนับสนุน</option>
-            </select>
-            <button type="button" onClick={() => handleDelete(index)} className="deletebutton">
-              Delete
-            </button>
-            <label>
-              <section>
-                {renderFormFields(selectedTypes[index]?.type, index)}
-              </section>
-            </label>
-          </div>
-        ))}
-        <div className="btncontainer">
-          <button
-            type="button"
-            onClick={handleAdd}
-            className="addbutton"
+      {fields.map((item, index) => (
+        <div key={item.id} className="Oformcontainer">
+          <select
+            value={item.type}
+            onChange={(e) => handleTypeChange(e, index)}
+            className="select"
+            disabled={isTypeSelected[index]}
           >
-            {selectedTypes.every((item) => item.type !== "select")
-              ? "Add"
-              : "Add"}
-          </button>
-          <button type="submit" className="submitbtn">
-            Submit
-          </button>
+            <option value="select">ตัวเลือก</option>
+            <option value="การวางแผนการพยาบาล">การวางแผนการพยาบาล</option>
+            <option value="ข้อมูลสนับสนุน">ข้อมูลสนับสนุน</option>
+          </select>
+          <div onClick={() => handleDelete(index)} className="deletebutton">
+            Delete
+          </div>
+          <label>
+            <section>
+              {renderFormFields(selectedTypes[index]?.type, index)}
+            </section>
+          </label>
         </div>
-      </form>
+      ))}
+      <div className="btncontainer">
+        <div
+          onClick={handleAdd}
+          className="addbutton"
+        >
+          {selectedTypes.every((item) => item.type !== "select")
+            ? "Add"
+            : "Add"}
+        </div>
+        <div onClick={handleFormSubmit} className="submitbtn">
+          Submit
+        </div>
+      </div>
     </div>
   );
 }

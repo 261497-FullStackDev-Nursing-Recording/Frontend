@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -41,7 +41,10 @@ export default function EForm() {
     control,
   });
 
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
+  const handleTypeChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) => {
     const selectedType = e.target.value;
     setValue(`Edata.${index}.type`, selectedType as any);
     setIsTypeSelected((prevIsTypeSelected) => {
@@ -52,7 +55,7 @@ export default function EForm() {
   };
 
   const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
-  
+
   const handleDelete = (index: number) => {
     remove(index);
 
@@ -172,55 +175,53 @@ export default function EForm() {
     }
   };
 
+  const handleFormSubmit = (data: FormValues) => {
+    console.log("Submit data", data.Edata);
+    // Perform any further processing or API calls here
+  };
+
   return (
     <div>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data.Edata);
-        })}
-      >
-        <h1 className="Headform">E การประเมินผล</h1>
+      <div className="Headform">E การประเมินผล</div>
 
-        {fields.map((item, index) => (
-          <div key={item.id} className="Eformcontainer">
-            <select
-              value={item.type}
-              onChange={(e) => handleTypeChange(e, index)}
-              className="select"
-              disabled={isTypeSelected[index]}
-            >
-              <option value="select">ตัวเลือก</option>
-              <option value="O2 Saturation">O2 Saturation</option>
-              <option value="ก๊าซในเลือดแดงมีค่าปกติ PaO2">ก๊าซในเลือดแดงมีค่าปกติ PaO2</option>
-              <option value="ก๊าซในเลือดแดงมีค่าปกติ PaCO2">ก๊าซในเลือดแดงมีค่าปกติ PaCO2</option>
-              <option value="เลือกผลของการรักษา">เลือกผลของการรักษา</option>
-              <option value="ข้อมูลเพิ่มเติม">ข้อมูลเพิ่มเติม</option>
-            </select>
-            <button type="button" onClick={() => handleDelete(index)} className="deletebutton">
-              Delete
-            </button>
-            <label>
-              <section>
-                {renderFormFields(selectedTypes[index]?.type, index)}
-              </section>
-            </label>
-          </div>
-        ))}
-        <div className="btncontainer">
-          <button
-            type="button"
-            onClick={handleAdd}
-            className="addbutton"
+      {fields.map((item, index) => (
+        <div key={item.id} className="Eformcontainer">
+          <select
+            value={item.type}
+            onChange={(e) => handleTypeChange(e, index)}
+            className="select"
+            disabled={isTypeSelected[index]}
           >
-            {selectedTypes.every((item) => item.type !== "select")
-              ? "Add"
-              : "Add"}
-          </button>
-          <button type="submit" className="submitbtn">
-            Submit
-          </button>
+            <option value="select">ตัวเลือก</option>
+            <option value="O2 Saturation">O2 Saturation</option>
+            <option value="ก๊าซในเลือดแดงมีค่าปกติ PaO2">ก๊าซในเลือดแดงมีค่าปกติ PaO2</option>
+            <option value="ก๊าซในเลือดแดงมีค่าปกติ PaCO2">ก๊าซในเลือดแดงมีค่าปกติ PaCO2</option>
+            <option value="เลือกผลของการรักษา">เลือกผลของการรักษา</option>
+            <option value="ข้อมูลเพิ่มเติม">ข้อมูลเพิ่มเติม</option>
+          </select>
+          <div onClick={() => handleDelete(index)} className="deletebutton">
+            Delete
+          </div>
+          <label>
+            <section>
+              {renderFormFields(selectedTypes[index]?.type, index)}
+            </section>
+          </label>
         </div>
-      </form>
+      ))}
+      <div className="btncontainer">
+        <div
+          onClick={handleAdd}
+          className="addbutton"
+        >
+          {selectedTypes.every((item) => item.type !== "select")
+            ? "Add"
+            : "Add"}
+        </div>
+        <div onClick={() => handleFormSubmit({ Edata: fields })} className="submitbtn">
+          Submit
+        </div>
+      </div>
     </div>
   );
 }

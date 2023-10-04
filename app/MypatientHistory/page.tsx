@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import Backbtn from "../../component/backBtn";
 
-interface Patient {
+export type Patient = {
   id: string;
   f_name: string;
   l_name: string;
@@ -21,7 +21,7 @@ interface Patient {
   created_at: string;
 }
 
-interface Record {
+export type Record = {
   id: string;
   user_id: string;
   patient_id: string;

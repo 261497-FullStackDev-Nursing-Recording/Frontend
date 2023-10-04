@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import "./formlayout.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -27,7 +27,7 @@ export default function SForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Sdata: [{ type: "select", name: "" , date: ""}],
+      Sdata: [{ type: "select", name: "", date: "" }],
     },
   });
 
@@ -52,7 +52,7 @@ export default function SForm() {
   };
 
   const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
-  
+
   const handleDelete = (index: number) => {
     remove(index);
 
@@ -68,9 +68,9 @@ export default function SForm() {
     setIsTypeSelected((prevIsTypeSelected) => [...prevIsTypeSelected, false]);
 
     if (selectedTypes.every((item) => item.type !== "select")) {
-      append({ type: "select", name: "", text: "",date: "" });
+      append({ type: "select", name: "", text: "", date: "" });
     } else {
-      append({ type: "", name: "", text: "" ,date: ""});
+      append({ type: "", name: "", text: "", date: "" });
     }
   };
 
@@ -78,79 +78,79 @@ export default function SForm() {
     switch (selectedType) {
       case 'โรคประจำตัว':
         return (
-          
+
           <label>
-          <section className="sectiongap">
-            <input  {...register(`Sdata.${index}.name`) } placeholder={`กรอกโรคประจำตัว`}/>
-            
-          </section>
-        </label>
-          
+            <section className="sectiongap">
+              <input  {...register(`Sdata.${index}.name`)} placeholder={`กรอกโรคประจำตัว`} />
+
+            </section>
+          </label>
+
         );
       case 'อาการของผู้ป่วย':
         return (
           <label>
             <section className="sectiongap">
-              <textarea className="textarearesize" {...register(`Sdata.${index}.text`)}  placeholder={`กรอกอาการของผู้ป่วย`} />
+              <textarea className="textarearesize" {...register(`Sdata.${index}.text`)} placeholder={`กรอกอาการของผู้ป่วย`} />
             </section>
           </label>
         );
 
 
-        case 'DTX':
-          return (
-            <label>
-                <section className="sectiongap">
-                  <div className="gapInput">DTX</div>
-                  <input
-                    {...register(`Sdata.${index}.name`)}
-                    placeholder={`กรอกค่า`}
-                  />
-                  <span className="gapInput"> mg%</span>
-                </section>
-                <div className="gapInput">เลือกวันที่</div>
-                <input
-                  {...register(`Sdata.${index}.date`)}
-                  placeholder={`วัน/เดือน/ปี`}
-                />
-                 {/* <DatePicker
+      case 'DTX':
+        return (
+          <label>
+            <section className="sectiongap">
+              <div className="gapInput">DTX</div>
+              <input
+                {...register(`Sdata.${index}.name`)}
+                placeholder={`กรอกค่า`}
+              />
+              <span className="gapInput"> mg%</span>
+            </section>
+            <div className="gapInput">เลือกวันที่</div>
+            <input
+              {...register(`Sdata.${index}.date`)}
+              placeholder={`วัน/เดือน/ปี`}
+            />
+            {/* <DatePicker
                   selected={new Date()} // Set the default value to today
                   onChange={(date) => {
   
                   }}
                   dateFormat="dd/MM/yyyy" 
                 /> */}
-                
-              </label>  
-          );
 
-          case 'Ketone':
-            return (
-              <>
-                <label>
-                  <section className="sectiongap">
-                    <div className="gapInput">Ketone</div>
-                    <input
-                      {...register(`Sdata.${index}.name`)}
-                      placeholder={`กรอกค่า`}
-                    />
-                    <span className="gapInput"> mmol/L</span>
-                  </section>
-                  <div className="gapInput">เลือกวันที่</div>
-                    <input
-                  {...register(`Sdata.${index}.date`)}
-                  placeholder={`วัน/เดือน/ปี`}
+          </label>
+        );
+
+      case 'Ketone':
+        return (
+          <>
+            <label>
+              <section className="sectiongap">
+                <div className="gapInput">Ketone</div>
+                <input
+                  {...register(`Sdata.${index}.name`)}
+                  placeholder={`กรอกค่า`}
                 />
-                  {/* <DatePicker
+                <span className="gapInput"> mmol/L</span>
+              </section>
+              <div className="gapInput">เลือกวันที่</div>
+              <input
+                {...register(`Sdata.${index}.date`)}
+                placeholder={`วัน/เดือน/ปี`}
+              />
+              {/* <DatePicker
                     selected={new Date()} // Set the default value to today
                     onChange={(date) => {
     
                     }}
                     dateFormat="dd/MM/yyyy" // Specify the date format
                   /> */}
-                </label>
-              </>
-            );    
+            </label>
+          </>
+        );
 
 
 
@@ -160,13 +160,14 @@ export default function SForm() {
     }
   };
 
+  const handleFormSubmit = () => {
+    const formData = fields.map((field) => field.text);
+    console.log("Submit data", formData);
+    // Perform any further processing or API calls here
+  };
+
   return (
     <div>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data.Sdata);
-        })}
-      >
         <h1 className="Headform">S อาการของผู้ป่วย</h1>
 
         {fields.map((item, index) => (
@@ -183,9 +184,9 @@ export default function SForm() {
               <option value="DTX">DTX</option>
               <option value="Ketone">Ketone</option>
             </select>
-            <button type="button" onClick={() => handleDelete(index)} className="deletebutton">
+            <div onClick={() => handleDelete(index)} className="deletebutton">
               Delete
-            </button>
+            </div>
             <label>
               <section>
                 {renderFormFields(selectedTypes[index]?.type, index)}
@@ -194,20 +195,18 @@ export default function SForm() {
           </div>
         ))}
         <div className="btncontainer">
-          <button
-            type="button"
+          <div
             onClick={handleAdd}
             className="addbutton"
           >
             {selectedTypes.every((item) => item.type !== "select")
               ? "Add"
               : "Add"}
-          </button>
-          <button type="submit" className="submitbtn">
+          </div>
+          <div onClick={handleFormSubmit} className="submitbtn">
             Submit
-          </button>
+          </div>
         </div>
-      </form>
     </div>
   );
 }
