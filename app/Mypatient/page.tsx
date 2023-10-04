@@ -36,6 +36,7 @@ export default function Mypatient() {
     try {
       await deleteAll.mutateAsync(allIDs);
       closeModal();
+      window.location.reload();
     } catch (error) {
       console.error("Error deleting patients:", error);
       closeModal();

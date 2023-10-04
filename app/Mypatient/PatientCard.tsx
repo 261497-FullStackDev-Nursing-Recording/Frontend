@@ -97,6 +97,7 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
     try {
       deleteP.mutateAsync([patient_id]);
       closeModal();
+      window.location.reload();
     } catch (error) {
       console.error("Error deleting patients:", error);
       closeModal();
