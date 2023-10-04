@@ -7,6 +7,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Link from "next/link";
 import axios from "axios";
 import { useCurrentNurseLogin } from "../../query/nurse";
+import { useMutationUpdateLinkedPatients } from "../../query/patient";
 import Spinner from "../../component/spinner";
 
 interface SearchPatientProps {
@@ -28,27 +29,27 @@ const getStatusColor = (status: string) => {
   }
 };
 
-const apiRequest = (
-  url: string,
-  payload: object,
-  user_id: string,
-  callback: (response: any) => void
-) => {
-  axios
-    .put<any>(
-      url,
-      { ...payload, user_id },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(callback)
-    .catch((error) => {
-      console.error("API Error for ID:", error);
-    });
-};
+// const apiRequest = (
+//   url: string,
+//   payload: object,
+//   user_id: string,
+//   callback: (response: any) => void
+// ) => {
+//   axios
+//     .put<any>(
+//       url,
+//       { ...payload, user_id },
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     )
+//     .then(callback)
+//     .catch((error) => {
+//       console.error("API Error for ID:", error);
+//     });
+// };
 
 const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
@@ -70,7 +71,8 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
 
   const userQuery = useCurrentNurseLogin();
   if (userQuery.isLoading) return <Spinner />;
-  console.log(userQuery.data?.id);
+  const nurse_id: any = userQuery?.data?.id;
+  const deleteP = useMutationUpdateLinkedPatients(nurse_id);
 
   const handleClickDeletePatient = () => {
     if (!selectedCard || !userQuery.data?.id) {
@@ -79,19 +81,26 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
       return;
     }
 
-    const user_id = userQuery.data.id;
+    // const user_id = userQuery.data.id;
     const patient_id = selectedCard.id;
 
     console.log("Deleting Patient...");
-    apiRequest(
-      "http://localhost:5001/api/patient/updateLikedPatient",
-      { ids: [patient_id] },
-      user_id,
-      (response) => {
-        console.log("Response data:", response.data);
-        closeModal();
-      }
-    );
+    // apiRequest(
+    //   `http://localhost:5001/api/patient/updateLikedPatient/${user_id}`,
+    //   { ids: [patient_id] },
+    //   user_id,
+    //   (response) => {
+    //     console.log("Response data:", response.data);
+    //     closeModal();
+    //   }
+    // );
+    try {
+      deleteP.mutateAsync([patient_id]);
+      closeModal();
+    } catch (error) {
+      console.error("Error deleting patients:", error);
+      closeModal();
+    }
   };
 
   return (

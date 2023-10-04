@@ -86,12 +86,11 @@ export default function Mypatient() {
     );
   }
 
-  // if (deleteAll.isError) {
-  //   console.log(deleteAll.error);
-  //   // closeModal();
-  // }
+  if (deleteAll.isError) {
+    console.log(deleteAll.error);
+  }
 
-  console.log(allIDs);
+  // console.log(allIDs);
 
   return (
     <div>
