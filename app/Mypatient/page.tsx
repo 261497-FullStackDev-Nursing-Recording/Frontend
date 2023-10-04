@@ -4,28 +4,55 @@ import LocalHospitalRoundedIcon from "@mui/icons-material/LocalHospitalRounded";
 import "./styles.css";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
+import { Modal, Button, Group, Text } from "@mantine/core";
 import Navbar from "../../component/Navbarbottom";
 import Spinner from "../../component/spinner";
-import { useQueryLinkedPatients } from "../../query/patient";
+import {
+  useQueryLinkedPatients,
+  useMutationUpdateLinkedPatients,
+} from "../../query/patient";
 import PatientCard from "./PatientCard";
-import { Patient } from "../../types/patient";
+import { Patient, RemoveLinkedPatients } from "../../types/patient";
 import { useCurrentNurseLogin } from "../../query/nurse";
 import Backbtn from "../../component/backBtn";
 
 export default function Mypatient() {
   const nurse = useCurrentNurseLogin();
-  const [myPatientIDs, setMyPatientIDs] = useState([]);
   const [apiData, setApiData] = useState<Patient[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [opened, setOpened] = useState(false);
+  const [allIDs, setAllIDs] = useState<string[]>([]);
+
+  const handleClearAll = () => {
+    setOpened(true);
+  };
+
+  const closeModal = () => {
+    setOpened(false);
+  };
+
+  const handleDeleteAll = async () => {
+    try {
+      await deleteAll.mutateAsync(allIDs);
+      closeModal();
+    } catch (error) {
+      console.error("Error deleting patients:", error);
+      closeModal();
+    }
+  };
 
   const nurse_id: any = nurse?.data?.id;
 
   const lp = useQueryLinkedPatients(nurse_id);
 
+  const deleteAll = useMutationUpdateLinkedPatients(nurse_id);
+
   useEffect(() => {
     if (!lp.data) {
       return;
+    } else {
+      setAllIDs(lp.data.map((patient) => patient.id));
     }
     const searchPattern = new RegExp(searchQuery.trim(), "i");
     const searchedPatients = lp.data.filter(
@@ -43,7 +70,7 @@ export default function Mypatient() {
     setSearchQuery(event.target.value);
   };
 
-  if (nurse.isLoading || lp.isLoading) {
+  if (nurse.isLoading || lp.isLoading || deleteAll.isLoading) {
     return (
       <div className="spinner-container">
         <Spinner />
@@ -58,6 +85,13 @@ export default function Mypatient() {
       </div>
     );
   }
+
+  // if (deleteAll.isError) {
+  //   console.log(deleteAll.error);
+  //   // closeModal();
+  // }
+
+  console.log(allIDs);
 
   return (
     <div>
@@ -87,12 +121,7 @@ export default function Mypatient() {
           </div>
           <div className="flex justify-between px-[10%] mb-[20px]">
             <p className="py-[3px] text-[17px]">Total: {lp.data?.length}</p>
-            <Button
-              variant="outlined"
-              size="small"
-              color="error"
-              sx={{ marginLeft: "10px" }}
-            >
+            <Button variant="outline" color="red" onClick={handleClearAll}>
               Clear All
             </Button>
           </div>
@@ -102,6 +131,25 @@ export default function Mypatient() {
         </div>
         <Navbar />
       </div>
+      <Modal
+        opened={opened}
+        onClose={closeModal}
+        size="lg"
+        title="Clear All"
+        className="items-center"
+      >
+        <div>
+          <Text>ยืนยันลบผู้ป่วยทั้งหมดออกจาก My Patient</Text>
+          <Group mt="xl">
+            <Button variant="outline" color="red" onClick={closeModal}>
+              ยกเลิก
+            </Button>
+            <Button variant="outline" color="green" onClick={handleDeleteAll}>
+              ยืนยัน
+            </Button>
+          </Group>
+        </div>
+      </Modal>
     </div>
     //  <div>
     //    <App/>
