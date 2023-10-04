@@ -92,7 +92,7 @@ export const useMutationUpdateLinkedPatients = (user_id: string) => {
     ["removeLinkedPatients"],
     async (args: RemoveLinkedPatients) => {
       await axios.put<null>(
-        `http://localhost:5001/patient/updateLikedPatient/${user_id}`,
+        `http://localhost:5001/api/patient/updateLikedPatient/${user_id}`,
         args
       );
     },
