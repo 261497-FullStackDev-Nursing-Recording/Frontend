@@ -23,7 +23,7 @@ export default function Searchpage() {
   const [searchBed, setSerachBed] = useState(0);
   const [searchName, setSearchName] = useState("");
   const [params, setParams] = useState({});
-  const {user,getAuth} = useAuth();
+  const {user,getAuth,isLoading} = useAuth();
   useEffect(() => {
     getAuth();
   }, []);
