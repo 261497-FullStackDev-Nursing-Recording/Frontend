@@ -12,25 +12,24 @@ import { Record } from "../../types/record";
 type FormValues = {
   Idata: {
     type: string;
-    // name: string;
+    
     text: string;
+
   }[];
 };
 
 export default function IForm() {
-  
   const searchParams = useSearchParams();
   const patientId = searchParams.get("id");
 
   const {
     register,
     formState: { errors },
-    handleSubmit,
     control,
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Idata: [{ type: "select" }],
+      Idata: [{ type: "select"}],
     },
   });
 
@@ -44,10 +43,7 @@ export default function IForm() {
     control,
   });
 
-  const handleTypeChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    index: number
-  ) => {
+  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const selectedType = e.target.value;
     setValue(`Idata.${index}.type`, selectedType as any);
     setIsTypeSelected((prevIsTypeSelected) => {
@@ -58,7 +54,7 @@ export default function IForm() {
   };
 
   const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
-
+  
   const handleDelete = (index: number) => {
     remove(index);
 
@@ -119,7 +115,6 @@ export default function IForm() {
     }
   };
 
-  
   const userQuery = useCurrentNurseLogin();
   if (userQuery.isLoading) return <Spinner />;
 
@@ -150,9 +145,11 @@ export default function IForm() {
     window.location.reload();
   };
 
+
+
   return (
     <div>
-      <div className="Headform">I ข้อวินิจฉัย</div>
+      <div className="Headform">I การปฏิบัติการพยาบาล</div>
 
       {fields.map((item, index) => (
         <div key={item.id} className="Iformcontainer">
@@ -166,20 +163,25 @@ export default function IForm() {
             <option value="ติดตามระดับน้ำตาลDTX">ติดตามระดับน้ำตาลDTX</option>
             <option value="การดูแลให้รับยา">การดูแลให้รับยา</option>
             <option value="ข้อมูลสนับสนุน">ข้อมูลสนับสนุน</option>
-
-
           </select>
           <div onClick={() => handleDelete(index)} className="deletebutton">
             Delete
           </div>
           <label>
-            <section>{renderFormFields(selectedTypes[index]?.type, index)}</section>
+            <section>
+              {renderFormFields(selectedTypes[index]?.type, index)}
+            </section>
           </label>
         </div>
       ))}
       <div className="btncontainer">
-        <div onClick={handleAdd} className="addbutton">
-          {selectedTypes.every((item) => item.type !== "select") ? "Add" : "Add"}
+        <div
+          onClick={handleAdd}
+          className="addbutton"
+        >
+          {selectedTypes.every((item) => item.type !== "select")
+            ? "Add"
+            : "Add"}
         </div>
         <div onClick={() => handleFormSubmit({ Idata: fields })} className="submitbtn">
           Submit
