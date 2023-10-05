@@ -98,9 +98,12 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   };
 
   return (
-    <div className="card_container">
+    <div className="flex flex-wrap justify-center">
       {apiData.map((item, index) => (
-        <Card className="patient-card" key={index}>
+        <Card
+          className="flex flex-row min-w-[331.2px] md:w-7/20 lg:w-1/4 min-h-[90px] justify-between bg-[#BFDBFE] font-[bold] text-[#2563EB] mx-[10px] mb-[15px] pl-[30px] pr-0 rounded-[10px]"
+          key={index}
+        >
           <div
             className="my-auto patient-info"
             onClick={() => goToPatientHistory(item.id)}
@@ -130,7 +133,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
               />
             ) : (
               <Button onClick={() => handleCardClick(item)} variant="text">
-                <AddIcon sx={{ fontSize: "45px" }} className="add-button" />
+                <AddIcon sx={{ fontSize: "45px", color: "#2563EB" }} />
               </Button>
             )}
           </div>
