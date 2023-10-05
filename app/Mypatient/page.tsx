@@ -25,8 +25,11 @@ import { UserType, useAuthStore } from "../../services/authStore";
 export default function Mypatient() {
   const nurse_id: string = "498bffa2-97ee-491c-a417-8d44a49e5660";
   
-  const router = useRouter();
-  
+   //Check User's authen 
+   const { user, getAuth, isLoading } = useAuth();
+   useEffect(() => {
+   getAuth();
+ }, []);
 
   const {
     data: linkedPatientsData,

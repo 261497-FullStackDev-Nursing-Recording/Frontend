@@ -17,20 +17,37 @@ function useAuth() {
     state.setIsLoading,
   ]);
 
+ 
+  // const getAuth = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const res = await axios.get("/api/auth/me", { withCredentials: true });
+  //     setUser(res.data);
+  //     setIsLoading("signedIn");
+  //   } catch (err) {
+  //     console.log(err);
+  //     setIsLoading("loggedOut");
+  //   }
+  // };
+
   //set user if isLoading is true
-  const bootstrapAsync = async () => {
+  async function getAuth() {
     setIsLoading(true);
     try {
-      const res = await axiosCustom.get<UserType>(
-        "http://localhost:5001/api/auth/me"
+      const res = await axios.get(
+        "http://localhost:5001/api/auth/me",{ withCredentials: true}
       );
       if (res.data) {
         setUser(res.data);
+        return console.log(res.data);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching data:",error);
+      alert('please sign in...');
+      window.location.href = '/Login';
     }
     setIsLoading(false);
+
   };
 
   // useEffect(() => {
@@ -72,7 +89,7 @@ function useAuth() {
     setIsLoading(false);
   }
 
-  return { signIn, user, isLoading, signOut, getUser };
+  return { signIn, user, isLoading, signOut, getUser, getAuth };
 }
 
 export default useAuth;

@@ -9,34 +9,17 @@ import PatientCount from "../../component/Dashboard/PatientCount";
 import Spinner from "../../component/spinner";
 import Navbar from "../../component/Navbarbottom";
 import PatientNurseRatio from "../../utils/patientRatio";
-import { useRouter } from "next/navigation";
+import useAuth from "../../services/useAuth";
+import { useLocalStorage } from "usehooks-ts";
 
 export default function Dashboard(): JSX.Element {
   const queryClient = new QueryClient();
 
-  const router = useRouter();
-
-//   // Function to get an array of cookie names
-// function getCookieNames(): string[] {
-//   const cookieString = document.cookie;
-//   const cookies = cookieString.split(';').map(cookie => cookie.trim());
-
-//   const cookieNames = cookies.map(cookie => {
-//     const parts = cookie.split('=');
-//     return parts[0];
-//   });
-
-//   return cookieNames;
-// }
-
-// // Example usage
-// const cookieNames = getCookieNames();
-// console.log(cookieNames);
-
-//   if(cookieNames[0] != 'access_token' ){
-//     alert('Not Login Yet!!');
-//       window.location.href = '/Login';
-//   }
+  //Check User's authen 
+  const { user, getAuth, isLoading } = useAuth();
+  useEffect(() => {
+  getAuth();
+}, []);
 
   return (
     <QueryClientProvider client={queryClient}>

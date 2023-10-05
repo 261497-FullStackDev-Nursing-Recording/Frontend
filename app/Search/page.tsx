@@ -10,6 +10,7 @@ import Navbar from "../../component/Navbarbottom";
 import { useQuerySearchPatients } from "../../query/patient";
 import { Patient } from "../../types/patient";
 import SearchPatient from "./SearchPatient";
+import useAuth from "../../services/useAuth";
 
 export default function Searchpage() {
   const [valueID, setValueID] = useDebouncedState("", 500, { leading: true });
@@ -19,6 +20,12 @@ export default function Searchpage() {
   const [apiData, setApiData] = useState<Patient[]>([]);
 
   const { data, isLoading, isError, error } = useQuerySearchPatients({});
+
+    //Check User's authen 
+    const { user, getAuth,} = useAuth();
+    useEffect(() => {
+    getAuth();
+  }, []);
 
   if (isLoading) {
     return (

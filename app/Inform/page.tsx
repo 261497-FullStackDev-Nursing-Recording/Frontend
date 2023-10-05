@@ -6,7 +6,16 @@ import EForm from "../../component/Form/eForm";
 import IForm from "../../component/Form/iForm";
 import OForm from "../../component/Form/oForm";
 import "./styles.css";
+import useAuth from "../../services/useAuth";
+import { useEffect } from "react";
 export default function Inform() {
+  //Check User's authen 
+  const { user, getAuth, isLoading } = useAuth();
+  useEffect(() => {
+  getAuth();
+}, []);
+
+
   return (
     <div className="inform-container">
       <div className="svgcontainer">
