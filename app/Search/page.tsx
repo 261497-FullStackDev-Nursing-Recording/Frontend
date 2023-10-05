@@ -8,82 +8,98 @@ import { useDebouncedState, useSetState } from "@mantine/hooks";
 import Spinner from "../../component/spinner";
 import Navbar from "../../component/Navbarbottom";
 import { useQueryPatients, useQuerySearchPatients } from "../../query/patient";
+import { useCurrentNurseLogin } from "../../query/nurse";
 import { Patient, SearchPatient } from "../../types/patient";
 import PatientCard from "./SearchPatient";
 import Backbtn from "../../component/backBtn";
+import axios from "axios";
 export default function Searchpage() {
-  // const [valueID, setValueID] = useDebouncedState("", 500, { leading: true });
-  // const [valueName, setValueName] = useDebouncedState("", 500, {
-  //   leading: true,
-  // });
-
   const [apiData, setApiData] = useState<Patient[]>([]);
   const [searchAN, setSearchAN] = useState("");
   const [searchBed, setSerachBed] = useState(0);
   const [searchName, setSearchName] = useState("");
-  const [params, setParams] = useState({});
 
-
-  const { data, isLoading, isError, error, refetch } =
-    useQuerySearchPatients(params);
-
-
-  if (isLoading) {
+  const nurse = useCurrentNurseLogin();
+  if (nurse.isLoading) {
     return (
-      <div className="spinner-container">
+      <div className="flex justify-center items-center text-center min-h-screen">
         <Spinner />
       </div>
     );
   }
-
-  if (isError) {
+  if (nurse.isError) {
     return (
       <div className="flex justify-center items-center text-center min-h-screen">
-        {(error as Error).message}
+        {(nurse.error as Error).message}
       </div>
     );
   }
 
-  if (!data) {
-    return undefined;
-  }
-
-  const handleSearchAN = () => {
+  const handleSearchAN = async () => {
     if (searchAN.trim() === "") {
       apiData.length = 0;
       setApiData([]);
       return;
     }
-    setParams({ an: searchAN });
-    refetch();
-    console.log(data);
-    setApiData(data);
+    setApiData([]);
+    const params = { an: searchAN };
+
+    try {
+      const response = await axios.post<Patient[]>(
+        "http://localhost:5001/api/patient/search",
+        params
+      );
+      setApiData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
-  const handleSearchBed = () => {
-    setParams({ bed_number: searchBed });
-    refetch();
-    console.log(data);
-    setApiData(data);
+  const handleSearchBed = async () => {
+    if (searchBed === 0) {
+      apiData.length = 0;
+      setApiData([]);
+      return;
+    }
+
+    setApiData([]);
+    const params = { bed_number: searchBed };
+
+    try {
+      const response = await axios.post<Patient[]>(
+        "http://localhost:5001/api/patient/search",
+        params
+      );
+      setApiData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
-  const handleSearchName = () => {
+  const handleSearchName = async () => {
     if (searchName.trim() === "") {
       apiData.length = 0;
       setApiData([]);
       return;
     }
+
     setApiData([]);
-    setParams({ name: searchName });
-    refetch();
-    console.log(data);
-    setApiData(data);
+    const params = { name: searchName };
+
+    try {
+      const response = await axios.post<Patient[]>(
+        "http://localhost:5001/api/patient/search",
+        params
+      );
+      setApiData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   return (
-
     <div className="mx-auto">
-      <Backbtn/>
+      <Backbtn />
       <div className="flex justify-center mt-[50px]">
         <PersonSearchRoundedIcon sx={{ fontSize: 40 }} />
       </div>

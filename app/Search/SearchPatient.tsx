@@ -71,7 +71,12 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
   const nurse_id: any = userQuery?.data?.id;
 
   const lp = useQueryLinkedPatients(nurse_id);
-  if (userQuery.isLoading || lp.isLoading) return <Spinner />;
+  // if (userQuery.isLoading || lp.isLoading)
+  //   return (
+  //     <div className="flex justify-center items-center text-center min-h-screen">
+  //       <Spinner />
+  //     </div>
+  //   );
 
   const isPatientInLinkedPatients = (patient: Patient) => {
     return lp.data?.some((linkedPatient) => linkedPatient.id === patient.id);
@@ -92,7 +97,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
       },
       (response) => {
         console.log("Response data:", response.data);
-        closeModal();
+        window.location.reload();
       }
     );
   };
