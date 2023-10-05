@@ -12,14 +12,15 @@ import { Record } from "../../types/record";
 type FormValues = {
   Sdata: {
     type: string;
-    name: string;
+    // name: string;
     text: string;
+
     date: string;
   }[];
 };
 
 export default function SForm() {
-
+  
   const searchParams = useSearchParams();
   const patientId = searchParams.get("id");
 
@@ -31,7 +32,7 @@ export default function SForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Sdata: [{ type: "select", name: "", date: "" }],
+      Sdata: [{ type: "select" }],
     },
   });
 
@@ -45,7 +46,10 @@ export default function SForm() {
     control,
   });
 
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
+  const handleTypeChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) => {
     const selectedType = e.target.value;
     setValue(`Sdata.${index}.type`, selectedType as any);
     setIsTypeSelected((prevIsTypeSelected) => {
@@ -72,9 +76,9 @@ export default function SForm() {
     setIsTypeSelected((prevIsTypeSelected) => [...prevIsTypeSelected, false]);
 
     if (selectedTypes.every((item) => item.type !== "select")) {
-      append({ type: "select", name: "", text: "", date: "" });
+      append({ type: "select", text: "" ,date: ""});
     } else {
-      append({ type: "", name: "", text: "", date: "" });
+      append({ type: "", text: "" , date: ""});
     }
   };
 
@@ -85,57 +89,57 @@ export default function SForm() {
 
           <label>
             <section className="sectiongap">
-              <input  {...register(`Sdata.${index}.name`)} placeholder={`กรอกโรคประจำตัว`} />
+              <input  {...register(`Sdata.${index}.text`)} placeholder={`กรอกโรคประจำตัว`} />
 
             </section>
           </label>
 
         );
-      case 'อาการของผู้ป่วย':
-        return (
-          <label>
-            <section className="sectiongap">
-              <textarea className="textarearesize" {...register(`Sdata.${index}.text`)} placeholder={`กรอกอาการของผู้ป่วย`} />
-            </section>
-          </label>
-        );
+        case 'อาการของผู้ป่วย':
+          return (
+            <label>
+              <section className="sectiongap">
+                <textarea className="textarearesize" {...register(`Sdata.${index}.text`)} placeholder={`กรอกอาการของผู้ป่วย`} />
+              </section>
+            </label>
+          );
 
 
-      case 'DTX':
-        return (
-          <label>
-            <section className="sectiongap">
-              <div className="gapInput">DTX</div>
-              <input
-                {...register(`Sdata.${index}.name`)}
-                placeholder={`กรอกค่า`}
-              />
-              <span className="gapInput"> mg%</span>
-            </section>
-            <div className="gapInput">เลือกวันที่</div>
-            <input
-              {...register(`Sdata.${index}.date`)}
-              placeholder={`วัน/เดือน/ปี`}
-            />
-            {/* <DatePicker
-                  selected={new Date()} // Set the default value to today
-                  onChange={(date) => {
-  
-                  }}
-                  dateFormat="dd/MM/yyyy" 
-                /> */}
-
-          </label>
-        );
-
-      case 'Ketone':
+          case 'DTX':
+            return (
+              <label>
+                <section className="sectiongap">
+                  <div className="gapInput">DTX</div>
+                  <input
+                    {...register(`Sdata.${index}.text`)}
+                    placeholder={`กรอกค่า`}
+                  />
+                  <span className="gapInput"> mg%</span>
+                </section>
+                <div className="gapInput">เลือกวันที่</div>
+                <input
+                  {...register(`Sdata.${index}.date`)}
+                  placeholder={`วัน/เดือน/ปี`}
+                />
+                {/* <DatePicker
+                      selected={new Date()} // Set the default value to today
+                      onChange={(date) => {
+      
+                      }}
+                      dateFormat="dd/MM/yyyy" 
+                    /> */}
+    
+              </label>
+            );
+    
+            case 'Ketone':
         return (
           <>
             <label>
               <section className="sectiongap">
                 <div className="gapInput">Ketone</div>
                 <input
-                  {...register(`Sdata.${index}.name`)}
+                  {...register(`Sdata.${index}.text`)}
                   placeholder={`กรอกค่า`}
                 />
                 <span className="gapInput"> mmol/L</span>
@@ -159,11 +163,16 @@ export default function SForm() {
 
 
 
+
+
       default:
         return null;
     }
   };
 
+
+
+  
   const userQuery = useCurrentNurseLogin();
   if (userQuery.isLoading) return <Spinner />;
 
@@ -196,45 +205,39 @@ export default function SForm() {
 
   return (
     <div>
-        <h1 className="Headform">S อาการของผู้ป่วย</h1>
+      <div className="Headform">S อาการของผู้ป่วย</div>
 
-        {fields.map((item, index) => (
-          <div key={item.id} className="Sformcontainer">
-            <select
-              value={item.type}
-              onChange={(e) => handleTypeChange(e, index)}
-              className="select"
-              disabled={isTypeSelected[index]}
-            >
-              <option value="select">ตัวเลือก</option>
-              <option value="โรคประจำตัว">โรคประจำตัว</option>
-              <option value="อาการของผู้ป่วย">อาการของผู้ป่วย</option>
-              <option value="DTX">DTX</option>
-              <option value="Ketone">Ketone</option>
-            </select>
-            <div onClick={() => handleDelete(index)} className="deletebutton">
-              Delete
-            </div>
-            <label>
-              <section>
-                {renderFormFields(selectedTypes[index]?.type, index)}
-              </section>
-            </label>
-          </div>
-        ))}
-        <div className="btncontainer">
-          <div
-            onClick={handleAdd}
-            className="addbutton"
+      {fields.map((item, index) => (
+        <div key={item.id} className="Sformcontainer">
+          <select
+            value={item.type}
+            onChange={(e) => handleTypeChange(e, index)}
+            className="select"
+            disabled={isTypeSelected[index]}
           >
-            {selectedTypes.every((item) => item.type !== "select")
-              ? "Add"
-              : "Add"}
+            <option value="select">ตัวเลือก</option>
+            <option value="โรคประจำตัว">โรคประจำตัว</option>
+            <option value="อาการของผู้ป่วย">อาการของผู้ป่วย</option>
+            <option value="DTX">DTX</option>
+            <option value="Ketone">Ketone</option>
+            
+          </select>
+          <div onClick={() => handleDelete(index)} className="deletebutton">
+            Delete
           </div>
-          <div onClick={() => handleFormSubmit({ Sdata: fields })} className="submitbtn">
-            Submit
-          </div>
+          <label>
+            <section>{renderFormFields(selectedTypes[index]?.type, index)}</section>
+          </label>
         </div>
+      ))}
+      <div className="btncontainer">
+        <div onClick={handleAdd} className="addbutton">
+          {selectedTypes.every((item) => item.type !== "select") ? "Add" : "Add"}
+        </div>
+        <div onClick={() => handleFormSubmit({ Sdata: fields })} className="submitbtn">
+          Submit
+        </div>
+      </div>
     </div>
   );
 }

@@ -9,16 +9,16 @@ import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { Record } from "../../types/record";
 
-
 type FormValues = {
   Odata: {
     type: string;
-    name: string;
+    // name: string;
     text: string;
   }[];
 };
 
-export default function OForm() {
+export default function NDXForm() {
+  
   const searchParams = useSearchParams();
   const patientId = searchParams.get("id");
 
@@ -30,7 +30,7 @@ export default function OForm() {
     setValue,
   } = useForm<FormValues>({
     defaultValues: {
-      Odata: [{ type: "select", name: "" }],
+      Odata: [{ type: "select" }],
     },
   });
 
@@ -56,7 +56,6 @@ export default function OForm() {
       return updatedIsTypeSelected;
     });
   };
-  
 
   const [isTypeSelected, setIsTypeSelected] = useState<boolean[]>([false]);
 
@@ -75,9 +74,9 @@ export default function OForm() {
     setIsTypeSelected((prevIsTypeSelected) => [...prevIsTypeSelected, false]);
 
     if (selectedTypes.every((item) => item.type !== "select")) {
-      append({ type: "select", name: "", text: "" });
+      append({ type: "select", text: "" });
     } else {
-      append({ type: "", name: "", text: "" });
+      append({ type: "", text: "" });
     }
   };
 
@@ -87,7 +86,7 @@ export default function OForm() {
         return (
           <label>
             <Select
-              {...register(`Odata.${index}.name`)}
+              {...register(`Odata.${index}.text`)}
               className="sectiongap"
               data={[
                 'VENTILATOR CARE',
@@ -102,16 +101,20 @@ export default function OForm() {
               ]}
               placeholder="เลือกการวางแผนการพยาบาล"
               onChange={(value) => {
-                setValue(`Odata.${index}.name`, value || '');
+                setValue(`Odata.${index}.text`, value || '');
               }}
             />
           </label>
         );
-      case 'ข้อมูลสนับสนุน':
+      case "ข้อมูลสนับสนุน":
         return (
           <label>
             <section className="sectiongap">
-              <textarea className="textarearesize" {...register(`Odata.${index}.text`)} placeholder="กรอกข้อมูลสนับสนุน" />
+              <textarea
+                className="textarearesize"
+                {...register(`Odata.${index}.text`)}
+                placeholder="กรอกข้อมูลสนับสนุน"
+              />
             </section>
           </label>
         );
@@ -120,6 +123,7 @@ export default function OForm() {
     }
   };
 
+  
   const userQuery = useCurrentNurseLogin();
   if (userQuery.isLoading) return <Spinner />;
 
@@ -150,7 +154,6 @@ export default function OForm() {
     window.location.reload();
   };
 
-
   return (
     <div>
       <div className="Headform">O การวางแผนการพยาบาล</div>
@@ -171,20 +174,13 @@ export default function OForm() {
             Delete
           </div>
           <label>
-            <section>
-              {renderFormFields(selectedTypes[index]?.type, index)}
-            </section>
+            <section>{renderFormFields(selectedTypes[index]?.type, index)}</section>
           </label>
         </div>
       ))}
       <div className="btncontainer">
-        <div
-          onClick={handleAdd}
-          className="addbutton"
-        >
-          {selectedTypes.every((item) => item.type !== "select")
-            ? "Add"
-            : "Add"}
+        <div onClick={handleAdd} className="addbutton">
+          {selectedTypes.every((item) => item.type !== "select") ? "Add" : "Add"}
         </div>
         <div onClick={() => handleFormSubmit({ Odata: fields })} className="submitbtn">
           Submit

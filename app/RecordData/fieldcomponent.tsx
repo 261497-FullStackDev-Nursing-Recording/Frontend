@@ -6,11 +6,13 @@ interface FieldProps {
     field_code: string;
     field_post_label: string;
     field_pre_label: string;
+    field_data: string;
     field_value: string;
     id: string;
     modified_at: string;
     record_id: string;
     user_id: string;
+    
   };
 }
 
@@ -21,16 +23,16 @@ const FieldComponent: React.FC<FieldProps> = ({ field }) => {
         <strong>สร้างเมื่อ:</strong> {field.created_at}
       </p>
       <p>
-        <strong>ประเภทบันทึก:</strong> {field.field_code}
+        <strong>ประเภทบันทึก:</strong> {field.field_pre_label}
       </p>
       {/* <p>
         <strong>field_post_label:</strong> {field.field_post_label}
       </p> */}
-      <p>
+      {/* <p>
         <strong>field_pre_label:</strong> {field.field_pre_label}
-      </p>
+      </p> */}
       <p>
-        <strong>ข้อมูลบันทึก:</strong> {field.field_value}
+        <strong>ข้อมูลบันทึก:</strong> {field.field_data}
       </p>
       <p>
         <strong>id:</strong> {field.id}
