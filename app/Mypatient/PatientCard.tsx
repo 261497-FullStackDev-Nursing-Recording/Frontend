@@ -29,28 +29,6 @@ const getStatusColor = (status: string) => {
   }
 };
 
-// const apiRequest = (
-//   url: string,
-//   payload: object,
-//   user_id: string,
-//   callback: (response: any) => void
-// ) => {
-//   axios
-//     .put<any>(
-//       url,
-//       { ...payload, user_id },
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     )
-//     .then(callback)
-//     .catch((error) => {
-//       console.error("API Error for ID:", error);
-//     });
-// };
-
 const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState<Patient | null>(null);
@@ -80,20 +58,8 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
       closeModal();
       return;
     }
-
-    // const user_id = userQuery.data.id;
     const patient_id = selectedCard.id;
-
     console.log("Deleting Patient...");
-    // apiRequest(
-    //   `http://localhost:5001/api/patient/updateLikedPatient/${user_id}`,
-    //   { ids: [patient_id] },
-    //   user_id,
-    //   (response) => {
-    //     console.log("Response data:", response.data);
-    //     closeModal();
-    //   }
-    // );
     try {
       deleteP.mutateAsync([patient_id]);
       closeModal();
@@ -105,9 +71,12 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   };
 
   return (
-    <div className="card_container">
+    <div className="flex flex-wrap justify-center">
       {apiData.map((item, index) => (
-        <Card className="patient-card" key={index}>
+        <Card
+          className="flex flex-row min-w-[331.2px] md:w-7/20 lg:w-1/4 min-h-[90px] justify-between bg-[#b2f5ea] font-[bold] text-[#319795] mx-[10px] mb-[15px] pl-[30px] pr-0 rounded-[10px]"
+          key={index}
+        >
           <div
             className="my-auto patient-info"
             onClick={() => goToPatientHistory(item.id)}
@@ -131,10 +100,7 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
           </div>
           <div className="my-auto">
             <Button onClick={() => handleCardClick(item)} variant="text">
-              <DeleteOutlineIcon
-                sx={{ fontSize: "30px" }}
-                className="add-button"
-              />
+              <DeleteOutlineIcon sx={{ fontSize: "30px", color: "#319795" }} />
             </Button>
           </div>
         </Card>
