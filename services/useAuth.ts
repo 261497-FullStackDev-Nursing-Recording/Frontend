@@ -70,13 +70,6 @@ function useAuth() {
 	}
 
 	return { signIn, user, isLoading, signOut, getAuth };
-  async function getUser() {
-    setIsLoading(true);
-    const res = await axios.get<any>("http://localhost:5001/api/auth/me")
-    setIsLoading(false);
-  }
-
-  return { signIn, user, isLoading, signOut, getUser };
 }
 
 export default useAuth;
