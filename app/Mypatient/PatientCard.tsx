@@ -32,7 +32,9 @@ const getStatusColor = (status: string) => {
 const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   const [opened, setOpened] = useState(false);
   const [selectedCard, setSelectedCard] = useState<Patient | null>(null);
-
+  const userQuery = useCurrentNurseLogin();
+  const nurse_id: any = userQuery?.data?.id;
+  const deleteP = useMutationUpdateLinkedPatients(nurse_id);
   const handleCardClick = (item: Patient) => {
     setSelectedCard(item);
     setOpened(true);
@@ -46,11 +48,6 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
   const goToPatientHistory = (identificationId: string) => {
     console.log("Navigating to PatientHistory with ID:", identificationId);
   };
-
-  const userQuery = useCurrentNurseLogin();
-  if (userQuery.isLoading) return <Spinner />;
-  const nurse_id: any = userQuery?.data?.id;
-  const deleteP = useMutationUpdateLinkedPatients(nurse_id);
 
   const handleClickDeletePatient = () => {
     if (!selectedCard || !userQuery.data?.id) {
@@ -68,6 +65,7 @@ const PatientCard: React.FC<SearchPatientProps> = ({ apiData }) => {
       closeModal();
     }
   };
+  if (userQuery.isLoading) return <Spinner />;
 
   return (
     <div className="flex flex-wrap justify-center">

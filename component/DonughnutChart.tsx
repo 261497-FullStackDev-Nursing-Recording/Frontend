@@ -1,7 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-export default function DonughnutChart({ statusCounts }) {
+export default function DonughnutChart(statusCounts: any) {
   // Register Chart.js components (ArcElement, Tooltip, Legend)
   ChartJS.register(ArcElement, Tooltip, Legend);
 
