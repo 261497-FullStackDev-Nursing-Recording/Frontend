@@ -14,11 +14,13 @@ import { useRouter } from "next/navigation";
 import useAuth from "../../services/useAuth";
 
 export default function Dashboard(): JSX.Element {
-  const queryClient = new QueryClient();
-  const {user,getAuth, isLoading} = useAuth();
+  const queryClient = new QueryClient()
+
+  //Check User's authen 
+  const { user, getAuth, isLoading } = useAuth();
   useEffect(() => {
-    getAuth();
-  }, []);
+  getAuth();
+}, []);
 
   return (
     

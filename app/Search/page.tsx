@@ -33,6 +33,12 @@ export default function Searchpage() {
     useQuerySearchPatients(params);
 
 
+    //Check User's authen 
+    const { user, getAuth,} = useAuth();
+    useEffect(() => {
+    getAuth();
+  }, []);
+
   if (isLoading) {
     return (
       <div className="spinner-container">
