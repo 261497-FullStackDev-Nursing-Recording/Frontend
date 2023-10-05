@@ -95,6 +95,6 @@
   .containercard{
     display: flex;
     flex-direction: row;
-    background-color: #BFDBFE;
+    /* background-color: #BFDBFE; */
   }
 }
