@@ -35,7 +35,6 @@ export default function Mypatient() {
   const handleDeleteAll = async () => {
     try {
       await deleteAll.mutateAsync(allIDs);
-      closeModal();
       window.location.reload();
     } catch (error) {
       console.error("Error deleting patients:", error);
@@ -90,8 +89,6 @@ export default function Mypatient() {
   if (deleteAll.isError) {
     console.log(deleteAll.error);
   }
-
-  // console.log(allIDs);
 
   return (
     <div>
