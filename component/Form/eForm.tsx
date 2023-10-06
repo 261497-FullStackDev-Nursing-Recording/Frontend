@@ -185,7 +185,7 @@ export default function EForm() {
   if (userQuery.isLoading) return <Spinner />;
 
   const handleFormSubmit = async (data: FormValues) => {
-    console.log("Submit data", data.Edata);
+    // console.log("Submit data", data.Edata);
     const userId = userQuery.data?.id;
     const requestRecordBody = {
       user_id: userId,

@@ -119,7 +119,7 @@ export default function IForm() {
   if (userQuery.isLoading) return <Spinner />;
 
   const handleFormSubmit = async (data: FormValues) => {
-    console.log("Submit data", data.Idata);
+    // console.log("Submit data", data.Idata);
     const userId = userQuery.data?.id;
     const requestRecordBody = {
       user_id: userId,

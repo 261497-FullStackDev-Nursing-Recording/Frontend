@@ -18,7 +18,7 @@ export default function Login() {
 
 	const handleLogin = async (e: any) => {
 		e.preventDefault();
-		console.log("logging in..." + username + "..." + password);
+		// console.log("logging in..." + username + "..." + password);
 
 		try {
 			await signIn(username, password);

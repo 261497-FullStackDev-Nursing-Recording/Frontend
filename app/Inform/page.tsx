@@ -43,7 +43,7 @@ export default function Inform() {
   const [patientData, setPatientData] = useState<Patient | undefined>();
   const searchParams = useSearchParams();
   const PatientHistory = searchParams.get("id");
-  console.log(PatientHistory);
+  // console.log(PatientHistory);
 
   useEffect(() => {
     apiRequest(
