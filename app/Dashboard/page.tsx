@@ -11,40 +11,38 @@ import Navbar from "../../component/Navbarbottom";
 import PatientNurseRatio from "../../utils/patientRatio";
 import Backbtn from "../../component/backBtn";
 export default function Dashboard(): JSX.Element {
-  const queryClient = new QueryClient();
+	const queryClient = new QueryClient();
 
-  return (
-    
-    <QueryClientProvider client={queryClient}>
-      <Backbtn/>
-      <div className="dashboard-container">
-        
-          <div className="centered-content">
-            <HomeRoundedIcon sx={{ fontSize: 40 }} />
-            <div className="chart-wrapper">
-              <StatusCount />
-            </div>
-            <span className="NperP">
-               1 : <PatientNurseRatio />
-            </span>
-            <div className="NperPtext">จำนวนพยาบาลต่อผู้ป่วย</div>
-            <div className="countbox">
-              <div className="nursecount">
-                จำนวนพยาบาล
-                <div className="nursetext">
-                  <NurseCount />
-                </div>
-              </div>
-              <div className="pateintcount">
-                จำนวนผู้ป่วย
-                <div className="patienttext">
-                  <PatientCount />
-                </div>
-              </div>
-            </div>
-          </div>
-        <Navbar />
-      </div>
-    </QueryClientProvider>
-  );
+	return (
+		<QueryClientProvider client={queryClient}>
+			{/* <Backbtn/> */}
+			<div className="dashboard-container">
+				<div className="centered-content">
+					<HomeRoundedIcon sx={{ fontSize: 40 }} />
+					<div className="chart-wrapper">
+						<StatusCount />
+					</div>
+					<span className="NperP">
+						1 : <PatientNurseRatio />
+					</span>
+					<div className="NperPtext">จำนวนพยาบาลต่อผู้ป่วย</div>
+					<div className="countbox">
+						<div className="nursecount">
+							จำนวนพยาบาล
+							<div className="nursetext">
+								<NurseCount />
+							</div>
+						</div>
+						<div className="pateintcount">
+							จำนวนผู้ป่วย
+							<div className="patienttext">
+								<PatientCount />
+							</div>
+						</div>
+					</div>
+				</div>
+				<Navbar />
+			</div>
+		</QueryClientProvider>
+	);
 }

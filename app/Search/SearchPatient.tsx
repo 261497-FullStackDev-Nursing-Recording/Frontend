@@ -90,7 +90,7 @@ const SearchPatient: React.FC<SearchPatientProps> = ({ apiData }) => {
 		}
 		console.log("Adding Patient...");
 		apiRequest(
-			"http://localhost:5001/api/patient/linkPatients",
+			"/api/api/patient/linkPatients",
 			{
 				user_id: userQuery.data?.id,
 				patient_id: selectedCard.id,

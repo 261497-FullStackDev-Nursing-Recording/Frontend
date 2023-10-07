@@ -192,7 +192,7 @@ export default function EForm() {
       patient_id: patientId,
     };
     const record = await axios.post<Record>(
-      "http://localhost:5001/api/records",
+      "/api/api/records",
       requestRecordBody
     );
     const recordId = record.data.id;
@@ -205,7 +205,7 @@ export default function EForm() {
       }
     })
     await axios.post(
-      "http://localhost:5001/api/fields",
+      "/api/api/fields",
       requestFieldsBody
     );
     window.location.reload();

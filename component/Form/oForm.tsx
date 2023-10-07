@@ -133,7 +133,7 @@ export default function NDXForm() {
 			patient_id: patientId,
 		};
 		const record = await axios.post<Record>(
-			"http://localhost:5001/api/records",
+			"/api/api/records",
 			requestRecordBody
 		);
 		const recordId = record.data.id;
@@ -145,7 +145,7 @@ export default function NDXForm() {
 				field_pre_label: Odata.type,
 			};
 		});
-		await axios.post("http://localhost:5001/api/fields", requestFieldsBody);
+		await axios.post("/api/api/fields", requestFieldsBody);
 		window.location.reload();
 	};
 

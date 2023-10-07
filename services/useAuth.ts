@@ -20,9 +20,7 @@ function useAuth() {
 	const bootstrapAsync = async () => {
 		setIsLoading(true);
 		try {
-			const res = await axios.get<UserType>(
-				"http://localhost:5001/api/auth/me"
-			);
+			const res = await axios.get<UserType>("/api/api/auth/me");
 			if (res.data) {
 				setUser(res.data);
 			}
@@ -46,7 +44,7 @@ function useAuth() {
 			// refreshToken: string;
 			user: UserType;
 		}>(
-			"http://localhost:5001/api/auth/signin",
+			"/api/api/auth/signin",
 			{
 				username,
 				password,

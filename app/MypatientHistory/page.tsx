@@ -84,14 +84,14 @@ export default function PatientHistory() {
 
 	React.useEffect(() => {
 		apiRequest(
-			"http://localhost:5001/api/patient/getAllPatient",
+			"/api/api/patient/getAllPatient",
 			{
 				id: PatientHistory,
 			},
 			(response) => setPatientData(response.data[0])
 		);
 		apiRequest(
-			"http://localhost:5001/api/records/getAllRecord",
+			"/api/api/records/getAllRecord",
 			{
 				patient_id: PatientHistory,
 				includeFields: true,
