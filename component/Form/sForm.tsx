@@ -136,6 +136,7 @@ export default function SForm() {
 			case "Ketone":
 				return (
 					<>
+						input
 						<label>
 							<section className="sectiongap">
 								<div className="gapInput">Ketone</div>
@@ -185,7 +186,7 @@ export default function SForm() {
 			return {
 				record_id: recordId,
 				field_type: "S_TEXT",
-				field_data: Sdata.text,
+				field_data: Sdata.text || null,
 				field_pre_label: Sdata.type,
 			};
 		});
@@ -200,7 +201,7 @@ export default function SForm() {
 			{fields.map((item, index) => (
 				<div key={item.id} className="Sformcontainer">
 					<select
-						value={item.type}
+						value={selectedTypes[index]?.type}
 						onChange={(e) => handleTypeChange(e, index)}
 						className="select"
 						disabled={isTypeSelected[index]}

@@ -140,7 +140,7 @@ export default function IForm() {
 		const requestFieldsBody = data.Idata.map((Idata) => {
 			return {
 				record_id: recordId,
-				field_type: "I_TEXT",
+				field_type: "I_TEXT" || null,
 				field_data: Idata.text,
 				field_pre_label: Idata.type,
 			};
@@ -156,7 +156,7 @@ export default function IForm() {
 			{fields.map((item, index) => (
 				<div key={item.id} className="Iformcontainer">
 					<select
-						value={item.type}
+						value={selectedTypes[index]?.type}
 						onChange={(e) => handleTypeChange(e, index)}
 						className="select"
 						disabled={isTypeSelected[index]}

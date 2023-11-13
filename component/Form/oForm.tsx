@@ -141,7 +141,7 @@ export default function NDXForm() {
 			return {
 				record_id: recordId,
 				field_type: "O_TEXT",
-				field_data: Odata.text,
+				field_data: Odata.text || null,
 				field_pre_label: Odata.type,
 			};
 		});
@@ -156,7 +156,7 @@ export default function NDXForm() {
 			{fields.map((item, index) => (
 				<div key={item.id} className="Oformcontainer">
 					<select
-						value={item.type}
+						value={selectedTypes[index]?.type}
 						onChange={(e) => handleTypeChange(e, index)}
 						className="select"
 						disabled={isTypeSelected[index]}

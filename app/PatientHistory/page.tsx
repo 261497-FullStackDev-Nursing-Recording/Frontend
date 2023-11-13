@@ -103,7 +103,7 @@ export default function PatientHistory() {
 			(response) => setRecordData(response.data)
 		);
 	}, []);
-	console.log(recordData);
+	// console.log(recordData);
 	return (
 		<div>
 			<Backbtn />

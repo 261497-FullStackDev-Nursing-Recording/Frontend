@@ -135,12 +135,17 @@ export default function NDXForm() {
 			return {
 				record_id: recordId,
 				field_type: "NDX_TEXT",
-				field_data: NDXdata.text,
+				// problem when the NDXdata.text is undefined error 400
+				field_data: NDXdata.text || null,
 				field_pre_label: NDXdata.type,
 			};
 		});
+
+		console.log("requestFieldsBody", requestFieldsBody);
+
 		await axios.post("/api/api/fields", requestFieldsBody);
-		window.location.reload();
+
+		// window.location.reload();
 	};
 
 	return (
@@ -150,7 +155,7 @@ export default function NDXForm() {
 			{fields.map((item, index) => (
 				<div key={item.id} className="NDXformcontainer">
 					<select
-						value={item.type}
+						value={selectedTypes[index]?.type}
 						onChange={(e) => handleTypeChange(e, index)}
 						className="select"
 						disabled={isTypeSelected[index]}

@@ -14,20 +14,29 @@ export default function Login() {
 	const [password, Setpassword] = useState("");
 	const [data, setData] = useState(null);
 
+	const [isError, setIsError] = useState(false);
 	const router = useRouter();
 
 	const handleLogin = async (e: any) => {
 		e.preventDefault();
 		// console.log("logging in..." + username + "..." + password);
-
 		try {
 			await signIn(username, password);
 			router.push("/Dashboard");
 		} catch (error) {
-			console.error("Error fetching data:", error);
+			// console.error("Error fetching data:", error);
+			setIsError(true);
 		}
 	};
 
+	const handleUserNameForm = (e: string) => {
+		Setusername(e);
+		setIsError(false);
+	};
+	const handlePasswordForm = (e: string) => {
+		Setpassword(e);
+		setIsError(false);
+	};
 	const [isPageReady, setIsPageReady] = useState(false);
 
 	useEffect(() => {
@@ -55,16 +64,27 @@ export default function Login() {
 								placeholder="Username"
 								withAsterisk
 								value={username}
-								onChange={(event) => Setusername(event.currentTarget.value)}
+								onChange={(event) =>
+									handleUserNameForm(event.currentTarget.value)
+								}
+								error={isError}
 							/>
 							<PasswordInput
 								className="Password"
 								placeholder="Password"
 								withAsterisk
 								value={password}
-								onChange={(event) => Setpassword(event.currentTarget.value)}
+								onChange={(event) =>
+									handlePasswordForm(event.currentTarget.value)
+								}
 								icon={<IconLock size="1rem" />}
+								error={isError}
 							/>
+							{isError ? (
+								<div className="error">Username or Password is incorrect</div>
+							) : (
+								<div></div>
+							)}
 							<button
 								type="submit"
 								className="LoginButton"
